@@ -1,0 +1,410 @@
+/*
+
+Contents
+================================
+
+1. Shared Styles
+	a. Fonts
+    b. Extends
+2. Header Section
+3. Entries
+    a. Pagination
+    b. Post Style
+4. Footer
+================================
+
+*/
+
+
+// 1. Shared Styles
+// --------------------------------------------------
+
+body{
+    background-color: rgb(151, 121, 97);
+}
+
+
+
+main.container, main.content > .container{
+    width:65em;
+}
+
+@media screen and (max-width:900px) {
+    main.container, main.content > .container{
+        width: 90%;
+    }
+}
+
+
+hr{
+    border-top: 1px solid lighten($grayLight, 20%);
+    border-bottom: none;
+}
+
+::-moz-selection {
+    color: #fff;
+    text-shadow: none;
+    background: #778da8;
+}
+
+::selection {
+    color: #fff;
+    text-shadow: none;
+    background: #778da8;
+}
+
+// 1. a Font
+// --------------------------------------------------
+@import url(http://fonts.googleapis.com/css?family=Ubuntu+Condensed);
+@import url(http://notosanskr-hestia.s3-website-ap-northeast-1.amazonaws.com/stylesheets/NotoSansKR-Hestia.css);
+
+// 1. b Extends
+// --------------------------------------------------
+
+.a-hover{
+        color: $grayDark;
+        @include transition(0.3s linear);
+
+        &:hover{
+            color: $grayDark;
+            text-decoration:none;
+            @include opacity(50);
+        }    
+}
+
+// 2. Header Section
+// --------------------------------------------------
+header {
+    min-height: 0.5em;
+    font-family: 'Ubuntu Condensed', "Noto Sans Korean";
+    font-weight: normal;
+        letter-spacing: 0.1em;
+        color: #fff;
+        margin-top: 0.6em;    
+        margin-left: 0.6em;
+}
+
+.content{
+    padding-top: 2.0em;
+    background-color: #f9f7f4;
+
+    & > .container{
+       min-height: 58em;  
+    }
+}
+
+.content {
+    h1{
+        font-family: 'Ubuntu Condensed', "Noto Sans Korean";
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 5.1em;  
+        margin-top: 1em;
+        letter-spacing: -1;
+        color: $pinkCoral;
+    }
+
+    .sub-title{
+        font-family: 'Ubuntu Condensed', "Noto Sans Korean";
+        letter-spacing: -1;
+        font-size: 1.8em;
+        margin: 0.8em 0 3em;
+        color: $grayLight;
+    }
+}
+
+@media screen and (max-width:900px) {
+    .content {
+        h1{
+            font-size: 4.1em;  
+            margin-top: 0em;
+        }
+
+        .sub-title{
+            font-size: 1.5em;
+        }
+    }
+}
+
+
+
+// 3. Entries
+// --------------------------------------------------
+
+.entries{
+    list-style: none;
+    margin:1em 0 0 0;
+
+    li{
+        border-bottom: 1px solid lighten($grayLight, 20%);
+        margin-bottom: 2em;
+        padding-bottom: 2.2em;
+    }
+
+    time{
+        font-family: 'Ubuntu Condensed';
+        font-size: 1.0em;
+        letter-spacing: 0.1em;
+        float: right;
+        margin-top: -2.6em;
+        color: $gray;
+    }
+
+    h2{
+        font-family: 'Ubuntu Condensed', "Noto Sans Korean";
+        color: $pinkCoral;
+        font-weight: normal;
+        font-size: 2.8em;
+        margin-top: 0.2em;
+        @extend .a-hover;
+    }
+
+    a{
+        @extend .a-hover;
+    }
+
+    h4{
+        margin-top:1.0em;
+        font-weight: bold;
+        letter-spacing: 0.1em;
+    }
+
+    h3{
+        font-family: 'Ubuntu Condensed', "Noto Sans Korean";
+        font-size: 1.5em;
+        font-weight: normal;
+        margin:0.5em 0 0 0;
+        color: $pinkCoral;
+        padding-bottom: 0.5em;
+    }
+
+    div{
+        font-family: 'Ubuntu Condensed', "Noto Sans Korean";
+        line-height: 1.6em;
+        font-size: 1.15em;
+        letter-spacing: 0.1em;
+        color: darken($grayLight, 20%);
+    }
+}
+
+
+// 3. a Pagination
+// --------------------------------------------------
+
+.pages{
+    list-style: none;    
+}
+
+.next{
+    float: right;
+}
+
+.prev{
+    float: left;
+}
+
+#post-pagination{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+// 3. b Post Style
+// --------------------------------------------------
+
+.home-icon{
+     font-size: 2.2em;
+     margin: 1.3em 0 -1.1em 1em;
+     float: left;
+     background-color: $pinkCoral;
+     padding: 0.65em;
+     @include border-radius(2em);
+
+     a{
+        @extend .a-hover; 
+        color: $white;
+     } 
+}
+
+@media screen and (max-width:900px) {
+    .home-icon{
+         margin: 0 0 -1.1em -0.1em;
+         float: left;
+         padding: 0.65em;
+     }
+}
+
+.post{
+    width: 55em;
+    float: right;
+    margin-top: -2em; 
+    line-height: 1.9em;
+
+    hr{
+        width: 280px;
+        border-top: 1px dotted lighten($grayLight, 30%);
+        border-bottom: none;
+    }
+
+    .bottom_line {
+        margin-top: 2.4em;
+        padding: 1em 0 0.5em 0;
+        border-top: 1px solid lighten($grayLight, 20%);
+        border-bottom: none;
+    }
+
+    table {
+       padding: 0em 0em 1.0em 1.0em;
+    }
+
+    thead {
+        font-size: 0.9em;
+    }
+
+    td {
+        padding: 0.3em;
+        border-bottom: 1px solid lighten($grayLight, 30%);
+    }
+
+    .time {
+        margin:0 0 1.5em 0;
+        font-family: 'Ubuntu Condensed';
+        font-weight: normal;
+        letter-spacing: 0.1em;
+        padding-bottom: 0.5em;
+        border-bottom: 1px solid lighten($grayLight, 20%);
+    }
+
+    h4{
+        margin-top:1.0em;
+        font-weight: bold;
+        letter-spacing: 0.1em;
+    }
+
+    h3{
+        font-family: 'Ubuntu Condensed', "Noto Sans Korean";
+        font-weight: normal;
+        margin:1.5em 0 0.5em 0;
+        color: $pinkCoral;
+        padding-bottom: 0.5em;
+        border-bottom: 1px solid lighten($grayLight, 30%);
+    }
+
+    h2{
+        font-family: 'Ubuntu Condensed', "Noto Sans Korean";
+        font-weight: normal;
+        font-size: 3.0em;
+        padding: 1.7em 0 0;
+        letter-spacing: 0.1em;
+        color: $pinkCoral;
+
+        span{
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+    }
+
+    section{
+        font-family: 'Ubuntu Condensed', "Noto Sans Korean";
+        letter-spacing: 0.1em;
+        color: darken($grayLight, 20%);
+    }
+}
+
+@media screen and (max-width:900px) {
+    .post{
+        margin-top: 2.7em; 
+        width: 100%;
+    }
+
+    .post h2{
+        font-family: 'Ubuntu Condensed', "Noto Sans Korean";
+        font-weight: normal;
+        font-size: 2.8em;
+        padding: 0.1em 0 0;
+        letter-spacing: 0.1em;
+        color: $pinkCoral;
+
+        span{
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+    }
+}
+
+// 4. Footer
+// --------------------------------------------------
+copyright {
+    color: $white;
+    padding: 2em 0;
+    font-size: 0.9em;
+    letter-spacing: 0.1em;
+    text-align: center;
+
+    div {
+        padding: 2em;
+    }
+
+    a {
+        color: $white;
+        text-decoration: underline;
+    } 
+}
+
+$spacing-unit:     30px;
+$grey-color:       #828282;
+$grey-color-light: lighten($grey-color, 40%);
+$grey-color-dark:  darken($grey-color, 25%);
+
+
+%clearfix {
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+.site-footer {
+    align: center;
+    background-color: #f9f7f4;
+    border-top: 1px solid $grey-color-light;
+    padding: $spacing-unit 0;
+}
+
+.wrapper {
+    width: 600px; background-color: #ffffff;
+    text-align: center;
+    align: center;
+}
+
+.footer-heading {
+    font-size: 18px;
+    margin-bottom: $spacing-unit / 2;
+}
+
+.contact-list,
+.social-media-list {
+    list-style: none;
+    margin-left: 0;
+}
+
+.footer-col-wrapper {
+    font-size: 15px;
+    color: $grey-color;
+    margin-left: -$spacing-unit / 2;
+    @extend %clearfix;
+}
+
+.footer-col {
+    float: left;
+    margin-bottom: $spacing-unit / 2;
+    padding-left: $spacing-unit / 2;
+}
+
+.footer-col-1 {
+    width: -webkit-calc(40% - (#{$spacing-unit} / 2));
+    width:         calc(40% - (#{$spacing-unit} / 2));
+}
+
+.footer-col-2 {
+    width: -webkit-calc(60% - (#{$spacing-unit} / 2));
+    width:         calc(60% - (#{$spacing-unit} / 2));
+}
+
