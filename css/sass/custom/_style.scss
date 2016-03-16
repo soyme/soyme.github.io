@@ -238,6 +238,10 @@ header {
     margin-top: -2em; 
     line-height: 1.9em;
 
+    li, ul {
+        line-height: 1.9em;
+    }
+
     hr{
         width: 280px;
         border-top: 1px dotted lighten($grayLight, 30%);

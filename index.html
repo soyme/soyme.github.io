@@ -16,7 +16,7 @@ layout: default
     		    <a href="{{ post.url }}">
     		        <h2>{{ post.title }}</h2>
                 <time>{{ post.date | date: "%d %B %Y" }}</time>
-                <div>{{ post.content | split:"<!-- more -->" | first | strip_html | truncate:300 }}</div>
+                <div>{{ post.content | split:"<!-- more -->" | first | strip_html | strip_newlines | newline_to_br | truncate:300 }}</div>
     		    </a>
     		  </li>
     		{% endfor %}

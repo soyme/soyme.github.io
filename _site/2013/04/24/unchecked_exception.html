@@ -3,7 +3,7 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta charset="utf-8"/>
-		<title>{% if page.title %} {{ page.title }} -{% endif %} Fantasie</title>
+		<title> Checked Exception / Uncheked Exception (RuntimeException) - Fantasie</title>
 		<!-- For responsive site
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		-->
@@ -32,7 +32,51 @@
 	<header>
 	</header>
 
-	{{ content }}
+	<main class="content">
+    <section class="container">
+    	<div class="row-fluid">
+    		<article class="home-icon">
+				<a href="/">
+					<i class="icon-home"></i> 
+				</a>
+			</article>
+			<article class="post">
+				<h2 class="content">Checked Exception / Uncheked Exception (RuntimeException)</h2>
+				<div class="time">24 April 2013</div>
+				<section>
+					<h3 id="toc_0">Checked Exception</h3>
+
+<p>Exception을 상속한 클래스는 try-catch, throws 등으로 예외처리를 해주어야 한다.
+처리를 해주지 않으면 컴파일시 에러가 발생한다.</p>
+
+<!-- more -->
+
+<h3 id="toc_1">Unchecked Exception (RuntimeException)</h3>
+
+<p>RuntimeException을 상속한 클래스는 예외처리가 필수가 아니다.</p>
+
+<ul>
+<li>ArithmeticException, IllegalArgumentException, IndexOutOfBoundsException</li>
+<li>코드에서 미리 예외조건을 처리하게 만든다면 피할 수 있으나, 개발자가 부주의하게 코딩한 경우에 발생할 수 있는 종류의 예외들이다.</li>
+</ul>
+
+<hr>
+
+<p><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/RuntimeException.html">http://docs.oracle.com/javase/7/docs/api/java/lang/RuntimeException.html</a></p>
+
+				</section>
+				<div class=bottom_line></div>
+				<section>
+					
+						 
+							<a rel="next" style="float:right" class="a-hover"href="/2013/05/09/factorial.html">팩토리얼 <i class="icon-arrow-right"></i></a>
+					
+				</section>
+			</article>
+		</div><br>
+	</section>
+</main>
+
 
 	<copyright>
 		<div><a href=#>fantasie.github.io</a></div>

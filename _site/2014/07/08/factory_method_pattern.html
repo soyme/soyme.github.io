@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8"/>
+		<title> 팩토리 메소드 패턴 - Fantasie</title>
+		<!-- For responsive site
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<link rel="author" href="/humans.txt">
+		<meta name="description" content="Description Goes Here">
+		<link rel="stylesheet" href="/css/style.css">
+		<!--[if IE 7]>
+			<html class="ie7"> 
+			<link rel="stylesheet" type="text/css" href="/css/font-awesome-ie7.min.css">
+		<![endif]-->
+		<!--[if IE 8]><html class="ie8"> <![endif]-->		
+	    <!--[if lt IE 9]>
+	      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	    <![endif]-->
+
+		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+		<link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+		<link rel="shortcut icon" href="ico/favicon.png">	    
+	</head>
+	<body>
+	<!-- Header
+	    ================================================== -->
+	<header>
+	</header>
+
+	<main class="content">
+    <section class="container">
+    	<div class="row-fluid">
+    		<article class="home-icon">
+				<a href="/">
+					<i class="icon-home"></i> 
+				</a>
+			</article>
+			<article class="post">
+				<h2 class="content">팩토리 메소드 패턴</h2>
+				<div class="time">08 July 2014</div>
+				<section>
+					<p><code>팩토리 메소드 패턴</code>은 <code>템플릿 메소드 패턴</code>을 인스턴스 생성에 적용한 전형적인 예이다. 팩토리(인스턴스를 생성하는 공장)를 템플릿 메소드 패턴으로 구성한 것이 팩토리 메소드 패턴이다.</p>
+
+<ul>
+<li>인스턴스를 만드는 방법을 상위 클래스에서 결정한다. 이름이나 구체적인 방법은 결정하지 않는다.</li>
+<li>구체적인 내용은 하위클래스측에서 구현함으로써 인스턴스 생성을 위한 골격과 실제 인스턴스 생성에 사용되는 클래스를 분리한다.</li>
+</ul>
+
+<!-- more -->
+
+<h3 id="toc_0">구현 예시</h3>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">framework</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Product</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="n">use</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div>
+<p>product(인스턴스)가 가져야 할 인터페이스(API)를 추상메소드로 규정하고, 구현은 하위클래스에게 위임한다.</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">framework</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Factory</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">final</span> <span class="n">Product</span> <span class="n">create</span><span class="o">(</span><span class="n">String</span> <span class="n">owner</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Product</span> <span class="n">p</span> <span class="o">=</span> <span class="n">createProduct</span><span class="o">(</span><span class="n">owner</span><span class="o">);</span>
+        <span class="n">registerProduct</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">p</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">protected</span> <span class="kd">abstract</span> <span class="n">Product</span> <span class="n">createProduct</span><span class="o">(</span><span class="n">String</span> <span class="n">owner</span><span class="o">);</span>
+    <span class="kd">protected</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="n">registerProduct</span><span class="o">(</span><span class="n">Product</span> <span class="n">product</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div>
+<p>공장에서는 제품을 생성할 때 생성-&gt;등록-&gt;반환 순으로 처리된다는 골격을 규정하고, 생성과 등록의 구현은 하위클래스에게 하도록 위임한다. 상위클래스는 createProduct 메소드를 호출하면 Product 인스턴스가 생성되어 반환된다는 정보만 알 뿐 createProduct 메소드의 세부 구현 내용은 몰라도 된다. <code>new</code> 키워드를 사용하여 Product 인스턴스를 생성하지 않고, 인스턴스 생성을 위한 메소드를 호출함으로서 구체적인 클래스 이름에 의한 속박에서 상위 클래스를 자유롭게 만든다.</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">idcard</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">framework.*</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">IDCard</span> <span class="kd">extends</span> <span class="n">Product</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">owner</span><span class="o">;</span>
+    <span class="n">IDCard</span><span class="o">(</span><span class="n">String</span> <span class="n">owner</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">owner</span> <span class="o">+</span> <span class="s">"의 카드를 만듭니다."</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">owner</span> <span class="o">=</span> <span class="n">owner</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">use</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">owner</span> <span class="o">+</span> <span class="s">"의 카드를 사용합니다."</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">getOwner</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">owner</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+<p>Product 추상클래스를 상속받아 원하는 제품 클래스를 만든다. 추상메소드 use()를 구현한다. 제품이 사용되는 모습을 구현하되 구체적으로 어떻게 사용되는지는 하위클래스가 결정한다.</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">idcard</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">framework.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">IDCardFactory</span> <span class="kd">extends</span> <span class="n">Factory</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">List</span> <span class="n">owners</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">();</span>
+    <span class="kd">protected</span> <span class="n">Product</span> <span class="n">createProduct</span><span class="o">(</span><span class="n">String</span> <span class="n">owner</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="n">IDCard</span><span class="o">(</span><span class="n">owner</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="n">registerProduct</span><span class="o">(</span><span class="n">Product</span> <span class="n">product</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">owners</span><span class="o">.</span><span class="na">add</span><span class="o">(((</span><span class="n">IDCard</span><span class="o">)</span><span class="n">product</span><span class="o">).</span><span class="na">getOwner</span><span class="o">());</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">List</span> <span class="n">getOwners</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">owners</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+<p>Factory 추상클래스를 상속받은 하위클래스는, Factory의 추상메소드들을 그 목적에 맞게 구현한다. 제품을 등록-registerProduct, 제품을 생성하여 반환-createProduct한다는 본래의 목적에 맞도록 구현하되, 생성/등록을 구체적으로 어떤 방법으로 할지는 하위클래스가 결정하게 된다.</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">framework.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">idcard.*</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Factory</span> <span class="n">factory</span> <span class="o">=</span> <span class="k">new</span> <span class="n">IDCardFactory</span><span class="o">();</span>
+        <span class="n">Product</span> <span class="n">card1</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="s">"홍길동"</span><span class="o">);</span>
+        <span class="n">Product</span> <span class="n">card2</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="s">"이순신"</span><span class="o">);</span>
+        <span class="n">Product</span> <span class="n">card3</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="s">"강감찬"</span><span class="o">);</span>
+        <span class="n">card1</span><span class="o">.</span><span class="na">use</span><span class="o">();</span>
+        <span class="n">card2</span><span class="o">.</span><span class="na">use</span><span class="o">();</span>
+        <span class="n">card3</span><span class="o">.</span><span class="na">use</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+<p>framework 패키지(Factory, Product)는 idcard 패키지(IDCardFactory, IDCard)에 의존하지 않는다. 즉 idcard 패키지에 대한 정보를 전혀 가지고 있지 않다. framework 패키지를 상속받아 구현하였다면 다른 어떤 product들도 같은 방법으로 사용될 수 있다. 이 때 framework 패키지의 내용을 수정할 필요가 없다.</p>
+
+				</section>
+				<div class=bottom_line></div>
+				<section>
+					 
+							<a rel="prev" class="a-hover"href="/2013/08/17/process_vs_thread.html"><i class="icon-arrow-left"></i> 프로세스와 쓰레드의 차이</a>
+						
+						 
+							<a rel="next" style="float:right" class="a-hover"href="/2014/07/08/template_method_pattern.html">템플릿 메소드 패턴 <i class="icon-arrow-right"></i></a>
+					
+				</section>
+			</article>
+		</div><br>
+	</section>
+</main>
+
+
+	<copyright>
+		<div><a href=#>fantasie.github.io</a></div>
+	</copyright>
+
+	<!-- Javascripts 
+	    ================================================= -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/custom.js"></script>
+
+    <!-- Analytics
+    ================================================== -->
+    <script>
+		// analytics code
+    </script>	
+	</body>
+</html>
