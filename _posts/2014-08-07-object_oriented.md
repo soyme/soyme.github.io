@@ -1,7 +1,8 @@
 ---
-layout: post_page
+layout: post
 title: 객체지향 / 절차지향 / 정보은닉 / 캡슐화 / 모듈화
-tag: Java, OOP
+category: blog
+tags: [java, oop]
 ---
 
 ### 절차지향 : C언어

@@ -1,7 +1,8 @@
 ---
-layout: post_page
+layout: post
 title: Checked Exception / Uncheked Exception (RuntimeException)
-tag: Java
+category: blog
+tags: [Java]
 ---
 
 ### Checked Exception

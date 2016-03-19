@@ -1,7 +1,8 @@
 ---
-layout: post_page
+layout: post
 title: 팩토리 메소드 패턴
-tag: Java, 디자인패턴
+category: blog
+tags: [java, pattern]
 ---
 
 `팩토리 메소드 패턴`은 `템플릿 메소드 패턴`을 인스턴스 생성에 적용한 전형적인 예이다. 팩토리(인스턴스를 생성하는 공장)를 템플릿 메소드 패턴으로 구성한 것이 팩토리 메소드 패턴이다.

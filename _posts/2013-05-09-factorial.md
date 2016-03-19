@@ -1,6 +1,7 @@
 ---
-layout: post_page
+layout: post
 title: 팩토리얼
+category: blog
 tag: Java, algorithm
 ---
 

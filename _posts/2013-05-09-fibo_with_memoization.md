@@ -1,8 +1,8 @@
 ---
-layout: post_page
+layout: post
 title: 피보나치수열 with memoization
-tag: Java, algorithm
-comments: true
+category: blog
+tags: [java, algorithm]
 ---
 
 ### 피보나치 수열

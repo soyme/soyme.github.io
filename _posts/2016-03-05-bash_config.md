@@ -1,7 +1,8 @@
 ---
-layout: post_page
+layout: post
 title: Bash Shell 환경 설정
-tag: bash
+category: blog
+tags: [linux]
 ---
 
 몇몇의 초기화 파일들을 통해 사용자 shell의 환경을 설정할 수 있다.

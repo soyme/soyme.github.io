@@ -1,0 +1,25 @@
+---
+layout: default
+---
+<!-- Content
+    ================================================== -->
+  <main class="content">
+    <section class="container">
+      <div class="row-fluid">
+      <article class="top-menu">
+        {% include menu.html%}
+              <h1><i class="fa fa-tags"></i>Tags</h1>
+          <div class="sub-title">{{ site.description }}</div>
+
+      </article>
+      <article class="all-tags">
+        <section>
+        {% for tag in site.data.tags %}
+            <span><a href="/tag/{{ tag.slug }}/">#{{ tag.name }}</a></span>
+        {% endfor %}
+        </section>
+        <div class=bottom_line></div>
+      </article>
+    </div><br>
+  </section>
+</main>

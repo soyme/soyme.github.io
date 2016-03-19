@@ -1,7 +1,8 @@
 ---
-layout: post_page
+layout: post
 title: 일급 객체 (first-class object)
-tag: JavaScript,first-clsas
+category: blog
+tags: [javascript]
 ---
 자바스크립트를 처음 공부하다 보면, `일급(First-class) 객체`라는 단어가 종종 등장한다.
 

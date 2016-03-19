@@ -1,16 +1,26 @@
 # visit https://github.com/mojombo/jekyll/wiki/Configuration for more settings
 
 title: fantasie
-email: your-email@domain.com
-description: "기록을 위한 공간"
+author: fantasie
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://fantasie.github.io" # the base hostname & protocol for your site
+description: "http://fantasie.github.io - My Personal Repository."
 github_username:  fantasie
 excerpt_separator: "<!-- more -->"
 auto: true # automatically update your jekyll
 server: true # runs a local server
-paginate: 10 # pagination basted on number of posts
 exclude: ["Gemfile", "Gemfile.lock", "README.md", 'sass', 'watch.sh', 'style.scss'] # files to exclude
+#gems: [jekyll-paginate, jekyll-paginate-category]
+permalink: /:year/:month/:day/:title/
+
+paginate: 10
+blog_pagenate: 1
+diary_pagenate:	5
+tag_pagenate: 10
+
+paginate_path: "page:num"
+
+categories: ["blog","diary"]
 
 markdown: redcarpet
 redcarpet:

@@ -1,0 +1,38 @@
+---
+layout: default
+---
+{% if page.grouptype == 'tag' %}
+  {% capture paging_root %}/tag/{{page.tag}}/{% endcapture %}
+{% elsif page.grouptype == 'category' %}
+  {% capture paging_root %}/category/{{page.category}}/{% endcapture %}
+{% else %}
+  {% capture paging_root %}/{% endcapture %}
+{% endif %}
+
+  <div class="content">
+    <main class="container">
+      <div class="row-fluid">
+        <article class="top-menu">
+          {% include menu.html %}
+          <h1>#{{page.tag}}</h1>
+          <div class="sub-title">{{ site.description }}</div>
+        </article>
+        <ul class="entries">
+        {% for post in paginator.posts %}
+          <li>
+            <a href="{{ post.url }}">
+                <h3>{{ post.title }}</h3></a>
+                <time><i class="fa fa-calendar"></i> {{ post.date | date: "%d %B %Y" }}</time>
+                <div>{{ post.content | split:"<!-- more -->" | first | strip_html | truncate:200 }}</div>
+            </a>
+          </li>
+        {% endfor %}
+        </ul>
+      </div>
+
+      {% include paging.html %}
+    </main>
+  </div>
+
+{% assign type = nil %}
+{% assign paging_root = nil %}

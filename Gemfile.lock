@@ -6,6 +6,8 @@ GEM
     colorator (0.1)
     ffi (1.9.10)
     ffi (1.9.10-x86-mingw32)
+    font-awesome-sass (4.5.0)
+      sass (>= 3.2)
     jekyll (3.1.2)
       colorator (~> 0.1)
       jekyll-sass-converter (~> 1.0)
@@ -15,6 +17,8 @@ GEM
       mercenary (~> 0.3.3)
       rouge (~> 1.7)
       safe_yaml (~> 1.0)
+    jekyll-paginate (1.1.0)
+    jekyll-paginate-category (0.1.0)
     jekyll-sass-converter (1.4.0)
       sass (~> 3.4)
     jekyll-watch (1.3.1)
@@ -45,7 +49,10 @@ PLATFORMS
 
 DEPENDENCIES
   albino (~> 1.3)
+  font-awesome-sass
   jekyll
+  jekyll-paginate
+  jekyll-paginate-category
   nokogiri
   redcarpet (~> 2.3)
   sass

@@ -1,0 +1,67 @@
+{% if page.grouptype == 'tag' %}
+  {% capture paging_root %}/tag/{{page.tag}}/{% endcapture %}
+{% elsif page.grouptype == 'category' %}
+  {% capture paging_root %}/category/{{page.category}}/{% endcapture %}
+{% else %}
+  {% capture paging_root %}/{% endcapture %}
+{% endif %}
+
+<div id="post-pagination">
+  <ul class="pages">
+    {% if paginator.page == 1 %}
+       <span class=pages_none><i class="fa fa-angle-double-left"></i></span>
+    {% else %}
+       <a href="{{paging_root}}"><i class="fa fa-angle-double-left"></i></a>
+    {% endif %}
+  
+
+    {% if paginator.previous_page %}
+      <li class="prev">
+        {% if paginator.previous_page == 1 %}
+        <a href="{{paging_root}}">PREV</a>
+        {% else %}
+        <a href="{{paging_root}}page{{paginator.previous_page}}">PREV</a>
+        {% endif %}
+      </li>
+  {% else %}
+    <li class="prev"><span class=pages_none>PREV</li>
+  {% endif %}
+
+    {% assign start_num = paginator.page | minus: 7 %}
+    {% assign end_num = paginator.page | plus: 7 %}
+
+    {% if start_num <= 0 %}
+      {% capture start_num %}1{% endcapture %}
+    {% endif %}
+
+    {% if end_num > paginator.total_pages %}
+      {% capture end_num %}{{ paginator.total_pages }}{% endcapture %}
+    {% endif %}
+
+      {% for count in (start_num..end_num) %} 
+      <li>
+        {% if count == paginator.page %}
+        <span class="current-page">{{count}}</span>
+        {% elsif count == 1 %}
+        <a href="{{paging_root}}">1</a>
+        {% else %}
+        <a href="{{paging_root}}page{{count}}">{{count}}</a>
+        {% endif %}
+      </li>
+      {% endfor %}
+    {% if paginator.next_page %}
+    <li class="next">
+      <a href="{{paging_root}}page{{paginator.next_page}}">NEXT</a>
+    </li>
+  {% else %}
+    <li class="next"><span class="pages_none">NEXT</li>
+    {% endif %}
+
+  {% if paginator.page == paginator.total_pages %}
+     <span class=pages_none><i class="fa fa-angle-double-right"></i></span>
+  {% else %}
+     <a href="{{paging_root}}page{{paginator.total_pages}}"><i class="fa fa-angle-double-right"></i></a>
+  {% endif %}
+
+  </ul>
+</div>

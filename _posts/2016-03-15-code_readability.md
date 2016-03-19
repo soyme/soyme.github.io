@@ -1,9 +1,9 @@
 ---
-layout: post_page
+layout: post
 title: Code Readability
-tag: test
+category: blog
+tags: [general, refactoring]
 ---
-
 더 나은 개발자로서 더 적은 버그를 양산하고, 자신의 코드를 더 자랑스러워하며, 주변 사람들이 사용하기를 원하는 코드를 만드는 방법.
 
 ### 핵심 아이디어

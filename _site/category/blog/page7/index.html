@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8"/>
+		<title>
+		 blog -
+		
+		 Fantasie</title>
+		<!-- For responsive site
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<link rel="author" href="/humans.txt">
+		<meta name="description" content="Description Goes Here">
+		<link rel="stylesheet" href="/css/style.css">
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+		<!--[if IE 7]>
+			<html class="ie7"> 
+			<link rel="stylesheet" type="text/css" href="/css/font-awesome-ie7.min.css">
+		<![endif]-->
+		<!--[if IE 8]><html class="ie8"> <![endif]-->		
+	    <!--[if lt IE 9]>
+	      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	    <![endif]-->
+
+	<link rel="apple-touch-icon" sizes="57x57" href="/ico/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/ico/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/ico/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/ico/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/ico/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/ico/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/ico/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/ico/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/ico/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="/ico/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/ico/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="/ico/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/ico/favicon-16x16.png">
+	<link rel="manifest" href="/manifest.json">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="/ico/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff"> 
+	</head>
+	<body>
+	<!-- Header
+	    ================================================== -->
+	<header>
+	</header>
+
+	  <div class="content">
+    <main class="container">
+        <div class="row-fluid">
+        <article class="top-menu">
+          <a href="/" class="menu-icon" data-toggle="tooltip" title="HOME"><i class="fa fa-home"></i></a>
+<a href="/category/diary/" class="menu-icon" data-toggle="tooltip" title="DIARY"><i class="fa fa-book"></i> Diary</a>
+      <a href="/category/blog/" class="menu-icon" data-toggle="tooltip" title="BLOG"><i class="fa fa-bars"></i> Blog</a>
+      <a href="/tag/" class="menu-icon" data-toggle="tooltip" title="general"><i class="fa fa-tags"></i> Tags</a>
+  <div class="top-line"></div>
+        </article>
+        
+        
+
+            <article class="diary">
+              <div align=center><h2 class="content">객체지향 / 절차지향 / 정보은닉 / 캡슐화 / 모듈화</h2></div>
+              <div class="time"><i class="fa fa-calendar"></i> 07 August 2014</div>
+              <div class="tags"><a href="/tag/java/">#Java</a>, <a href="/tag/oop/">#OOP</a></div>
+              <section>
+                <h3 id="toc_0">절차지향 : C언어</h3>
+
+<ul>
+<li>데이터와, 그들을 조작하는 절차가 구분됨.</li>
+<li>데이터를 중심으로, 각 함수들이 데이터를 조작하고 사용함</li>
+<li>하나의 데이터 type에 변화가 생기면? 많은 함수를 수정해야 할 것임</li>
+</ul>
+
+<h3 id="toc_1">객체지향 : C++, Java 등등</h3>
+
+<ul>
+<li>객체 : 명백한 한계와 의미를 가지는 사물/개념을 추상화 한 것. 애트리뷰트+메소드</li>
+<li>객체(데이터, 기능을 모두 포함)들이 서로 메시지를 주고 받으며 협업함</li>
+<li>하나의 데이터 type에 변화가 생기면? 해당 객체만 수정하면 될 것임, 다른 객체들에는 영향이 가지 않음</li>
+<li>추상화, 캡슐화, 모듈화, 재사용성, 계층성, 상속성,  다형성(같은 메시지에 대해 다르게 반응하는 것)</li>
+</ul>
+
+<h3 id="toc_2">정보은닉 / 캡슐화</h3>
+
+<ul>
+<li>객체간에 데이터를 주고받기 보다는, 기능을 실행해달라고 요청함</li>
+<li>외부에서 데이터에 직접 접근할 수 없고, 인터페이스를 통해서만 이용할 수 있음</li>
+<li>객체는 인터페이스를 제공하기만 하고, 객체의 내부가 어떻게 구현되었는지는 숨긴다.</li>
+<li>외부에서는, 객체의 내부가 어떻게 구현되었는지 알 필요가 없다 (변화시 영향 안받음)</li>
+</ul>
+
+<h3 id="toc_3">모듈화</h3>
+
+<ul>
+<li>크고 복잡한 것을, 좀 더 작고 관리가능한 단위로 나누어서 독립적으로 개발하는 것.</li>
+<li>모듈간의 결합(Coupling)은 낮고, 응집(Cohesion)은 높게</li>
+<li>유지보수, 재사용 용이</li>
+</ul>
+
+              </section>
+            </article>
+        
+        </div>
+
+      
+
+<div id="post-pagination">
+  <ul class="pages">
+    
+       <a href="/category/blog/"><i class="fa fa-angle-double-left"></i></a>
+    
+  
+
+    
+      <li class="prev">
+        
+        <a href="/category/blog/page6">PREV</a>
+        
+      </li>
+  
+
+    
+    
+
+    
+
+    
+
+       
+      <li>
+        
+        <a href="/category/blog/">1</a>
+        
+      </li>
+       
+      <li>
+        
+        <a href="/category/blog/page2">2</a>
+        
+      </li>
+       
+      <li>
+        
+        <a href="/category/blog/page3">3</a>
+        
+      </li>
+       
+      <li>
+        
+        <a href="/category/blog/page4">4</a>
+        
+      </li>
+       
+      <li>
+        
+        <a href="/category/blog/page5">5</a>
+        
+      </li>
+       
+      <li>
+        
+        <a href="/category/blog/page6">6</a>
+        
+      </li>
+       
+      <li>
+        
+        <span class="current-page">7</span>
+        
+      </li>
+       
+      <li>
+        
+        <a href="/category/blog/page8">8</a>
+        
+      </li>
+       
+      <li>
+        
+        <a href="/category/blog/page9">9</a>
+        
+      </li>
+       
+      <li>
+        
+        <a href="/category/blog/page10">10</a>
+        
+      </li>
+       
+      <li>
+        
+        <a href="/category/blog/page11">11</a>
+        
+      </li>
+       
+      <li>
+        
+        <a href="/category/blog/page12">12</a>
+        
+      </li>
+       
+      <li>
+        
+        <a href="/category/blog/page13">13</a>
+        
+      </li>
+      
+    
+    <li class="next">
+      <a href="/category/blog/page8">NEXT</a>
+    </li>
+  
+
+  
+     <a href="/category/blog/page13"><i class="fa fa-angle-double-right"></i></a>
+  
+
+  </ul>
+</div>
+
+    </main>
+  </div>
+
+
+
+
+	<footer>
+  <div class="wrapper">
+    <a href=#><img src="/img/general/dog.png" class="img" border=0></a>
+    <h2 class="footer-heading">fantasie</h2>
+    <div class="intro">I still don't know what I want to do in my life. ☺<br>&nbsp;</div>
+  </div>
+</footer>
+
+	<copyright>
+		<div>&nbsp;</div>
+	</copyright>
+
+	<!-- Javascripts 
+	    ================================================= -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/custom.js"></script>
+
+    <!-- Analytics
+    ================================================== -->
+    <script>
+		// analytics code
+    </script>	
+	</body>
+</html>

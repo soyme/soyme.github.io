@@ -1,7 +1,8 @@
 ---
-layout: post_page
+layout: post
 title: Git 기본 명령어
-tag: Git
+category: blog
+tags: [git]
 ---
 
 ### 파일의 상태

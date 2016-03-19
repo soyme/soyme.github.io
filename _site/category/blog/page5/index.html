@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8"/>
+		<title>
+		 blog -
+		
+		 Fantasie</title>
+		<!-- For responsive site
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<link rel="author" href="/humans.txt">
+		<meta name="description" content="Description Goes Here">
+		<link rel="stylesheet" href="/css/style.css">
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+		<!--[if IE 7]>
+			<html class="ie7"> 
+			<link rel="stylesheet" type="text/css" href="/css/font-awesome-ie7.min.css">
+		<![endif]-->
+		<!--[if IE 8]><html class="ie8"> <![endif]-->		
+	    <!--[if lt IE 9]>
+	      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	    <![endif]-->
+
+	<link rel="apple-touch-icon" sizes="57x57" href="/ico/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/ico/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/ico/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/ico/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/ico/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/ico/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/ico/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/ico/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/ico/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="/ico/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/ico/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="/ico/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/ico/favicon-16x16.png">
+	<link rel="manifest" href="/manifest.json">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="/ico/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff"> 
+	</head>
+	<body>
+	<!-- Header
+	    ================================================== -->
+	<header>
+	</header>
+
+	  <div class="content">
+    <main class="container">
+        <div class="row-fluid">
+        <article class="top-menu">
+          <a href="/" class="menu-icon" data-toggle="tooltip" title="HOME"><i class="fa fa-home"></i></a>
+<a href="/category/diary/" class="menu-icon" data-toggle="tooltip" title="DIARY"><i class="fa fa-book"></i> Diary</a>
+      <a href="/category/blog/" class="menu-icon" data-toggle="tooltip" title="BLOG"><i class="fa fa-bars"></i> Blog</a>
+      <a href="/tag/" class="menu-icon" data-toggle="tooltip" title="general"><i class="fa fa-tags"></i> Tags</a>
+  <div class="top-line"></div>
+        </article>
+        
+        
+
+            <article class="diary">
+              <div align=center><h2 class="content">Git 기본 명령어</h2></div>
+              <div class="time"><i class="fa fa-calendar"></i> 13 October 2014</div>
+              <div class="tags"><a href="/tag/git/">#Git</a></div>
+              <section>
+                <h3 id="toc_0">파일의 상태</h3>
+
+<ul>
+<li>untracked : Git의 관리 대상이 아닌 파일.</li>
+<li>(tracked) unstaged : Git의 관리 대상임. 그런데 stage area에 아직 반영되지 않은 변경사항이 존재한다.</li>
+<li>(tracked) staged : Git의 관리 대상임. 변경사항이 stage area에 반영되었다. 그러나 아직 커밋된 것은 아니다. stage area란, 커밋을 날리면 반영될 변경사항들이 저장되어 있는 일종의 스냅샷이다.</li>
+</ul>
+
+<h3 id="toc_1">기존의 디렉토리를 Git 저장소로 만들기</h3>
+
+<p>기존에 존재하던 프로젝트를 Git으로 관리하고 싶을 때</p>
+
+<ol>
+<li>프로젝트의 루트 디렉토리로 이동</li>
+<li><code>git init</code> 입력
+
+<ul>
+<li><code>/.git</code> 이라는 하위 디렉토리가 만들어지고, 그 안에 설정파일들이 생긴다.</li>
+<li>이 때 까지는 어떤 파일도 관리 대상이 아니다. 즉 모든 파일이 untracked 상태이다. add &amp; commit을 해줘야 관리 대상이 된다.</li>
+</ul></li>
+<li><code>git add 파일명</code>
+
+<ul>
+<li>git add 명령어는 두 가지 일을 한다. 해당 파일이 untracked 상태였다면 tracked 상태로 만든다. 그리고 해당 파일이 untracked 였던 tracked 였던, staged 상태로 만든다. 즉 새로운 파일을 관리 대상에 추가하고자 할 때, 그리고 수정한 파일을 stage area에 추가하고자 할 때 git add를 사용한다.</li>
+<li><code>git add *</code>, <code>git add *.java</code> 등과 같이 와일드카드 문자를 사용할 수 있다.</li>
+</ul></li>
+<li><code>git commit -m &quot;커밋 메시지&quot;</code>
+
+<ul>
+<li>stage area의 최종 스냅샷이 로컬 저장소에 커밋된다.</li>
+</ul></li>
+</ol>
+
+<h3 id="toc_2">기존 저장소를 clone 하기</h3>
+
+<p>이미 존재하는 원격 저장소를 로컬 저장소로 가져오고자 할 때</p>
+
+<ol>
+<li>원하는 루트 디렉토리로 이동</li>
+<li><code>git clone 저장소url [디렉토리명]</code>
+
+<ul>
+<li>예) git clone git://github.com/schacon/grit.git </li>
+<li>새로운 디렉토리가 생성되고 그 안에 .git 디렉토리가 생긴다. 디렉토리명을 지정하지 않은 경우 프로젝트명(예: <code>grit</code>)과 동일하게 생성된다.</li>
+<li>clone 명령은 원격 저장소의 모든 데이터를 가져와서 모두 저장하고, 자동으로 가장 최신버전의 master 브랜치를 checkout 해놓는다.</li>
+<li>처음 clone을 하면 모든 파일은 tracked 이고 unmodifed 이다.</li>
+</ul></li>
+<li>특정 브랜치를 clone 하고 싶은 경우, <code>git clone -b 브랜치명 저장소url [디렉토리명]</code></li>
+</ol>
+
+<h3 id="toc_3">파일 상태 확인하기</h3>
+
+<p><code>git status</code>를 입력하면 현재 작업 중인 브랜치가 무엇이고, 어떤 상태인지 볼 수 있다. 또한 어떤 파일이 새로 생성되었고, 변경되었고 삭제되었는지 볼 수 있다.</p>
+<div class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="gp">$ </span>git status
+On branch master
+Your branch is up-to-date with <span class="s1">'origin/master'</span>.
+Changes to be committed:
+  <span class="o">(</span>use <span class="s2">"git reset HEAD &lt;file&gt;..."</span> to unstage<span class="o">)</span>
+    modified:   file1.txt
+    new file:   file2.txt
+
+Changes not staged <span class="k">for </span>commit:
+  <span class="o">(</span>use <span class="s2">"git add &lt;file&gt;..."</span> to update what will be committed<span class="o">)</span>
+  <span class="o">(</span>use <span class="s2">"git checkout -- &lt;file&gt;..."</span> to discard changes <span class="k">in </span>working directory<span class="o">)</span>
+    modified:   file3.txt
+
+Untracked files:
+  <span class="o">(</span>use <span class="s2">"git add &lt;file&gt;..."</span> to include <span class="k">in </span>what will be committed<span class="o">)</span>
+    file4.txt
+</code></pre></div>
+<p>한 줄 씩 살펴보자면..</p>
+
+<ul>
+<li><code>On branch master</code> : 현재 작업중인 브랜치의 이름은 master 임</li>
+<li><code>Your branch is up-to-date with &#39;origin/master&#39;</code> : 현재 브랜치는 origin 이라는 이름의 remote 저장소의 master 브랜치를 바라보고 있으며, 최신 상태임.</li>
+<li><code>Changes to be committed:</code> : staged 상태의 파일 목록. 쉽게 말하면 커밋될 후보들이다. 이 상태에서 commit을 날리면 해당 파일들의 최종 스냅샷이 커밋된다. 만약 파일을 unstaged로 되돌리고 싶다면, 즉 커밋 후보에서 제외시키려면 <code>git reset HEAD 파일명</code> 명령어를 사용한다.</li>
+<li><code>Changes not staged for commit:</code> : 변경사항이 존재하지만 unstaged 상태인 파일 목록. 이 파일들을 커밋시 포함시키고 싶다면 <code>git add 파일명</code>을 해야한다. 혹은 변경사항을 날려버리고, 최신 커밋 버전으로 되돌리고 싶다면 <code>git checkout -- &lt;file&gt;</code> 명령어를 사용한다.</li>
+<li><code>Untracked files:</code> : Git의 관리 대상이 아닌 파일 목록. <code>git add</code>를 하면 관리 대상이 되고, staged 상태가 된다.</li>
+</ul>
+
+<h3 id="toc_4">파일을 staged 상태로 변경하기</h3>
+
+<p><code>git add 파일명</code> or <code>git add 디렉토리명</code> or <code>git add *</code> 등.. git add 명령어는 untracked 파일을 새로 추적할 때도 사용하고, tracked &amp; modified 파일을 staged 상태로 만들 때도 사용한다.</p>
+
+<ol>
+<li>untracked 파일을  git add하는 경우: tracked &amp; staged 상태로 변경된다.
+
+<ul>
+<li>untracked 파일이 tracked &amp; staged 상태로 바뀜 (changes to be committed)</li>
+<li>이 후 commit을 하면, git add를 실행한 시점의 파일이 저장소에 커밋됨.</li>
+</ul></li>
+<li>tracked 파일을 git add하는 경우: staged 상태로 변경된다.
+
+<ul>
+<li>이미 tracked인 파일을 수정하면 modifed 상태가 됨. (changed but not update)</li>
+<li>modifed 파일을 add하면 tracked &amp; staged 상태로 바뀜 (changed to be commited)</li>
+</ul></li>
+<li>참고) 새로운 파일을 git add 하여 staged 상태로 만들고, 이 파일을 다시 수정한 후 git status 해보면..
+
+<ul>
+<li>changed to be committed, changed but not updated 둘 다에 해당 파일이 나온다.</li>
+<li>이 시점에서 커밋을 하면 마지막으로 add 한 시점의 파일이 커밋되는 것임.</li>
+<li>즉 add의 의미는 파일을 다음 커밋에 추가한다는 의미임.</li>
+<li>최근 변경분까지 커밋되게 하고 싶으면 다시 git add 를 날리면 된다.</li>
+</ul></li>
+</ol>
+
+<h3 id="toc_5">특정 파일 무시하기</h3>
+
+<p>untracked를 유지하고 싶은 파일 패턴을 <code>.gitignore</code> 파일에 적을 수 있다. 로그파일, 임시파일, IDE 설정파일 등..</p>
+
+<ul>
+<li><code>!a</code> : 느낌표로 시작한 패턴의 파일은 무시하지 않는다</li>
+<li><code>*.a</code>, <code>!lib.a</code> : 확장자가 a인 파일은 다 무시하나 lib.a는 무시하지 않는다</li>
+<li><code>/TODO</code> : 루트 디렉토리에 위치하는 TODO 라는 파일을 무시</li>
+<li><code>TODO/</code> : TODO라는 이름의 디렉토리 내에 있는 모든 파일을 무시 </li>
+</ul>
+
+<h3 id="toc_6">파일 변경 내용 확인하기</h3>
+
+<p><code>git diff</code> 명령어를 사용하면 어떤 파일의 내용이 어떻게 변경 되었는지 확인할 수 있다.</p>
+
+<ul>
+<li>작업하고 있는 디렉토리와 staging area에 있는 내용을 비교해서 보여준다. 즉 수정하고 아직 add (staged) 하지 않은 것, unstaged 상태인 내용을 보여준다. 즉 수정한 파일을 전부 add (staged) 하였다면 변경사항이 없다고 나온다.</li>
+</ul>
+
+<p><code>git diff --staged</code> or <code>git diff --cached</code></p>
+
+<ul>
+<li>로컬 저장소의 최신 파일과 staging area에 있는 내용을 비교해서 보여준다. 즉 현재 시점에서 commit을 했을 때 로컬 저장소에 반영될 내용을 보여준다.</li>
+</ul>
+
+<h3 id="toc_7">파일 커밋하기</h3>
+
+<p><code>git commit</code> 명령어를 수행하면 staging area에 있는 스냅샷의 내용을 로컬 저장소에 저장한다. </p>
+
+<ul>
+<li><code>git add</code>를 수행한 이후에 수정된 내용은 반영되지 않는다. git commit 명령어를 입력하면 커밋 메시지를 작성하기 위한 에디터가 열린다. </li>
+<li><code>git commit -m 커밋메시지</code> : 커밋 명령어와 메시지 작성을 한 번에 끝낼 수 있다.</li>
+<li><code>git commit -v</code> : 커밋 메시지에 git diff 내용을 추가하여 커밋 </li>
+<li><code>git commit -a</code>  : staging area를 생략하고 바로 커밋한다. tracked 상태인 파일을 자동으로 staging area에 넣은 후 커밋해주므로, git add를 실행하는 수고를 덜 수 있다.</li>
+<li><code>git commit --amend</code> : 바로 직전에 했던 커밋에 이번에 하는 커밋을 덮어씌운다. 실수로 파일 한 두개를 빠뜨렸거나, 커밋 메시지를 다시 작성하고 싶을 때 주로 사용한다.</li>
+</ul>
+
+<h3 id="toc_8">파일 삭제하기</h3>
+
+<p><code>git rm 파일명</code> 명령어를 수행하면, 해당 파일을 staging area 및 작업중인 디렉토리에서 삭제한다.</p>
+<div class="highlight"><pre><code class="language-shell" data-lang="shell">Changes to be committed:
+  <span class="o">(</span>use <span class="s2">"git reset HEAD &lt;file&gt;..."</span> to unstage<span class="o">)</span>
+    deleted:   file
+</code></pre></div>
+<ul>
+<li><code>git rm</code> 후에 <code>git status</code>를 확인해보면, 해당 파일의 상태가 위와 같이 changed to be comitted (staged) 이다. 이 상태에서 커밋을 하면 staging area에서 삭제가 되고, git은 더이상 이 파일을 추적하지 않는다.</li>
+<li><code>git rm</code>을 사용하지 않고 워킹 디렉토리에서 직접 파일을 삭제하면, changed but not update (unstaged) 상태가 된다.</li>
+<li><code>git rm --cached 파일명</code> : 워킹 디렉토리에 있는 파일은 지우지 않고, staging area에서만 삭제한다. (tracked 상태였던 파일을 ignore 하고 싶을 때 사용)</li>
+</ul>
+
+<h3 id="toc_9">파일 이름 변경하기</h3>
+
+<p><code>git mv 이전파일명 새로운파일명</code></p>
+
+<ul>
+<li>tracked 상태였던 파일의 이름을 바꾸고 싶을 때 사용한다.</li>
+<li><code>git rm 이전파일명</code> 실행 후에 <code>git add 새로운파일명</code>을 실행하는 것과 결과는 동일하다.</li>
+</ul>
+
+              </section>
+            </article>
+        
+        </div>
+
+      
+
+<div id="post-pagination">
+  <ul class="pages">
+    
+       <a href="/category/blog/"><i class="fa fa-angle-double-left"></i></a>
+    
+  
+
+    
+      <li class="prev">
+        
+        <a href="/category/blog/page4">PREV</a>
+        
+      </li>
+  
+
+    
+    
+
+    
+
+    
+
+       
+      <li>
+        
+        <a href="/category/blog/">1</a>
+        
+      </li>
+       
+      <li>
+        
+        <a href="/category/blog/page2">2</a>
+        
+      </li>
+       
+      <li>
+        
+        <a href="/category/blog/page3">3</a>
+        
+      </li>
+       
+      <li>
+        
+        <a href="/category/blog/page4">4</a>
+        
+      </li>
+       
+      <li>
+        
+        <span class="current-page">5</span>
+        
+      </li>
+       
+      <li>
+        
+        <a href="/category/blog/page6">6</a>
+        
+      </li>
+       
+      <li>
+        
+        <a href="/category/blog/page7">7</a>
+        
+      </li>
+       
+      <li>
+        
+        <a href="/category/blog/page8">8</a>
+        
+      </li>
+       
+      <li>
+        
+        <a href="/category/blog/page9">9</a>
+        
+      </li>
+       
+      <li>
+        
+        <a href="/category/blog/page10">10</a>
+        
+      </li>
+       
+      <li>
+        
+        <a href="/category/blog/page11">11</a>
+        
+      </li>
+       
+      <li>
+        
+        <a href="/category/blog/page12">12</a>
+        
+      </li>
+      
+    
+    <li class="next">
+      <a href="/category/blog/page6">NEXT</a>
+    </li>
+  
+
+  
+     <a href="/category/blog/page13"><i class="fa fa-angle-double-right"></i></a>
+  
+
+  </ul>
+</div>
+
+    </main>
+  </div>
+
+
+
+
+	<footer>
+  <div class="wrapper">
+    <a href=#><img src="/img/general/dog.png" class="img" border=0></a>
+    <h2 class="footer-heading">fantasie</h2>
+    <div class="intro">I still don't know what I want to do in my life. ☺<br>&nbsp;</div>
+  </div>
+</footer>
+
+	<copyright>
+		<div>&nbsp;</div>
+	</copyright>
+
+	<!-- Javascripts 
+	    ================================================= -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/custom.js"></script>
+
+    <!-- Analytics
+    ================================================== -->
+    <script>
+		// analytics code
+    </script>	
+	</body>
+</html>

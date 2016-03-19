@@ -1,7 +1,8 @@
 ---
-layout: post_page
+layout: post
 title: Bash Shell - 변수 변경자 (variable modifier)
-tag: bash
+category: blog
+tags: [linux, shell]
 ---
 `변수 변경자`를 사용하면, 특정 변수에 값이 지정되어 있는지 검사할 수 있으며 검사 결과에 따라 새로운 값을 할당할 수 있다.
 
