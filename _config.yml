@@ -12,6 +12,8 @@ server: true # runs a local server
 exclude: ["Gemfile", "Gemfile.lock", "README.md", 'sass', 'watch.sh', 'style.scss'] # files to exclude
 #gems: [jekyll-paginate, jekyll-paginate-category]
 permalink: /:year/:month/:day/:title/
+comments:
+  url: "http://ec2-52-79-127-116.ap-northeast-2.compute.amazonaws.com:7000/jekyll-discuss/comments"
 
 paginate: 10
 blog_pagenate: 1

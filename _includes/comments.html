@@ -1,0 +1,45 @@
+{% capture post_slug %}{{ post.date | date: "%Y-%m-%d" }}-{{ post.url | split: '/' | last }}{% endcapture %}
+{% if site.data.comments[post_slug] %}
+	{% assign comments = site.data.comments[post_slug] | sort %}
+{% else %}
+	{% assign comments = nil %}
+{% endif %}
+<div style="float: left"></div>
+<div class="comments">
+	<div class="comments_wrapper" {% if site.data.comments[post_slug] == null %}aria-hidden="true"{% endif %}>
+		<div class="heading"><a href="#bottom_{{ post_slug }}" onClick="comment_toggle('comment_hidden_{{ post_slug }}', 'write_{{ post_slug }}')">comments {{ comments.size }}</a></div>
+		<div id="comment_hidden_{{ post_slug }}" style="display: none;">
+			<div class="line"></div>
+
+			<form id="post-new-comment" slug="{{ post_slug }}" class="form" action="{{ site.comments.url }}">
+			    <!-- Meta -->       
+				<div>
+				    <input type="hidden" name="meta[post-url]" value="{{ post.url }}">
+				    <input type="hidden" name="meta[post-slug]" value="{{ post_slug }}">
+				    <input type="hidden" name="meta[post-title]" value="{{ post.title }}">
+				</div>
+				    <!-- Fields -->
+				<div class="text_div">
+				    <input class="text_field f_name" id="write_{{ post_slug }}" type="text" name="fields[name]" placeholder="NAME" required/>
+				    <input class="text_field f_email" type="email" name="fields[email]" placeholder="E-MAIL (will be not public)" required/>
+				    <input class="text_field f_url" type="url" name="fields[url]" placeholder="HOMEPAGE (optional)"/>
+				</div>
+				<div class="content_div"><textarea class="content" rows="5" name="fields[message]" placeholder=" Comment. Markdown is available." required></textarea></div>
+				<div><input class="button" type="submit" value="WRITE" /></div>
+			</form>
+
+			<div class="comment" {% if site.data.comments[post_slug] == null %}aria-hidden="true"{% endif %}>
+			{% for comment in comments %}
+				{% assign email = comment[1].email %}
+				{% assign name = comment[1].name %}
+				{% assign url = comment[1].url %}
+				{% assign date = comment[1].date %}
+				{% assign message = comment[1].message %}
+
+				{% include comment.html index=forloop.index email=email name=name url=url date=date message=message %}
+			{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+<div style="clear: both"></div>

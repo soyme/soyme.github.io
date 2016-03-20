@@ -2,7 +2,7 @@
 layout: post
 title: Checked Exception / Uncheked Exception (RuntimeException)
 category: blog
-tags: [Java]
+tags: [java]
 ---
 
 ### Checked Exception

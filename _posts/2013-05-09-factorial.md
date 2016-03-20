@@ -2,7 +2,7 @@
 layout: post
 title: 팩토리얼
 category: blog
-tag: Java, algorithm
+tags: [java, algorithm]
 ---
 
 재귀 함수를 배울 때 필수로 등장하는 예제인 팩토리얼..

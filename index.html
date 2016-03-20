@@ -16,7 +16,7 @@ layout: default
     		  <li>
     		    <a href="{{ post.url }}">
     		        <h3>{{ post.title }}</h3></a>
-                <time>{{ post.date | date: "%d %B %Y" }}</time>
+                <time><i class="fa fa-calendar"></i> {{ post.date | date: "%d %B %Y" }}</time>
                 <div>{{ post.content | split:"<!-- more -->" | first | strip_html | truncate:200 }}</div>
     		    </a>
     		  </li>

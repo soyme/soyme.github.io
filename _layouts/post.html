@@ -42,17 +42,21 @@ layout: default
 				<h2 class="content">{{page.title}}</h2>
 				<div class="time"><i class="fa fa-calendar"></i> {{ page.date | date: "%d %B %Y" }}</div>
                 <div class="tags">{{ tags_content }}</div>
-                <div class=title_line></div>
+                <div class="title_line"></div>
 				<section>
-					{{ content }}
+					<div>{{ content }}</div>
+                    {% assign post = page %}
+                    {% include comments.html %}
 				</section>
-				<div class=bottom_line></div>
-				<section class=prev_next>
-					{% if page.previous %} 
-							<a rel="prev" href="{{ page.previous.url }}"><i class="icon-arrow-left"></i> {{ page.previous.title }}</a>
-						{% endif %}
-						{% if page.next %} 
-							<a rel="next" style="float:right" href="{{ page.next.url }}">{{ page.next.title }} <i class="icon-arrow-right"></i></a>
+				<div class="bottom_line"></div>
+				<section class="prev_next">
+					{% if page.next and page.previous %} 
+                        <a style="float: left;" href="{{ page.previous.url }}"><i class="icon-arrow-left"></i> {{ page.previous.title }}</a>
+                    {% elsif page.previous %} 
+						<a style="float: left; margin-bottom: 10px;" href="{{ page.previous.url }}"><i class="icon-arrow-left"></i> {{ page.previous.title }}</a>
+					{% endif %}
+					{% if page.next %} 
+						<a style="float:right; margin-bottom: 10px;"; href="{{ page.next.url }}">{{ page.next.title }} <i class="icon-arrow-right"></i></a>
 					{% endif %}
 				</section>
 			</article>

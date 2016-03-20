@@ -28,8 +28,9 @@ layout: default
               <div align=center><h2 class="content">{{post.title}}</h2></div>
               <div class="time"><i class="fa fa-calendar"></i> {{ post.date | date: "%d %B %Y" }}</div>
               <div class="tags">{{ tags_content }}</div>
-              <section>
-                {{ post.content }}
+              <section class="diary_section">
+                <div>{{ post.content }}</div>
+                {% include comments.html %}
               </section>
             </article>
         {% endfor %}

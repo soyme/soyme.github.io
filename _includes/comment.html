@@ -1,0 +1,23 @@
+<div id="comment{{ include.index }}" class="comment">
+	<div class="comment_wrapper">
+		<div class="comment_line"></div>
+		<div>
+		<span class="comment_name">
+			{% if (include.url) and (include.url != '@url') %}
+				<a rel="nofollow" href="{{ include.url }}">{{ include.name }}</a>
+			{% else %}
+				{{ include.name }}
+			{% endif %}
+		</span>
+
+		{% if include.date %}
+			<span class="comment_date">, {{ include.date }}</span> </div>
+			<div class="comment_content">
+		{% else %}
+			<span class="comment_date">, now</span> </div>
+			<div class="comment_content">
+			<p><em>This is a preview of your comment. It may take a couple of minutes for it to be displayed to others.</em></p>
+		{% endif %}
+		{{ include.message }}</div>
+	</div>
+</div>
