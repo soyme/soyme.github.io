@@ -51,7 +51,6 @@ function getComment(data) {
 }
 
 function addComment(comment, addAt) {
-	alert(addAt);
 	$(addAt).removeAttr('aria-hidden').append(comment);
 }
 
