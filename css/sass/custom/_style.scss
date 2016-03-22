@@ -481,7 +481,7 @@ header {
     }
 
     .diary_section {
-        padding: 3.5em 2.5em 1.5em 2.5em;
+        padding: 3.5em 2.0em 1.5em 2.0em;
         margin-top: 0.5em;
         margin-bottom: 2.0em;
         border: 1px solid #ddd;
@@ -494,16 +494,8 @@ header {
 }
 
 @media screen and (max-width:900px) {
-    .diary h2{
-        font-size: 2em;
-    }
-    .diary_section {
-        padding: 3.5em 1.3em 1em 1.5em;
-    }
-   .diary .time {
-        position: absolute;
-        margin: -5px 0px;
-        padding: 5px 10px;
+    .diary .diary_section {
+        padding: 3.5em 1.5em 1.5em 1.5em;
     }
 }
 
