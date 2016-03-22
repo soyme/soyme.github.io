@@ -1,20 +1,24 @@
 $(document).ready(function () {
 
-	$('#post-new-comment').click(function() {
-		var formData = $(this).serializeArray();
+	$('.new_comment_button').click(function() {
+
+		alert("코멘트를 작성합니다.");
+		var formId = $(this).attr('formId');
+		var thisForm = $(formId);
+		var formData = thisForm.serializeArray();
 		var fieldsWithErrors = [];
 
 		$(formData).each((function (index, element) {
-			var required = $(this).find('[name="' + element.name + '"]').attr('required');
+			var required = thisForm.find('[name="' + element.name + '"]').attr('required');
 			var empty = (element.value.trim().length === 0);
 
 			if (required && empty) {
 				fieldsWithErrors.push(element.name);
 			}
 		}).bind(this));
-		var addAt = "#comment_hidden_" + $(this).attr('slug');
+		var addAt = "#comment_hidden_" + thisForm.attr('slug');
 		if (fieldsWithErrors.length === 0) {
-			var postUrl = $(this).attr('action');
+			var postUrl = thisForm.attr('action');
 			var payload = $.param(formData);
 
 			$.ajax({
@@ -32,7 +36,7 @@ $(document).ready(function () {
 				}
 			});
 
-			$(this).get(0).reset();
+			thisForm.get(0).reset();
 		}
 
 		return false;
@@ -41,7 +45,7 @@ $(document).ready(function () {
 
 function getComment(data) {
 	var template = $('#template-comment').text();
-	data.index = $('.comment').length;
+	data.index = "999";
 	for (var variable in data) {
 		var exp = new RegExp('{' + variable + '}', 'g');
 		template = template.replace(exp, data[variable]);
