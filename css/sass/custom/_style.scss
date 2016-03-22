@@ -164,6 +164,7 @@ header {
         font-weight: bold;
         font-size: 5.1em;  
         margin-top: 0.6em;
+        text-shadow: 1px 1px #fff;
         letter-spacing: 0.1em;
         color: $pointColor;
     }
@@ -219,6 +220,7 @@ header {
         color: $pointColor;
         font-weight: normal;
         font-size: 2.8em;
+        text-shadow: 1px 1px #fff;
         margin-top: 0.2em;
     }
 
@@ -365,7 +367,7 @@ header {
         color: $pointColor;
         text-align: center;
         word-break: break-word; 
-
+        text-shadow: 1px 1px #fff;
     }
 
     section{
@@ -636,6 +638,7 @@ footer {
         background: none;
         font-weight: bold;
         border: none;
+        text-align: center;
         cursor: pointer;
         margin: 0.4em 0 0.8em 0;
     }

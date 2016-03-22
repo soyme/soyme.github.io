@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-	$('#post-new-comment').submit(function() {
+	$('#post-new-comment').click(function() {
 		var formData = $(this).serializeArray();
 		var fieldsWithErrors = [];
 

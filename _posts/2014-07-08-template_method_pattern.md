@@ -2,7 +2,7 @@
 layout: post
 title: 템플릿 메소드 패턴
 category: blog
-tags: [java, algorithm]
+tags: [java, pattern]
 ---
 
 `템플릿 메소드 패턴`은, 상위 클래스의 `템플릿 메소드`에서 처리의 흐름을 결정하고 하위 클래스에서 그 구체적인 처리 방법을 결정하는 디자인패턴이다.
