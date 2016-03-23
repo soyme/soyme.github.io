@@ -39,8 +39,10 @@ main.container, main.content > .container{
     }
 }
 
-img {
-    max-width: 550px;    
+@media screen and (min-width:640px) {
+    img {
+        max-width: 640px;    
+    }
 }
 
 hr{
