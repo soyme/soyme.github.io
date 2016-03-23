@@ -20,6 +20,6 @@ tags: [java]
 
 또한 인터페이스는 디자인패턴 측면에서, 구현할 컴포넌트의 표준을 정하고 실제로 어떤 방식으로 구현할지는 사용자에게 위임하기 위한 것이다. Comparable 인터페이스를 생각해보면 명료하다. 어떤 방식으로 sorting 할 것인지는, 인터페이스를 구현(implements)한 서브클래스에게 위임한다.
 
------------
+---
 
 https://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html

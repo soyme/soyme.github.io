@@ -26,10 +26,11 @@ layout: default
 
             <article class="diary">
               <div align=center><h2 class="content">{{post.title}}</h2></div>
-              <div class="time"><i class="fa fa-calendar"></i> {{ post.date | date: "%d %B %Y" }}</div>
+              <div class="time"><i class="fa fa-calendar"></i>{{ post.date | date: "%d %B %Y" }}</div>
               <div class="tags">{{ tags_content }}</div>
               <section class="diary_section">
-                <div>{{ post.content }}</div>
+            {% capture img_url %}/assets/{{ post.date | date: "%Y-%m-%d" }}-{{ post.url | split: '/' | last }}{% endcapture %}
+                <div>{{ post.content | replace: '__imgUrl__',img_url }}</div>
                 {% include comments.html %}
               </section>
             </article>

@@ -4,8 +4,6 @@ title: Java Collection과 멀티쓰레드
 category: blog
 tags: [java,thread]
 ---
-References: "Java 언어로 배우는 디자인 패턴 입문 - 멀티쓰레드편" Chapter 02
-
 여러개의 인스턴스를 관리하는 인터페이스나 클래스를 총칭하여 컬렉션 이라고 한다.
  > java.util.List 인터페이스, java.util.ArrayList 클래스 등등..
 
@@ -145,3 +143,7 @@ public class Main {
 }
 ```
 copy-on-write는 'write 할 때 copy 한다'는 의미. 컬렉션에 대하여 write를 할 때마다, 내부에 확보된 배열을 통째로 복사한다. 이렇게 통째로 복사를 하면 iterator를 사용하여 element들을 순서대로 읽어가는 도중에 element가 변경될 염려가 없다. 따라서 CopyOnWriteArrayList 클래스와 그 iterator가 ConcurrentModificationException을 발생시키는 일은 절대 없다. 단 write를 할 때마다 배열을 통째로 copy 하므로, write가 잦은 경우 성능이 저하될 수 있다. write가 적고 read가 빈번한 경우에 좋다.
+
+---
+
+References: "Java 언어로 배우는 디자인 패턴 입문 - 멀티쓰레드편" Introduction 02

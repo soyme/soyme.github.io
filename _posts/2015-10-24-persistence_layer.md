@@ -4,7 +4,6 @@ title: 대용량 서비스 아키텍처의 Persistent Layer
 category: blog
 tags: [database]
 ---
-
 ### 클러스터링
 - Fail Over 가능 : 특정 인스턴스 장애 시 다른 인스턴스들이 장애가 난 인스턴스의 메시지를 받아서 이어서 처리
 - 한 대의 서버로 처리할 수 없는 양의 메시지를 여러 대의 서버에서 분산 처리 가능

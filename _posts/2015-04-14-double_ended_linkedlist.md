@@ -4,10 +4,10 @@ title: Double Ended Linked List
 category: blog
 tags: [java, algorithm]
 ---
-
 `Double Ended Linked List`란 리스트의 맨 앞을 가리키는 HEAD 포인터 뿐 아니라, 리스트의 맨 뒤를 가리키는 TAIL 포인터 또한 가지고 있는 링크드리스트이다. 이는 `Double Linked List`와 다르다. 더블 링크드리스트는 각 노드가 prevNode 및 nextNode의 링크를 모두 가지고 있는 것이고, 지금 여기서의 Double Ended 링크드리스트는 리스트 전체에서 한 개의 HEAD 포인터와 한 개의 TAIL를 가지고 있는 것이다.
 
 <!-- more -->
+
 ### 구현 예제
 - 원소가 하나도 없을 때 뿐 아니라 디큐시에 원소가 하나만 있을 때도 고려 필요
 - enqueue를 맨 앞, 맨 뒤, 원하는 위치에서 할 수 있도록 구현 (가장 첫 위치는 1으로 가정)

@@ -4,7 +4,6 @@ title: Git 기본 명령어
 category: blog
 tags: [git]
 ---
-
 ### 파일의 상태
 - untracked : Git의 관리 대상이 아닌 파일.
 - (tracked) unstaged : Git의 관리 대상임. 그런데 stage area에 아직 반영되지 않은 변경사항이 존재한다.

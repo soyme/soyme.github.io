@@ -4,10 +4,7 @@ title: 멀티쓰레드 프로그램 구현 방법 (Thread, Runnable) / ThreadFac
 category: blog
 tags: [java,thread]
 ---
-References: "Java 언어로 배우는 디자인 패턴 입문 - 멀티쓰레드편" Introduction 01
-
 <!-- more -->
-
 ### 싱글쓰레드 프로그램과 멀티쓰레드 프로그램의 차이
 #### 싱글쓰레드 프로그램
 싱글쓰레드 프로그램은, 지금 프로그램의 어느 부분이 실행되고 있냐는 물음에 "여기" 라고 한 군데를 가르킬 수 있다.
@@ -160,3 +157,7 @@ public class Main {
 1. 디폴트 ThreadFactory 객체를 얻기 위해 Executors.defaultThreadFactory() 메소드를 이용한다.
 2. Runnable 인스턴스를 인자로 하여 ThreadFactory 객체의 newThread 메소드를 호출하면 쓰레드 인스턴스가 생성된다.
 3. 생성된 쓰레드 인스턴스의 start() 메소드를 호출한다.
+
+---
+
+References: "Java 언어로 배우는 디자인 패턴 입문 - 멀티쓰레드편" Introduction 01

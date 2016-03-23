@@ -4,8 +4,6 @@ title: 멀티쓰레드 프로그램의 성능 평가 기준
 category: blog
 tags: [java,thread]
 ---
-References: "Java 언어로 배우는 디자인 패턴 입문 - 멀티쓰레드편" Introduction 02
-
 <!-- more -->
 
 ### 안정성 (safety)
@@ -40,3 +38,7 @@ References: "Java 언어로 배우는 디자인 패턴 입문 - 멀티쓰레드�
 - latency : 요청을 한 뒤 반응이 나타날 때까지 걸리는 시간. 응답성이 높다 = 대기시간이 짧다.
 - capacity : 동시에 처리할 수 있는 수. 예를 들어, 서버가 동시에 처리할 수 있는 클라이언트 수나 동시에 처리할 수 있는 파일의 수
 - efficiency, scalability, degradation 등등등 ...
+
+---
+
+References: "Java 언어로 배우는 디자인 패턴 입문 - 멀티쓰레드편" Introduction 02

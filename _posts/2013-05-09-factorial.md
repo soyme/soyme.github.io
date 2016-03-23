@@ -4,7 +4,6 @@ title: 팩토리얼
 category: blog
 tags: [java, algorithm]
 ---
-
 재귀 함수를 배울 때 필수로 등장하는 예제인 팩토리얼..
 > 5! = 5 * 4 * 3 * 2 * 1
 

@@ -44,7 +44,8 @@ layout: default
                 <div class="tags">{{ tags_content }}</div>
                 <div class="title_line"></div>
 				<section>
-					<div>{{ content }}</div>
+                {% capture img_url %}/assets/{{ post.date | date: "%Y-%m-%d" }}-{{ post.url | split: '/' | last }}{% endcapture %}
+                    <div>{{ content | replace: '__imgUrl__',img_url }}</div>
                     {% assign post = page %}
                     {% include comments.html %}
 				</section>
