@@ -1,10 +1,10 @@
 # visit https://github.com/mojombo/jekyll/wiki/Configuration for more settings
 
-title: fantasie
-author: fantasie
+title: so' blog
+author: so
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://fantasie.github.io" # the base hostname & protocol for your site
-description: "http://fantasie.github.io - My Personal Repository."
+description: "http://so-blog.net <i class='fa fa-heart'></i> My Personal Repository"
 github_username:  fantasie
 excerpt_separator: "<!-- more -->"
 auto: true # automatically update your jekyll

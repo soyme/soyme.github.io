@@ -23,7 +23,7 @@ $darkPointColor: rgb(151, 121, 97);
 // --------------------------------------------------
 
 body{
-    background-color: $darkPointColor;
+    background-color: $bgColor;
 }
 
 a { color: #000; text-decoration: none; }
@@ -59,6 +59,7 @@ hr{
 // 1. a Font
 // --------------------------------------------------
 @import url(http://fonts.googleapis.com/css?family=Ubuntu+Condensed);
+
 @font-face {
     font-family: 'Noto Sans Korean';
     font-style: normal;
@@ -136,17 +137,15 @@ hr{
     url(../../font/NotoSansKR-Black-Hestia.otf) format('opentype');
 }
 
-
 // 2. Header Section
 // --------------------------------------------------
 header {
     min-height: 0.5em;
     font-family: 'Ubuntu Condensed', "Noto Sans Korean";
     font-weight: normal;
-        letter-spacing: 0.1em;
-        color: #fff;
-        margin-top: 0.6em;    
-        margin-left: 0.6em;
+    letter-spacing: 0.1em;
+    color: #fff;
+    background-color:$darkPointColor;
 }
 
 .content{
@@ -511,7 +510,7 @@ copyright {
 
 footer {
     background-color: $bgColor;
-    padding: 1em;
+    padding: 1em 0em;
     text-align: center;
 }
 
