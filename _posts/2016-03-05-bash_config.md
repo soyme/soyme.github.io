@@ -2,11 +2,11 @@
 layout: post
 title: Bash Shell 환경 설정
 category: blog
-tags: [linux]
+tags: [linux,shell]
 ---
 몇몇의 초기화 파일들을 통해 사용자 shell의 환경을 설정할 수 있다.
 
-<!-- more -->
+참고로 모든 shell 관련 포스트는 bash 기준이다. 로그인 된 shell 종류는 `echo $SHELL` 명령으로 확인할 수 있다.
 
 ### /etc/profile 파일
 `/etc/profile`은 사용자가 로그인 할 때, 시스템 전체적으로 공통된 초기화를 하기 위해 설정하는 파일이다. 즉 모든 사용자에게 적용된다. 

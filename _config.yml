@@ -1,29 +1,39 @@
 # visit https://github.com/mojombo/jekyll/wiki/Configuration for more settings
 
+
 title: so' blog
 author: so
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://fantasie.github.io" # the base hostname & protocol for your site
-description: "http://so-blog.net <i class='fa fa-heart'></i> My Personal Repository"
+url: "http://so-blog.net" # the base hostname & protocol for your site
+description: "http://so-blog.net <i class='fa fa-heart'></i> 이것저것 기록하는 공간 :-)"
 github_username:  fantasie
 excerpt_separator: "<!-- more -->"
 auto: true # automatically update your jekyll
 server: true # runs a local server
 exclude: ["Gemfile", "Gemfile.lock", "README.md", 'sass', 'watch.sh', 'style.scss'] # files to exclude
-#gems: [jekyll-paginate, jekyll-paginate-category]
 permalink: /:year/:month/:day/:title/
-comments:
-  url: "http://ec2-52-79-127-116.ap-northeast-2.compute.amazonaws.com:7000/jekyll-discuss/comments"
+imgUri: "http://fantasie.github.io"
 
+# deprecated
+comments:
+  url: "http://so-blog.net:7000/jekyll-discuss/comments"
+
+editor: "http://so-blog.net:7500"
 paginate: 10
 blog_pagenate: 1
-diary_pagenate:	5
+diary_pagenate:	1 # if larger than 1 then disqus will not work... :(
+scrap_pagenate: 1
 tag_pagenate: 10
 
 paginate_path: "page:num"
 
-categories: ["blog","diary"]
+categories: ["blog","diary","scrap"]
 
 markdown: redcarpet
 redcarpet:
     extensions: ["no_intra_emphasis", "tables", "autolink", "strikethrough", "with_toc_data"]
+
+# disqus config
+disqusUrl: "so-blog-1"
+layout: default
+comments: true

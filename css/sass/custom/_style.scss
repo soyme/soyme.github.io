@@ -39,13 +39,21 @@ main.container, main.content > .container{
     }
 }
 
-@media screen and (min-width:640px) {
+img {
+}
+
+.center-img {
+    margin: 0 auto;
+    display: block;
+}
+
+@media screen and (min-width:650px) {
     img {
-        max-width: 640px;    
+        max-width: 600px;
     }
 }
 
-hr{
+hr {
     border-top: 1px solid lighten($grayLight, 20%);
     border-bottom: none;
 }
@@ -158,7 +166,7 @@ header {
     background-color: $bgColor;
 
     & > .container{
-       min-height: 20em;  
+       min-height: 20em;
     }
 }
 
@@ -167,7 +175,7 @@ header {
         font-family: 'Ubuntu Condensed';
         text-transform: uppercase;
         font-weight: bold;
-        font-size: 5.1em;  
+        font-size: 5.1em;
         margin-top: 0.6em;
         text-shadow: 1px 1px #fff;
         letter-spacing: 0.1em;
@@ -177,8 +185,8 @@ header {
     .sub-title{
         font-family: 'Ubuntu Condensed', "Noto Sans Korean";
         letter-spacing: -1;
-        font-size: 1.8em;
-        margin: 0.8em 0 1.7em;
+        font-size: 1.4em;
+        margin: 0.6em 0 1.7em;
         color: $grayLight;
     }
 }
@@ -186,12 +194,12 @@ header {
 @media screen and (max-width:900px) {
     .content {
         h1{
-            font-size: 3.1em;  
+            font-size: 3.1em;
             margin-top: 1em;
         }
 
         .sub-title{
-            font-size: 1.5em;
+            font-size: 1.3em;
         }
     }
 }
@@ -269,17 +277,17 @@ header {
     text-align: center;
     font-family: 'Ubuntu Condensed';
     font-size: 1.15em;
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
 
     .prev {
        clear: both;
     }
     .next {
-     clear: both;  
+     clear: both;
     }
 
     li {
-       display: inline-block; padding: 2px 6px 4px 6px; 
+       display: inline-block; padding: 2px 6px 4px 6px;
     }
     .current-page {
         color: $pointColor;
@@ -293,7 +301,7 @@ header {
 // --------------------------------------------------
 
 .post{
-    margin-top: -0.1em; 
+    margin-top: -0.1em;
     line-height: 1.9em;
 
     li, ul {
@@ -371,12 +379,12 @@ header {
         letter-spacing: 0.1em;
         color: $pointColor;
         text-align: center;
-        word-break: break-word; 
+        word-break: break-word;
         text-shadow: 1px 1px #fff;
     }
 
     section{
-        word-break: break-all; 
+        word-break: break-all;
         clear: both;
         font-family: 'Ubuntu Condensed', "Noto Sans Korean";
         letter-spacing: 0.1em;
@@ -402,11 +410,16 @@ header {
     }
 }
 
+.search {
+    width: 360px;
+    margin-bottom: 10px;
+}
+
 // 3. diary Style
 // --------------------------------------------------
 
 .diary{
-    margin-top: 0em; 
+    margin-top: 0em;
     line-height: 1.9em;
 
     li, ul {
@@ -476,10 +489,10 @@ header {
         font-family: 'Ubuntu Condensed', "Noto Sans Korean";
         font-weight: normal;
         font-size: 2.0em;
-        padding: 1.2em 0 0;
+        padding: 1.2em 0em 0;
         letter-spacing: 0.1em;
         display: inline-block;
-        word-break: break-word; 
+        word-break: break-word;
         color: $pointColor;
         line-height: 160%;
         text-align: center;
@@ -492,7 +505,7 @@ header {
         margin-top: 0.5em;
         margin-bottom: 2.0em;
         border: 1px solid #ddd;
-        line-height: 180%; 
+        line-height: 180%;
         word-break: break-all;
         background-color: #ffffff;
         font-family: 'Ubuntu Condensed', "Noto Sans Korean";
@@ -524,16 +537,15 @@ footer {
     font-family: 'Ubuntu Condensed', "Noto Sans Korean";
     border-top: 1px solid $darkPointColor;
     font-size: 1.1em;
-
-    .intro  {
-    }
+    padding-top: 3em;
+    padding-bottom: 2em;
 }
 
-.img {
-    margin-top: 2.2em;
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
+.about-img {
+    padding: 0.5em 0.5em;
+//  border-radius: 50%;
+    width: 95px;
+    height: 95px;
 }
 
 .footer-heading {
@@ -546,7 +558,6 @@ footer {
 }
 
 .intro {
-    
 }
 
 .top-menu {
@@ -558,7 +569,7 @@ footer {
 .top-line {
     margin: 2em 2em 0em 2em;
     border-bottom: 3px dotted $darkPointColor;
-    font-size: 1.1em; 
+    font-size: 1.1em;
 }
 
 .menu-icon {
@@ -633,7 +644,7 @@ footer {
         font-family: 'Ubuntu Condensed', "Noto Sans Korean";
         width: 100%;
         border: 1px solid #ddd;
-        
+
         background: #fff;
     }
 

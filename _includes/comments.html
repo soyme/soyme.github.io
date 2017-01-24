@@ -1,43 +1,35 @@
 {% capture post_slug %}{{ post.date | date: "%Y-%m-%d" }}-{{ post.url | split: '/' | last }}{% endcapture %}
-{% if site.data.comments[post_slug] %}
-	{% assign comments = site.data.comments[post_slug] | sort %}
-{% else %}
-	{% assign comments = nil %}
-{% endif %}
 <div style="float: left"></div>
 <div class="comments">
 	<div class="comments_wrapper" {% if site.data.comments[post_slug] == null %}aria-hidden="true"{% endif %}>
-		<div class="heading"><a href="#bottom_{{ post_slug }}" onClick="comment_toggle('comment_hidden_{{ post_slug }}', 'write_{{ post_slug }}')">comments {{ comments.size }}</a></div>
+		<div class="heading">
+			<a href="#content_div" onClick="reset(); comment_toggle('comment_hidden_{{ post_slug }}');">Comments</a>
+			<a id="comment_count" style="display: none;" href="{{ site.url }}{{ post.url }}#disqus_thread"></a>
+		</div>
 		<div id="comment_hidden_{{ post_slug }}" style="display: none;">
 			<div class="line"></div>
+			<div class="content_div">
+			<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+        this.page.url = "{{ site.url }}{{ post.url }}";
+        this.page.identifier = "{{ post_slug }}";
+    };
 
-			<form id="form_{{ post_slug }}" slug="{{ post_slug }}" class="form" action="{{ site.comments.url }}">
-			    <!-- Meta -->       
-				<div>
-				    <input type="hidden" name="meta[post-url]" value="{{ post.url }}">
-				    <input type="hidden" name="meta[post-slug]" value="{{ post_slug }}">
-				    <input type="hidden" name="meta[post-title]" value="{{ post.title }}">
-				</div>
-				    <!-- Fields -->
-				<div class="text_div">
-				    <input class="text_field f_name" id="write_{{ post_slug }}" type="text" name="fields[name]" placeholder="NAME" required/>
-				    <input class="text_field f_email" type="email" name="fields[email]" placeholder="E-MAIL (will be not public)" required/>
-				    <input class="text_field f_url" type="url" name="fields[url]" placeholder="HOMEPAGE (optional)"/>
-				</div>
-				<div class="content_div"><textarea class="content" rows="5" name="fields[message]" placeholder=" Comment. Markdown is available." required></textarea></div>
-				<div><input type="button" formId="#form_{{ post_slug }}" class="new_comment_button" value="WRITE" /></div>
-			</form>
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://{{ site.disqusUrl }}.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
 
-			<div class="comment" id="comment_{{ post_slug }}" {% if site.data.comments[post_slug] == null %}aria-hidden="true"{% endif %}>
-			{% for comment in comments %}
-				{% assign email = comment[1].email %}
-				{% assign name = comment[1].name %}
-				{% assign url = comment[1].url %}
-				{% assign date = comment[1].date %}
-				{% assign message = comment[1].message %}
-
-				{% include comment.html index=forloop.index email=email name=name url=url date=date message=message %}
-			{% endfor %}
+	var reset = function() {
+		DISQUS.reset({
+		  reload: true,
+		  config: disqus_config
+		});
+	};
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 			</div>
 		</div>
 	</div>

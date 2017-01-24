@@ -1,0 +1,21 @@
+---
+layout: default
+---
+{% assign post = page %}
+<main class="content">
+    <section class="container">
+    	<div class="row-fluid">
+			<article class="top-menu">
+				{% include menu.html%}
+			</article>
+			<article class="post">
+				<h2 class="content">{{page.title}}</h2>
+                <div class="title_line"></div>
+				<section>
+                    <div align="center">{{ content }}</div>
+                    {% assign post = page %}
+				</section>
+			</article>
+		</div>
+	</section>
+</main>

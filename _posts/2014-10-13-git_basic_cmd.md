@@ -111,6 +111,7 @@ untracked를 유지하고 싶은 파일 패턴을 `.gitignore` 파일에 적을 
 - `git commit -v` : 커밋 메시지에 git diff 내용을 추가하여 커밋 
 - `git commit -a`  : staging area를 생략하고 바로 커밋한다. tracked 상태인 파일을 자동으로 staging area에 넣은 후 커밋해주므로, git add를 실행하는 수고를 덜 수 있다.
 - `git commit --amend` : 바로 직전에 했던 커밋에 이번에 하는 커밋을 덮어씌운다. 실수로 파일 한 두개를 빠뜨렸거나, 커밋 메시지를 다시 작성하고 싶을 때 주로 사용한다.
+- `git commit --amend --reset-author` or `git commit --amend --author "so <so@so-blog.net>"`: author 변경
 
 
 ### 파일 삭제하기

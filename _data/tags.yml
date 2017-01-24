@@ -22,3 +22,7 @@
   name: Shell
 - slug: oop
   name: OOP
+- slug: test
+  name: Test
+- slug: book
+  name: Book

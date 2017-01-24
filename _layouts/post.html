@@ -32,6 +32,8 @@ layout: default
     {% assign category_content = '' %}
 {% endif %}
 
+{% capture file_name %}{{ post.date | date: "%Y-%m-%d" }}-{{ post.url | split: '/' | last }}.md{% endcapture %}
+
 <main class="content">
     <section class="container">
     	<div class="row-fluid">
@@ -40,14 +42,15 @@ layout: default
 			</article>
 			<article class="post">
 				<h2 class="content">{{page.title}}</h2>
-				<div class="time"><i class="fa fa-calendar"></i> {{ page.date | date: "%d %B %Y" }}</div>
+				<div class="time"><a style="color:#777" href="{{ site.editor }}/edit/{{ file_name }}"><i class="fa fa-calendar"></i></a> {{ page.date | date: "%d %B %Y" }}</div>
                 <div class="tags">{{ tags_content }}</div>
                 <div class="title_line"></div>
 				<section>
-                {% capture img_url %}/assets/{{ post.date | date: "%Y-%m-%d" }}-{{ post.url | split: '/' | last }}{% endcapture %}
+                {% capture img_url %}{{ site.imgUri }}/assets/{{ post.date | date: "%Y-%m-%d" }}-{{ post.url | split: '/' | last }}{% endcapture %}
                     <div>{{ content | replace: '__imgUrl__',img_url }}</div>
                     {% assign post = page %}
-                    {% include comments.html %}
+                  {% include comments.html %}
+
 				</section>
 				<div class="bottom_line"></div>
 				<section class="prev_next">

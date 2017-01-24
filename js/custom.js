@@ -65,11 +65,9 @@ function comment_toggle(id, txt)
 
 	if(obj.style.display == "none") {
 	  obj.style.display="inline";
-	  document.getElementById(txt).focus();
 	}
 	else {
 	  obj.style.display="none";
-	  document.getElementById(txt).blur();
 	}
 
 }
