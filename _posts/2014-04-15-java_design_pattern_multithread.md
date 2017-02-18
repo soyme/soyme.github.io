@@ -1,12 +1,12 @@
 ---
 layout: post
-title: [책] JAVA 언어로 배우는 디자인 패턴 입문
+title: Java 언어로 배우는 디자인 패턴 입문 멀티쓰레드편
 category: blog
 tags: [book]
 
 ---
 
-- JAVA 언어로 배우는 디자인 패턴 입문
+- Java 언어로 배우는 디자인 패턴 입문 멀티쓰레드편
  - http://book.naver.com/bookdb/book_detail.nhn?bid=4529127
  - 작가: 유키 히로시
  - 출판: 영진닷컴
