@@ -18,6 +18,7 @@ Thread 클래스의 static 메소드인 setDefaultUncaughtExceptionHandler 메�
 
 ### Uncaught Exception Handler와 Shutdown Hook를 사용한 예제
 이 프로그램은 다음과 같은 처리를 실행한다.
+
 1. 캐치되지 않은 예외의 핸들러를 설정한다. (Thread.setDefaultUncaughtExceptionHandler 메소드 이용)
 2. 셧다운 후크를 설정한다. (Runtime.getRuntime().addShutdownHook 메소드 이용)
 3. 약 3초 후에 '0에 의한 정수의 나눗셈'을 실행하는 쓰레드(DivideThread)를 기동한다. 이 쓰레드에서는 java.lang.Arithmetic.Exception이 발생하여 프로그램이 종료된다. 프로그램 종료 전에 Uncaught Exception Handler와 Shutdown Hook가 순서대로 호출된다.
@@ -26,7 +27,7 @@ Thread 클래스의 static 메소드인 setDefaultUncaughtExceptionHandler 메�
 public class Main {
     public static void main(String[] args) {
         System.out.println("main:BEGIN");
-  
+
         // (1) Uncaught Exception Handler 설정
         Thread.setDefaultUncaughtExceptionHandler(
             new Thread.UncaughtExceptionHandler() {
@@ -40,7 +41,7 @@ public class Main {
                 }
             }
         );
-  
+
         // (2) 셧다운 훅 설정
         Runtime.getRuntime().addShutdownHook(
             new Thread() {
@@ -52,28 +53,28 @@ public class Main {
                 }
             }
         );
-  
+
         // (3) 약 3초후에 divided by zero를 실행하는 쓰레드를 기동
         new Thread("MyThread") {
             public void run() {
                 System.out.println("MyThread:BEGIN");
                 System.out.println("MyThread:SLEEP...");
-  
+
                 try {
                     Thread.sleep(3000);
                 } catch (InterruptedException e) {
                 }
-  
+
                 System.out.println("MyThread:DIVIDE");
-  
+
                 // divided by zero
                 int x = 1 / 0;
-  
+
                 // 윗 줄에서 예외가 발생함으로써 이 다음 라인은 실행될 수 없다
                 System.out.println("MyThread:END");
             }
         }.start();
-  
+
         System.out.println("main:END");
     }
 }

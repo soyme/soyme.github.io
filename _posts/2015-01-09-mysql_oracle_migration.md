@@ -78,9 +78,9 @@ SELECT * FROM TEST LIMIT 0, 2;
 
 SELECT * FROM
   (
-  SELECT 
+  SELECT
     TEST.*,
-    row_number() over (ORDER BY 1) as LIMIT_NUM 
+    row_number() over (ORDER BY 1) as LIMIT_NUM
   FROM TEST
   )
 WHERE LIMIT_NUM BETWEEN 1 AND 2
@@ -92,9 +92,9 @@ SELECT * FROM TEST LIMIT 0, 2 ORDER BY A DESC;
 
 SELECT * FROM
   (
-  SELECT 
+  SELECT
     TEST.*,
-    row_number() over (ORDER BY A DESC) as LIMIT_NUM 
+    row_number() over (ORDER BY A DESC) as LIMIT_NUM
   FROM TEST
   )
 WHERE LIMIT_NUM BETWEEN 1 AND 2
@@ -102,16 +102,19 @@ WHERE LIMIT_NUM BETWEEN 1 AND 2
 
 ### IF NULL 처리 변경
 IF(ISNULL(조건컬럼), 'NULL일 때 표시할 값')
-> -> NVL('조건컬럼', 'NULL일 때 표시할 값')
+
+-> `NVL('조건컬럼', 'NULL일 때 표시할 값')`
 
 IFNULL(조건컬럼, 'NULL일 때 표시할 값')
-> -> NVL('조건컬럼', 'NULL일 때 표시할 값')
+
+-> `NVL('조건컬럼', 'NULL일 때 표시할 값')`
 
 결과 레코드가 한 건도 없을 때도 'NULL일 때 표시할 값'을 나타내고 싶다면
-> -> NVL(MAX('조건컬럼'), 'NULL일 때 표시할 값')
+
+-> `NVL(MAX('조건컬럼'), 'NULL일 때 표시할 값')`
 
 ### SEQUENCE
-MySQL에서는 AUTO_INCREMENT 옵션이면 다 되었지만, Oracle에서는 시퀀스 또한 별개의 객체로 직접 관리해줘야 한다. 
+MySQL에서는 AUTO_INCREMENT 옵션이면 다 되었지만, Oracle에서는 시퀀스 또한 별개의 객체로 직접 관리해줘야 한다.
 
 1. AUTO_INCREMENT 컬럼이 존재하는 테이블마다 사용할 SEQUENCE 생성.
 2. AUTO_INCREMENT 컬럼이 존재하는 테이블의 INSERT문 수정. INSERT 되는 값으로 [ 시퀀스명.nextval ] 사용
@@ -124,8 +127,8 @@ MySQL에서는 length 0인 empty string을 하나의 값으로서 사용할 수 
 MySQL에서는 CONCAT 함수의 인자 수가 제한이 없으나, Oracle에서는 두 개의 인자만 갖는다.
 CONCAT(1,2,3,4,5) 이랬던 것을 아래와 같이 수정
 
- - 1 || 2 || 3 || 4 || 5  이렇게 해도 되고
- - CONCAT( CONCAT( CONCAT (CONCAT(1,2), 3), 4), 5) 그냥 이렇게 해도 됨.
+ - 1 \|\| 2 \|\| 3 \|\| 4 \|\| 5  이렇게 해도 되고
+ - CONCAT( CONCAT( CONCAT (CONCAT(1,2), 3), 4), 5) 그냥 이렇게 해도 된다.
 
 ### GROUP_CONCAT()
 MySQL에서는 GROUP_CONCAT()이 있고, 오라클에서는 이와 유사한 기능을 해주는 WM_CONCAT()이 있다.
@@ -146,27 +149,23 @@ SELECT * FROM TABLE1 INNER JOIN TABLE2 AS T2 ON TABLE1.ID=T2.ID;
 ### INSERT INTO ON DUPLICATE KEY UPDATE
 ```
 MERGE INTO 테이블명
-            USING DUAL
-            ON (ID = #{id})				// KEY 중복 조건
-            WHEN MATCHED THEN
-                      UPDATE SET		// KEY 중복 조건이 만족할 때에는 기존 레코드 UPDATE
-                            A='값', B='값'	// UPDATE 할 컬럼과 값
+    USING DUAL ON (ID = #{id}) // KEY 중복 조건
+    WHEN MATCHED THEN
+        // KEY 중복 조건이 만족할 때에는 기존 레코드 UPDATE
+        UPDATE SET A='값', B='값'
 
-            WHEN NOT MATCHED THEN
-                      INSERT		// 중복 조건이 만족하지 않을 때에는 신규 레코드 INSERT
-                       (ID, A, B) VALUES ('#{id}', '값', '값')
-
+        WHEN NOT MATCHED THEN
+            // 중복 조건이 만족하지 않을 때에는 신규 레코드 INSERT
+            INSERT (ID, A, B) VALUES ('#{id}', '값', '값')
 ```
 
 ### INSERT IGNORE INTO
 ```
 MERGE INTO 테이블명
-            USING DUAL
-            ON (ID = #{id})			// KEY 중복 조건
-            WHEN NOT MATCHED THEN
-                      INSERT		// 중복 조건이 만족하지 않을 때에는 신규 레코드 INSERT
-                       (ID, A, B) VALUES ('#{id}', '값', '값')
-
+    USING DUAL ON (ID = #{id})  // KEY 중복 조건
+    WHEN NOT MATCHED THEN
+        // 중복 조건이 만족하지 않을 때에는 신규 레코드 INSERT
+        INSERT (ID, A, B) VALUES ('#{id}', '값', '값')
 ```
 
 ### REPLACE INTO

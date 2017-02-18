@@ -9,6 +9,7 @@ tags: [java, pattern]
 <!-- more -->
 
 ### 구현 예시
+
 #### 클래스에 의한 Adapter 패턴
 > class Adapter extends Adaptee implements Target
 

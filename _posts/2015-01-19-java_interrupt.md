@@ -28,7 +28,7 @@ if (Thread.currentThread().isInterrupted()) {
 ```
 
 ### InterruptedException -> 인터럽트 상태로 변환
-일정 시간만큼 쓰레드의 동작을 멈추고 싶을 때는 Thread.sleep 메소드를 사용한다. Thread.sleep은 InterruptedException을 통보한다. 
+일정 시간만큼 쓰레드의 동작을 멈추고 싶을 때는 Thread.sleep 메소드를 사용한다. Thread.sleep은 InterruptedException을 통보한다.
 
 ```java
 try {
@@ -60,9 +60,12 @@ try {
 } catch (InterruptedException e) {
     savedException = e;
 }
-```  
-...
+
+// ...
+
 if (savedException != null) {
     throw savedException;
 }
+```
+
 인터럽트가 들어오면 일단 savedException이라는 필드에 보관해두고, 나중에 throw 한다.

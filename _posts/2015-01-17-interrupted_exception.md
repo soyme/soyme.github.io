@@ -6,8 +6,8 @@ tags: [java,thread]
 ---
 메소드에 throws InterruptedException이 붙는다는 것은 다음과 같은 의미를 지닌다.
 
-1. 시간이 걸리는 메소드이다
-2. 취소 가능한 메소드이다
+1. 시간이 걸리는 메소드이다.
+2. 취소 가능한 메소드이다.
 
 <!-- more -->
 
@@ -65,10 +65,10 @@ A.interrupt();
 ### join 메소드와 interrupt 메소드
 join도 sleep, wait과 마찬가지로 취소할 수 있다. join 메소드는 인스턴스의 락을 취하지 않고도 호출할 수 있기 때문에 sleep 메소드와 마찬가지로 바로 catch절을 실행하게 된다.
 
-### Interrupted Status 
+### Interrupted Status
 interrupt 메소드는 대상 쓰레드의 interrupted status를 바꾸는 것일 뿐, interrupt 메소드를 호출했을 때, 대상 쓰레드가 항상 InterruptedException을 통보하는 것은 아니다. (interrupted status란 쓰레드가 인터럽트 된 상태인지 아닌지를 나타내는 status이다.)
 
-쓰레드 A가 sleep/wait/join을 실행하여 정지하고 있는 중에 쓰레드 B가 A의 interrupt 메소드를 호출했다고 하자. 그러면 쓰레드 A는 InterruptedException을 통보한다. 그러나 이것은 sleep, wait, join 메소드 내부에서 쓰레드의 interrupted status를 조사하고 명시적으로 InterruptedException을 통보하고 있기 때문이다. 
+쓰레드 A가 sleep/wait/join을 실행하여 정지하고 있는 중에 쓰레드 B가 A의 interrupt 메소드를 호출했다고 하자. 그러면 쓰레드 A는 InterruptedException을 통보한다. 그러나 이것은 sleep, wait, join 메소드 내부에서 쓰레드의 interrupted status를 조사하고 명시적으로 InterruptedException을 통보하고 있기 때문이다.
 
 만약 쓰레드 A가 sleep/wait/join 실행중이 아니라 다른 일반적인 연산을 수행중이었다고 하자. 이 때 쓰레드 A의 interrupt 메소드가 호출되었다면, 쓰레드 A는 InterruptedException을 통보하지 않고 하던 연산을 계속 수행한다. 즉, 코드상에서 interrupted status를 조사하여 InterruptedException을 통보하지 않는 이상 InterruptedException은 통보되지 않는다.
 
@@ -90,7 +90,7 @@ public void test() throw InterruptedException {
 isInterrupted() 메소드는 지정한 쓰레드의 interrupted status를 조사하는 Thread 클래스의 static 메소드이다. 지정한 쓰레드가 interrupted status라면 true를 리턴, non-interrupted status라면 false를 리턴한다. (status의 변경은 없다.)
 
 ### Thread.interrupted() 메소드
-Thread.interrupted() 메소드는 현재 쓰레드의 interrupted status를 조사하고 삭제하는 Thread 클래스의 static 메소드이다. 
+Thread.interrupted() 메소드는 현재 쓰레드의 interrupted status를 조사하고 삭제하는 Thread 클래스의 static 메소드이다.
 
 - 현재 쓰레드가 non-interrupted status라면 false를 리턴한다.  (status의 변경은 없다.)
 - 반면 interrupted status라면, 해당 쓰레드의 interrupted status를 삭제한 후 true를 리턴한다. (interrupted status를 삭제하면 non-interrupted status가 된다.)
@@ -101,7 +101,7 @@ public class Main {
     public static void main(String[] args) {
         Thread t = new Thread() {
             public void run() {
-                while (true) { 
+                while (true) {
                     try {
                         if (Thread.currentThread().isInterrupted()) {
                             throw new InterruptedException();
@@ -114,7 +114,7 @@ public class Main {
             }
         };
         t.start();
- 
+
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {

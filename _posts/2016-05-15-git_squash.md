@@ -7,13 +7,15 @@ tags: [git]
 ---
 
 ### squash
-- 영어사전에 따르면 짓누르다, 납작하게 만들다라는 의미.
+- 짓누르다, 납작하게 만들다라는 의미.
 - Git에서는 이미 수행한 여러개의 커밋들을 한 개의 커밋으로 합치는 행위를 말한다.
 
 <!-- more -->
 
-### How to squash - their commits
+### How to squash (their commits)
+
 #### 상황
+
 ```
 git checkout master
 git checkout -b branchA
@@ -43,7 +45,6 @@ git commit -m "modify file"
 ```
 git checkout master
 git merge --squash branchA
-
 ```
 
 #### solution 2. git rebase -i
@@ -77,7 +78,6 @@ pick 02a3484 modify file
 # However, if you remove everything, the rebase will be aborted.
 #
 # Note that empty commits are commented out                                              
-
 ```
 
 맨 윗부분을 아래와 같이 수정하자.

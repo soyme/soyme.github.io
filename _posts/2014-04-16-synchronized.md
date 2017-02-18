@@ -69,6 +69,7 @@ synchronized(lock) {
 `lock` 부분에는 락을 취할 변수나 인스턴스를 명시한다. 같은 인스턴스가 명시된 synchronized 블록들은 상호 배타적으로 실행되게 된다. 즉 synchronized 블록은 상호 배타적으로 실행하는 범위를 치밀하게 제어하고 싶을 때 사용한다.
 
 ### synchronized 메소드와 synchronized 블록
+
 #### synchronized 메소드
 ```java
 public class Bank {
@@ -93,6 +94,7 @@ public class Bank {
 위의 두 코드는 동일하게 동작한다. synchronized 메소드에서는 쓰레드의 상호 배타 제어를 실행하는데 this의 락을 사용하는 것이다. 단 static 메소드/블록의 경우 모든 인스턴스가 공유하는 것이므로, this가 아닌 클래스 객체가 사용된다.
 
 ### static synchronized 메소드와 블록
+
 #### static synchronized 메소드
 ```java
 public class Bank {

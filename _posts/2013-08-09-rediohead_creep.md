@@ -8,8 +8,6 @@ tags: []
 
 <!-- more -->
 
-<center>
 <iframe width="560" height="315" src="http://www.youtube.com/embed/QgKVSYrT9Bs" frameborder="0" allowfullscreen=""></iframe>
 
 happily ever after
-</center>
