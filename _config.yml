@@ -41,3 +41,6 @@ highlighter: rouge
 disqusUrl: "so-blog-1"
 layout: default
 comments: true
+
+gems:
+  - jekyll-sitemap
