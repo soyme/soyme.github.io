@@ -44,3 +44,7 @@ comments: true
 
 gems:
   - jekyll-sitemap
+  - jemoji
+
+#emoji:
+#  src: "/assets/images/emoji"

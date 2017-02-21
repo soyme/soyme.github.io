@@ -55,6 +55,12 @@ img {
     }
 }
 
+.emoji {
+ 	display: inline;
+ 	margin: 0px 2px 3px 2px;
+	width: 16px;
+}
+
 hr {
     border-top: 1px solid lighten($grayLight, 20%);
     border-bottom: none;
