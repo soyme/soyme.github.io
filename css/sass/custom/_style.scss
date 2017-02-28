@@ -473,11 +473,12 @@ header {
     }
 
     .time {
-		margin: 1.3em 0em 0em 1.0em;
+		margin: 1.0em 0em 0em 1.0em;
 		color: lighten($gray, 25%);
         cursor: default;
         font-family: 'Ubuntu Condensed', "Noto Sans Korean";
 		float: left;
+		letter-spacing: 0.03em;
     }
 
     h4{
