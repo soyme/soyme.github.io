@@ -48,3 +48,6 @@ gems:
 
 #emoji:
 #  src: "/assets/images/emoji"
+
+google-analytics:
+  id: "UA-92395927-1"
