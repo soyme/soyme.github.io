@@ -1,13 +1,7 @@
 ---
 layout: default
 ---
-{% if page.grouptype == 'tag' %}
-  {% capture paging_root %}/tag/{{page.tag}}/{% endcapture %}
-{% elsif page.grouptype == 'category' %}
-  {% capture paging_root %}/category/{{page.category}}/{% endcapture %}
-{% else %}
-  {% capture paging_root %}/{% endcapture %}
-{% endif %}
+{% capture paging_root %}/tag/{{page.tag}}/{% endcapture %}
 
   <div class="content">
     <main class="container">
@@ -20,11 +14,9 @@ layout: default
         <ul class="entries">
         {% for post in paginator.posts %}
           <li>
-            <a href="{{ post.url }}">
-                <h3>{{ post.title }}</h3></a>
-                <time><i class="fa fa-calendar"></i> {{ post.date | date: "%d %B %Y" }}</time>
-                <div>{{ post.content | split:"<!-- more -->" | first | strip_html | truncate:200 }}</div>
-            </a>
+            <a href="{{ post.url }}"><div class="title">{{ post.title }}</div></a>
+             <div class="time"><i class="fa fa-calendar"></i> {{ post.date | date: "%d %B %Y" }}</div>
+             <div class="content">{{ post.content | split:"<!-- more -->" | first | strip_html | truncate:200 }}</div>
           </li>
         {% endfor %}
         </ul>

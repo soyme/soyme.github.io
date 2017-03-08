@@ -4,29 +4,23 @@ module Jekyll
 
     def generate(site)
       site.categories.each do |category|
-        cf = "#{category[0]}_pagenate"
+        cate_value = "#{category[0]}";
+        cf = "#{cate_value}_pagenate"
         per_page = site.config[cf]
-        build_subpages(site, "category", category, per_page)
+        build_subpages(site, "category", category, per_page, cate_value)
       end
 
       site.tags.each do |tag|
-        build_subpages(site, "tag", tag, site.config['tag_pagenate'])
+        build_subpages(site, "tag", tag, site.config['tag_pagenate'], "tag")
       end
     end
 
-    def build_subpages(site, type, posts, per_page) 
+    def build_subpages(site, type, posts, per_page, cf) 
       posts[1] = posts[1].sort_by { |p| -p.date.to_f }     
-      #atomize(site, type, posts)
-      paginate(site, type, posts, per_page)
+      paginate(site, type, posts, per_page, cf)
     end
 
-    def atomize(site, type, posts)
-      path = "/#{type}/#{posts[0]}"
-      atom = AtomPage.new(site, site.source, path, type, posts[0], posts[1])
-      site.pages << atom
-    end
-
-    def paginate(site, type, posts, per_page)
+    def paginate(site, type, posts, per_page, cf)
       conf_per_page = site.config['category_paginate']
       pages = Jekyll::CategoryPaginate::Pager.calculate_pages(posts[1], per_page.to_i)
       (1..pages).each do |num_page|
@@ -35,7 +29,7 @@ module Jekyll
         if num_page > 1
           path = path + "/page#{num_page}"
         end
-        newpage = GroupSubPage.new(site, site.source, path, type, posts[0])
+        newpage = GroupSubPage.new(site, site.source, path, type, posts[0], cf)
         newpage.pager = pager
         site.pages << newpage 
 
@@ -44,32 +38,18 @@ module Jekyll
   end
 
   class GroupSubPage < Page
-    def initialize(site, base, dir, type, val)
+    def initialize(site, base, dir, type, val, cf)
       @site = site
       @base = base
       @dir = dir
       @name = 'index.html'
 
       self.process(@name)
-      filename = "#{type}_index.html"
+      #filename = "#{type}_index.html"
+	  filename = "#{cf}_index.html"
       self.read_yaml(File.join(base, '_layouts'), filename)
       self.data["grouptype"] = type
       self.data[type] = val
-    end
-  end
-  
-  class AtomPage < Page
-    def initialize(site, base, dir, type, val, posts)
-      @site = site
-      @base = base
-      @dir = dir
-      @name = 'atom.xml'
-
-      self.process(@name)
-      self.read_yaml(File.join(base, '_layouts'), "group_atom.xml")
-      self.data[type] = val
-      self.data["grouptype"] = type
-      self.data["posts"] = posts[0..9]
     end
   end
 end

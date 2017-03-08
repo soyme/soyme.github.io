@@ -20,7 +20,7 @@ comments:
 
 editor: "http://so-blog.net:7500"
 paginate: 10
-blog_pagenate: 1
+blog_pagenate: 15
 diary_pagenate:	1 # if larger than 1 then disqus will not work... :(
 scrap_pagenate: 1
 tag_pagenate: 10

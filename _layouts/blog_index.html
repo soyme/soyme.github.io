@@ -1,0 +1,36 @@
+---
+layout: default
+---
+
+{% capture paging_root %}/tag/{{page.tag}}/{% endcapture %}
+
+  <div class="content">
+    <main class="container">
+      <div class="row-fluid">
+        <article class="top-menu">
+          {% include menu.html %}
+		</article>
+		<article class="diary">
+			<div align=center><h2>articles</h2></div>
+			<article class="diary_section diary_list">
+		        <ul>
+    		    {% for post in paginator.posts %}
+        		  <li>
+            		<a href="{{ post.url }}">
+         		       <div class="title">{{ post.title }}</div></a>
+            		   <time><i class="fa fa-calendar"></i> {{ post.date | date: "%d %B %Y" }}</time>
+      	  	    </a>
+     		     </li>
+     	 	  {% endfor %}
+	    	    </ul>
+			</article>
+		</article>
+      </div>
+
+      {% include paging.html %}
+
+    </main>
+  </div>
+
+{% assign type = nil %}
+{% assign paging_root = nil %}

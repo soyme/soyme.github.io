@@ -38,30 +38,31 @@ layout: default
     <section class="container">
     	<div class="row-fluid">
 			<article class="top-menu">
-				{% include menu.html %} 
+				{% include menu.html%}
 			</article>
+			<article class="post">
+				<h2 class="content">{{page.title}}</h2>
+				<div class="time"><a style="color:#777" href="{{ site.editor }}/edit/{{ file_name }}"><i class="fa fa-calendar"></i></a> {{ page.date | date: "%d %B %Y" }}</div>
+                <div class="tags">{{ tags_content }}</div>
+                <div class="title_line"></div>
+				<section>
+                {% capture img_url %}{{ site.imgUri }}/assets/{{ post.date | date: "%Y-%m-%d" }}-{{ post.url | split: '/' | last }}{% endcapture %}
+                    <div>{{ content | replace: '__imgUrl__',img_url }}</div>
+                    {% assign post = page %}
+                  {% include comments.html %}
 
-			{% capture file_name %}{{ post.date | date: "%Y-%m-%d" }}-{{ post.url | split: '/' | last }}.md{% endcapture %}
-
-     	   <article class="diary">
-       	 	   <div align=center><h2>{{page.title}}</h2></div>
-       		   <div class="time"><a style="color:#777" href="{{ site.editor }}/edit/{{ file_name }}"><i class="fa fa-calendar"></i></a> {{ page.date | date: "%d %B %Y" }}</div>
-				 <div class="tags">{{ tags_content }}</div>
-        		  <section class="diary_section">
-     			  	 {% capture img_url %}{{ site.imgUri }}/assets/{{ post.date | date: "%Y-%m-%d" }}-{{ post.url | split: '/' | last }}{% endcapture %}
-           		  	  <div>{{ post.content | replace: '__imgUrl__',img_url }}</div>
-        		  	  {% include comments.html %}
-        		  </section>
-				  <section class="prev_next">
-					{% if page.next and page.previous %}
+				</section>
+				<div class="bottom_line"></div>
+				<section class="prev_next">
+					{% if page.next and page.previous %} 
                         <a style="float: left;" href="{{ page.previous.url }}"><i class="icon-arrow-left"></i> {{ page.previous.title }}</a>
-                    {% elsif page.previous %}
+                    {% elsif page.previous %} 
 						<a style="float: left; margin-bottom: 10px;" href="{{ page.previous.url }}"><i class="icon-arrow-left"></i> {{ page.previous.title }}</a>
 					{% endif %}
-					{% if page.next %}
+					{% if page.next %} 
 						<a style="float:right; margin-bottom: 10px;"; href="{{ page.next.url }}">{{ page.next.title }} <i class="icon-arrow-right"></i></a>
 					{% endif %}
-		  		  </section>
+				</section>
 			</article>
 		</div>
 	</section>
