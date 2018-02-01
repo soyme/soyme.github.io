@@ -7,7 +7,7 @@ tags: [general, javascript]
 ---
 > FATAL ERROR: CALL_AND_RETRY_2 Allocation failed - process out of memory
 
-유지보수를 맡고있는 node로 된 batch 서비스가 자꾸 죽는다. 돌겠..ㅠㅠ 불행 중 다행인 것은 heapdump 뜨기가 매우 간편하다는 것..;;
+유지보수를 맡고있는 node로 된 batch 서비스가 자꾸 죽는다.. :cry:
 
 <!-- more -->
 

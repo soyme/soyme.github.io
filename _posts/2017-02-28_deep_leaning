@@ -1,0 +1,56 @@
+---
+layout: post
+title: Deep Leaning & its Application
+category: blog
+tags: []
+align: left
+
+---
+
+Deep Learning & its Application - VUNO 이예하 대표
+
+<!-- more -->
+
+#### Artificial Intelligence Diagram
+ -  이전에는 사람이 날리지를 구축하는 날리지 베이스 어프로치에서, 이제는 데이터로부터 학습해보자 하는 데이터드리븐 어프로치로 바뀌었다.
+ -  Computationalism -> Connectionism
+
+#### 머신러닝의 정의
+- explicitly pogrammed 되지 않았음에도 학습할 수 있는....
+
+#### Using..
+- 스팸, 지도검색, 사진 구분, 추천, 음성 인식, 넷플릭스 영화 추천..
+
+#### Now..
+- 여러 분야에서 기존의 연구를 뛰어 넘고 사람보다 성능이 더 높게 나타나는.. Machines beat human in tasks once considered impossible..
+- 알파고..
+
+#### DL
+- 인간 뇌의 신경망을 모방한 인공신경망을 도입, 컴퓨터가 빅데이터를 분석하고 가공해서 새로운 정보를 얻거나 미래를 예측하는 기술 ㅋㅋㅋ
+
+
+#### 전통적 머신러닝과 딥러닝의 차이점
+- 기존: 도메인 전문가들이 feature를 식별......? 모르겠음 simple classifier 이용?
+- 딥러닝: feature learning?
+
+
+* shallow network? 
+
+* 이미지넷의 경우 2010년정도에는 8layer에 불과했으나 2015년에 152layers.... error rate도 계속 낮아지고 있음, 2015년 3.57%
+
+* 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

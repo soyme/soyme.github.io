@@ -4,7 +4,7 @@ title: about
 permalink: /about/
 ---
 
-I'm a junior developer :)<br><br>
+I'm a junior developer :)<br><u><i>soyykk@gmail.com</i></u><br><br>
 
 <i>I Like ...<i><br>
 <img src="/img/about/piano.jpg" class="about-img" title="피아노 덕후">

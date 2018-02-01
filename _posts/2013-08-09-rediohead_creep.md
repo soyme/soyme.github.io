@@ -8,6 +8,6 @@ tags: []
 
 <!-- more -->
 
-<iframe width="560" height="315" src="http://www.youtube.com/embed/QgKVSYrT9Bs" frameborder="0" allowfullscreen=""></iframe>
+{% youtube QgKVSYrT9Bs Radiohead - Creep (Acoustic Version) %}
 
 happily ever after

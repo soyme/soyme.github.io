@@ -6,6 +6,4 @@ tags: []
 
 ---
 
-<!-- more -->
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/yzPqZBMx7i4" frameborder="0" allowfullscreen></iframe>
+{% youtube yzPqZBMx7i4 Radiohead - Last Flowers (Confessions OST) %}

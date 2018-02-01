@@ -15,7 +15,6 @@ Emoji Plugin 달았다.
 <!-- more -->
 
 
-
 ### Jekyll 블로그에 Emoji Plugin 설치하기
 엄청 간단하다. 정말 이 세상엔 없는 게 없다..:stuck_out_tongue_closed_eyes:
 
@@ -42,7 +41,5 @@ Git Repository는 [여기](https://github.com/jekyll/jemoji)인데 소스를 clo
 }
 ```
 
----
-
-`cheet sheet`는 요기서:sunglasses:
- - [http://www.webpagefx.com/tools/emoji-cheat-sheet](http://www.webpagefx.com/tools/emoji-cheat-sheet)
+### Emoji Cheet Sheet
+[http://www.webpagefx.com/tools/emoji-cheat-sheet](http://www.webpagefx.com/tools/emoji-cheat-sheet)
