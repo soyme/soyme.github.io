@@ -45,7 +45,7 @@ layout: default
 
      	   <article class="diary">
        	 	   <div align=center><h2>{{page.title}}</h2></div>
-       		   <div class="time"><a style="color:#777" href="{{ site.editor }}/edit/{{ file_name }}"><i class="fa fa-calendar"></i></a> {{ page.date | date: "%d %B %Y" }}</div>
+       		   <div class="time"><a style="color:#777" href="{{ site.url }}{{ site.editor }}/edit/{{ file_name }}"><i class="fa fa-calendar"></i></a> {{ page.date | date: "%d %B %Y" }}</div>
 				 <div class="tags">{{ tags_content }}</div>
         		  <section class="diary_section">
      			  	 {% capture img_url %}{{ site.imgUri }}/assets/{{ post.date | date: "%Y-%m-%d" }}-{{ post.url | split: '/' | last }}{% endcapture %}

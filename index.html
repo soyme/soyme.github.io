@@ -9,7 +9,7 @@ layout: default
         <article class="top-menu">
           {% include menu.html %}
     		  <h1>{{ site.title }}</h1>
-          <div class="sub-title">{{ site.description }}<a style="color: #999" href="{{ site.editor }}/new/">&nbsp;</a></div>
+          <div class="sub-title">{{ site.description }}<a style="color: #999" href="{{ site.url }}{{ site.editor }}/new/">&nbsp;</a></div>
         </article>
     		<ul class="entries">
     		{% for post in paginator.posts %}

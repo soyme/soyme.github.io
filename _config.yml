@@ -4,8 +4,8 @@
 title: so' blog
 author: so
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://so-blog.net" # the base hostname & protocol for your site
-description: "http://so-blog.net <i class='fa fa-heart'></i> 이것저것 기록하는 공간 :-)"
+url: "http://ec2-13-125-156-42.ap-northeast-2.compute.amazonaws.com" # the base hostname & protocol for your site
+description: "<i class='fa fa-heart'></i> 이것저것 기록하는 공간 :-)"
 github_username:  fantasie
 excerpt_separator: "<!-- more -->"
 auto: true # automatically update your jekyll
@@ -14,11 +14,7 @@ exclude: ["Gemfile", "Gemfile.lock", "README.md", 'sass', 'watch.sh', 'style.scs
 permalink: /:year/:month/:day/:title/
 imgUri: "http://fantasie.github.io"
 
-# deprecated
-comments:
-  url: "http://so-blog.net:7000/jekyll-discuss/comments"
-
-editor: "http://so-blog.net:7500"
+editor: ":7500"
 paginate: 10
 blog_pagenate: 15
 diary_pagenate:	1 # if larger than 1 then disqus will not work... :(
