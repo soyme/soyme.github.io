@@ -6,13 +6,13 @@ author: soy
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://soy.me" # the base hostname & protocol for your site
 description: "soy.me - 이것저것 기록하는 공간 <i class='fa fa-smile-o'></i>"
-github_username:  fantasie
+github_username:  soyme
 excerpt_separator: "<!-- more -->"
 auto: true # automatically update your jekyll
 server: true # runs a local server
 exclude: ["Gemfile", "Gemfile.lock", "README.md", 'sass', 'watch.sh', 'style.scss'] # files to exclude
 permalink: /:year/:month/:day/:title/
-imgUri: "http://fantasie.github.io"
+imgUri: "http://soyme.github.io"
 
 editor: ":7500"
 paginate: 10
