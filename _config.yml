@@ -1,11 +1,11 @@
 # visit https://github.com/mojombo/jekyll/wiki/Configuration for more settings
 
 
-title: so' blog
-author: so
+title: soy blog
+author: soy
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://ec2-13-125-156-42.ap-northeast-2.compute.amazonaws.com" # the base hostname & protocol for your site
-description: "<i class='fa fa-heart'></i> 이것저것 기록하는 공간 :-)"
+url: "http://soy.me" # the base hostname & protocol for your site
+description: "soy.me - 이것저것 기록하는 공간 <i class='fa fa-smile-o'></i>"
 github_username:  fantasie
 excerpt_separator: "<!-- more -->"
 auto: true # automatically update your jekyll
