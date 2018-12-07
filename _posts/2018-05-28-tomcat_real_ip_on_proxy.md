@@ -7,7 +7,7 @@ align: left
 
 ---
 
-간만에 올리는.. 이슈 해결 기록. Proxy 환경에서 tomcat 로그에 `127.0.0.1`이 찍힐 때,
+Proxy 환경에서 tomcat 로그에 `127.0.0.1`이 찍힐 때,
 
 <!-- more -->
 
@@ -17,9 +17,9 @@ align: left
 
 
 ```
--- RemoteIpValve Valve 추가
+// RemoteIpValve Valve 추가
 <Valve className="org.apache.catalina.valves.RemoteIpValve" remoteIpHeader="X-Real-IP" />
 
--- 기존이ㅡ AccessLogValve에 requestAttributesEnabled="true"를 추가
+// 기존의 AccessLogValve에 requestAttributesEnabled="true"를 추가
 <Valve className="org.apache.catalina.valves.AccessLogValve" rotatable="true" fileDateFormat="'.'yyyyMMdd" directory="logs" prefix="access_log" pattern="%h %l %u %t &quot;%r&quot; %s %b &quot;%{Referer}i&quot; &quot;%{User-Agent}i&quot; &quot;-:- - %T %{_usersession_}i - %{page_uid}i - - -&quot; %{NNB}c - - &quot;-&quot;" resolveHosts="false" requestAttributesEnabled="true" />
 ```
