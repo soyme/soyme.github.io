@@ -5,7 +5,7 @@ title: soy blog
 author: soy
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://soy.me" # the base hostname & protocol for your site
-host: "http://13.124.119.126"
+host: "http://13.124.102.231"
 description: "soy.me - 이것저것 기록하는 공간 <i class='fa fa-smile-o'></i>"
 github_username:  soyme
 excerpt_separator: "<!-- more -->"
@@ -43,8 +43,8 @@ gems:
   - jekyll-sitemap
   - jemoji
 
-#emoji:
-#  src: "/assets/images/emoji"
+emoji:
+  src: "https://github.com/images/icons"
 
 google-analytics:
   id: "UA-92395927-1"
