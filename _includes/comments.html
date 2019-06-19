@@ -3,33 +3,12 @@
 <div class="comments">
 	<div class="comments_wrapper" {% if site.data.comments[post_slug] == null %}aria-hidden="true"{% endif %}>
 		<div class="heading">
-			<a href="#content_div" onClick="reset(); comment_toggle('comment_hidden_{{ post_slug }}');">Comments</a>
-			<a id="comment_count" style="display: none;" href="{{ site.url }}{{ post.url }}#disqus_thread"></a>
+			<a href="#content_div" onClick="comment_toggle('comment_hidden_{{ post_slug }}');">Comments</a>
 		</div>
 		<div id="comment_hidden_{{ post_slug }}" style="display: none;">
 			<div class="line"></div>
 			<div class="content_div">
-			<div id="disqus_thread"></div>
-<script>
-    var disqus_config = function () {
-        this.page.url = "{{ site.url }}{{ post.url }}";
-        this.page.identifier = "{{ post_slug }}";
-    };
-
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = 'https://{{ site.disqusUrl }}.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-
-	var reset = function() {
-		DISQUS.reset({
-		  reload: true,
-		  config: disqus_config
-		});
-	};
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+				<script src="https://utteranc.es/client.js" repo="soyme/my-blog-comments" branch="master" issue-term="{{ post_slug }}" theme="github-light" crossorigin="anonymous" async></script>
 			</div>
 		</div>
 	</div>
