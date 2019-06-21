@@ -246,7 +246,7 @@ header {
 
 .entries{
     list-style: none;
-    margin:1em 0 0 0;
+    margin:1em 0.2em 0 0.5em;
 
     li{
         border-bottom: 1px dotted lighten($grayLight, 20%);
@@ -534,7 +534,7 @@ header {
     h3{
         font-family: 'Ubuntu Condensed', "Noto Sans Korean";
         font-weight: normal;
-        margin:1.5em 0 0.5em 0;
+        margin:2.3em 0 0.5em 0;
         color: $pointColor;
         padding-bottom: 0.5em;
 		font-size: 1.5em;
@@ -556,13 +556,17 @@ header {
         text-shadow: 1px 1px #fff;
     }
 
+	.inner-content h2{
+	    padding: 2.5em 0em 0;
+	}
+
 	h4{
-		margin-top: 1.0em;
+		margin-top: 2.0em;
 		font-weight: 600;
 	}
 
 	h5{
-		margin: 1.0em 0 0.4em 0;
+		margin: 1.5em 0 0.4em 0;
 		font-weight: 600;
 	}
 
@@ -583,6 +587,13 @@ header {
 		}
 	}
 
+	.inner_content>:nth-child(1) {
+		margin-top: 0!important;
+	}
+
+	> h4:nth-child(1) {
+		margin-top: 1em!important;
+	}
 
 	.diary_list {
 		padding: 1.5em 2.0em 2.5em 2.0em;
@@ -709,7 +720,7 @@ footer {
 // comment
 .comments {
     .comments_wrapper {
-        width: 90%;
+        width: 100%;
         float: right;
         text-align: right;
    }

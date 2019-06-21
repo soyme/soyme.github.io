@@ -19,12 +19,11 @@ editor: ":7500"
 paginate: 10
 blog_pagenate: 15
 diary_pagenate:	1 # if larger than 1 then disqus will not work... :(
-scrap_pagenate: 1
 tag_pagenate: 10
 
 paginate_path: "page:num"
 
-categories: ["blog","diary","scrap"]
+categories: ["blog","diary"]
 
 markdown: kramdown
 kramdown:
@@ -44,7 +43,8 @@ gems:
   - jemoji
 
 emoji:
-  src: "https://github.com/images/icons"
+   src: "http://soyme.github.io/img"
+#  src: "https://github.com/images/icons"
 
 google-analytics:
   id: "UA-92395927-1"

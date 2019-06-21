@@ -49,7 +49,7 @@ layout: default
 				 <div class="tags">{{ tags_content }}</div>
         		  <section class="diary_section">
      			  	 {% capture img_url %}{{ site.imgUri }}/assets/{{ post.date | date: "%Y-%m-%d" }}-{{ post.url | split: '/' | last }}{% endcapture %}
-           		  	  <div>{{ post.content | replace: '__imgUrl__',img_url }}</div>
+           		  	  <div class="inner_content">{{ post.content | replace: '__imgUrl__',img_url }}</div>
         		  	  {% include comments.html %}
         		  </section>
 				  <section class="prev_next">
