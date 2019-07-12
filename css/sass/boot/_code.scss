@@ -6,28 +6,30 @@
 // Inline and block code styles
 code,
 pre {
-  padding: 0 3px 2px;
-  @include font-family-monospace;
-  font-size: $baseFontSize - 2;
-  color: $grayDark;
   @include border-radius(3px);
 }
 
 // Inline code
 code {
-  padding: 1px 2px;
-  color: #d14;
+  font-family: inherit;
+  //font-family: 'Ubuntu Condensed', "Noto Sans Korean";
+  padding: 2px 3px;
+  //color: #d14;
+  // font-size: $baseFontSize - 2;
   background-color: #f7f7f9;
-  border: 1px solid #e1e1e8;
+ // border: 1px solid #e1e1e8;
 }
 
 // Blocks of code
 pre {
+  padding: 0 3px 2px;
+  @include font-family-monospace;
+  color: $grayDark;
   display: block;
   padding: ($baseLineHeight - 1) / 3;
   margin-top: 5px;
-  font-size: $baseFontSize - 1; // 14px to 13px
-//  line-height: $baseLineHeight;
+  font-size: $baseFontSize - 2.5; // 14px to 13px
+  line-height: 170%;
   word-break: break-all;
   word-wrap: break-word;
   white-space: pre;
