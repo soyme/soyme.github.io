@@ -67,4 +67,4 @@ final output:	{
 
 ------
 
-https://en.wikipedia.org/wiki/MapReduce
+Reference: <https://en.wikipedia.org/wiki/MapReduce>

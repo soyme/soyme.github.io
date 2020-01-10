@@ -40,5 +40,5 @@ Emoji Plugin 달았다.
    }
    ```
 
-### Emoji Cheet Sheet
+### Emoji Cheat Sheet
 [http://www.webpagefx.com/tools/emoji-cheat-sheet](http://www.webpagefx.com/tools/emoji-cheat-sheet)

@@ -18,4 +18,4 @@ RuntimeException을 상속한 클래스는 예외처리가 필수가 아니다.
 
 ---
 
-http://docs.oracle.com/javase/7/docs/api/java/lang/RuntimeException.html
+Reference: <http://docs.oracle.com/javase/7/docs/api/java/lang/RuntimeException.html[http://docs.oracle.com/javase/7/docs/api/java/lang/RuntimeException.html>
