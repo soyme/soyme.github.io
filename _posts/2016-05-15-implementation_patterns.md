@@ -2,7 +2,7 @@
 layout: post
 title: 켄트백의 구현 패턴 - 1. 클래스
 category: blog
-tags: []
+tags: [pattern,TBC]
 
 ---
 

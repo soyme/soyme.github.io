@@ -2,7 +2,7 @@
 layout: post
 title: Proxy 환경에서 Tomcat 설정에 Real IP 셋팅하기
 category: blog
-tags: []
+tags: [general]
 align: left
 
 ---

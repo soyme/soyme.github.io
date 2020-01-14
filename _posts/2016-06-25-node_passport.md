@@ -18,6 +18,8 @@ passport를 이용하여 간단하게 로그인, 로그아웃 및 세션 관리 
 <!-- more -->
 
 #### app.js
+- main
+
 ```javascript
 ...
 var expressSession = require('express-session');
@@ -42,6 +44,8 @@ app.use('/', routes);
 ```
 
 #### passport.js
+- 로그인 처리
+
 ```javascript
 var LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require('bcrypt-nodejs');
@@ -87,6 +91,8 @@ module.exports = function(passport) {
 ```
 
 #### routes/index.js
+- 라우팅 처리
+
 ```javascript
 var express = require('express');
 var router = express.Router();

@@ -22,13 +22,12 @@ code {
 
 // Blocks of code
 pre {
-  padding: 0 3px 2px;
   @include font-family-monospace;
   color: $grayDark;
   display: block;
-  padding: ($baseLineHeight - 1) / 3;
-  margin-top: 5px;
-  font-size: $baseFontSize - 2.5; // 14px to 13px
+  padding: 12px;
+  //margin: -15px 0 15px 20px;
+  font-size: $baseFontSize - 2;
   line-height: 170%;
   word-break: break-all;
   word-wrap: break-word;

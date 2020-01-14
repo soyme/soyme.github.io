@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Git commit log 및 PR 작성시 참고할만한 주요 전치사 정리
-category: diary
-tags: []
+category: blog
+tags: [git]
 align: left
 
 ---

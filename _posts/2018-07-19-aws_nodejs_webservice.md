@@ -1,13 +1,11 @@
 ---
 layout: post
 title: AWS EC2, node.js로 웹서비스 구축하기
-category: blog
+category: diary
 tags: []
 align: left
 
 ---
-
-AWS EC2, node.js로 웹서비스 구축하기.
 
 문득 취미삼아 개발할만한 서비스 아이디어가 생각나서 최근 몇일간 버닝해보았다.
 일단 다 만들어놓고 나니 홍보를 어떻게 하고 유저를 어떻게 끌어모아야 할지 고민이긴 하지만, 굉장히 오랜만에 서비스 하나를 처음부터 만들어서 서버에 띄워놓으니 은근히 뿌듯하다.
