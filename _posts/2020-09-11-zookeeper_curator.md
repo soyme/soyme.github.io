@@ -7,12 +7,15 @@ align: left
 
 ---
 
+Zookeeper에 대한 간단한 소개와 Apache Curator를 사용하여 개발을 진행하면서 알게된 내용들을 정리해본다.
+
+<!-- more -->
+
 ### Zookeeper
 * 분산된 시스템의 coordination 서비스. 여러 프로세스들간의 협력, 경합을 조절해준다.
 * 데이터는 Tree 형태로 구성된다.
 * 분산 시스템에서 공통 설정 정보, 각 서버들의 상태 정보를 공유하는데에 주로 사용된다.
 
-<!-- more -->
 
 #### Znode
 * 주키퍼의 데이터 단위.
@@ -116,6 +119,7 @@ cache.start()
 * 특정 path 하위의 모든 노드들에 대해 생성/변경/삭제를 감시한다.
 * 몇단계의 depth까지 감시할지 지정할 수도 있다.
 * path 구조와 Stat(통계정보)만 캐시할지, 노드의 데이터까지 캐시할지 선택할 수 있다.
+* iterate() 메소드를 이용하여 Tree를 탐색할 수 있다.
 
 ```java
 final TreeCache cache = TreeCache.newBuilder(client, "/root").setCacheData(true).setMaxDepth(3).build();
