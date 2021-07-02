@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta charset="utf-8"/>
+		<title>
+		 Java 8 - 람다 표현식과 함수형 인터페이스 -
+		
+		 soy blog</title>
+		<!-- For responsive site
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<link rel="author" href="/humans.txt">
+		<meta name="description" content="Description Goes Here">
+		<link rel="stylesheet" href="/css/style.css">
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+		<!--[if IE 7]>
+			<html class="ie7"> 
+			<link rel="stylesheet" type="text/css" href="/css/font-awesome-ie7.min.css">
+		<![endif]-->
+		<!--[if IE 8]><html class="ie8"> <![endif]-->		
+	    <!--[if lt IE 9]>
+	      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	    <![endif]-->
+
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-92395927-1', 'auto');
+		  ga('send', 'pageview');
+		</script>
+
+		<link rel="apple-touch-icon" sizes="57x57" href="/ico/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/ico/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/ico/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/ico/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/ico/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/ico/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/ico/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/ico/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/ico/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="/ico/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/ico/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="/ico/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/ico/favicon-16x16.png">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/ico/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff"> 
+	</head>
+	<body>
+	<!-- Header
+	    ================================================== -->
+	<header>
+	</header>
+
+	
+
+
+
+
+
+
+
+<main class="content">
+    <section class="container">
+    	<div class="row-fluid">
+			<article class="top-menu">
+				<a href="/" class="menu-icon" data-toggle="tooltip" title="HOME"><i class="fa fa-home"></i></a>
+<a href="/about/" class="menu-icon" data-toggle="tooltip" title="ABOUT"><i class="fa fa-user"></i></a>
+<a href="/category/diary/" class="menu-icon" data-toggle="tooltip" title="DIARY"><i class="fa fa-edit"></i></a>
+      <a href="/category/blog/" class="menu-icon" data-toggle="tooltip" title="BLOG"><i class="fa fa-bars"></i></a>
+      <a href="/tag/" class="menu-icon" data-toggle="tooltip" title="TAG"><i class="fa fa-tags"></i></a>
+  <div class="top-line"></div>
+ 
+			</article>
+
+			
+
+     	   <article class="diary">
+       	 	   <div align=center><h2>Java 8 - 람다 표현식과 함수형 인터페이스</h2></div>
+       		   <div class="time"><a style="color:#777" href="http://3.34.122.196:7500/edit/2017-06-13-java8.md"><i class="fa fa-calendar"></i></a> 13 June 2017</div>
+				 <div class="tags"><a href="/tag/java/">#Java</a></div>
+        		  <section class="diary_section">
+     			  	 
+           		  	  <div class="inner_content"><p>2014년 3월에 발표된 Java 8은 프로그램을 더 효과적이고 간결하게 구현할 수 있는 새로운 개념과 기능을 제공한다. 조금 많이 늦었지만 Java 8의 변경들에 대해 정리해보고자 한다.</p>
+
+<!-- more -->
+
+<h4 id="주요-변경-및-키워드">주요 변경 및 키워드</h4>
+<ul>
+  <li>스트림 API
+    <ul>
+      <li>@병렬성. 가변 공유 상태가 없는 병렬 실행 가능. 멀티쓰레딩 코드를 직접 구현하지 않고도 효율적인 병렬성을 얻을 수 있음.</li>
+    </ul>
+  </li>
+  <li>함수형 프로그래밍</li>
+  <li>람다 표현식</li>
+  <li>동작 파라미터화 (메서드의 인수로 코드를 전달할 수 있음)</li>
+  <li>인터페이스에 static 메서드 및 default 메서드 추가
+    <ul>
+      <li>기존의 코드를 건드리지 않고도 인터페이스 설계를 확장 가능</li>
+    </ul>
+  </li>
+  <li>default 메서드를 이용한 Collections API 확장 (예: List.sort)</li>
+  <li>Optional<T> 클래스 추가 -&gt; NullPointerException을 피할 수 있도록 도와줌</T></li>
+  <li>java.time 패키지에 새로운 날짜/시간관련 API 추가 (LocalDate 등)</li>
+  <li>Concurrency API 확장 (ForkJoinPool, CompletableFuture 등)</li>
+  <li><strong>Java 9</strong> : 대규모 컴포넌트를 정의하고 사용하는 기능 추가. 이를 이용해 모듈을 사용하거나 리액티브 프로그래밍 툴킷을 임포트해 시스템을 구성할 수 있음. - <a href="https://www.baeldung.com/new-java-9">관련 링크</a></li>
+  <li><strong>Java 10</strong> : 지역 변수 타입 추론 (var 사용 가능) - <a href="https://www.baeldung.com/java-10-local-variable-type-inference">관련 링크</a></li>
+  <li><strong>Java 11</strong> : 람다 표현식 파라미터에 var 사용 가능</li>
+</ul>
+
+<h3 id="동작-파라미터화-behavior-parameterization">동작 파라미터화 (Behavior Parameterization)</h3>
+<ul>
+  <li>메서드를 호출할 때 인수로 <code class="highlighter-rouge">코드 블록</code>을 전달함으로써 코드 블록의 내용에 따라 메서드의 동작이 달라지게 되는 것.</li>
+  <li>전달하는 인수만 교체하면 되므로 변화하는 요구사항에 유연하게 대응할 수 있음.</li>
+  <li>파라미터는 클래스의 인스턴스일수도 있고, 익명 클래스 혹은 람다 표현식일 수도 있음.</li>
+  <li>일종의 Strategy 패턴 (전략을 캡슐화하는 인터페이스를 정의해놓고, 런타임시에 어떤 전략 구현체를 사용할지 선택하는 기법).</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Predicate 인터페이스를 구현하는 새로운 클래스를 정의
+public class ColorPredicate implements Predicate {
+    @Override
+    public boolean test(Item item) {
+        return "green".equals(item.getColor());
+    }
+}
+
+// 클래스를 인스턴스화하여 파라미터로 전달
+List&lt;Item&gt; result = filterItem(list, new ColorPredicate());
+</code></pre></div></div>
+
+<p>메서드 호출 시 익명클래스를 이용하여 클래스 선언과 인스턴스 생성을 동시에 수행한 뒤 곧바로 파라미터로 전달할 수도 있다. (즉석에서 필요한 구현을 만들어서 사용) 코드가 좀 더 간결해진다.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 익명클래스 사용
+List&lt;Item&gt; result = filterItem(list, new ColorPredicate() {
+    @Override
+    public boolean test(Item item) {
+        return "green".equals(item.getColor());
+    }
+});
+</code></pre></div></div>
+
+<p>Java 8에 추가된 람다 표현식을 이용하면 위의 익명클래스 코드를 단 한 줄로 변경할 수 있다.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>List&lt;Item&gt; result =
+    filterItem(list, (Item item) -&gt; "green".equals(item.getColor()));
+</code></pre></div></div>
+
+<h3 id="람다-표현식">람다 표현식</h3>
+<blockquote>
+  <p>(파라미터 리스트) -&gt; { statement; }<br />
+(int a, int b) -&gt; { return a + b; }</p>
+
+  <p>(파라미터 리스트) -&gt; expression<br />
+(int a, int b) -&gt; a + b</p>
+</blockquote>
+
+<ul>
+  <li>람다식이란 = 일종의 <code class="highlighter-rouge">익명 함수</code></li>
+  <li>람다는 메서드와 유사하지만 특정 클래스에 종속되지 않으므로 메서드가 아닌 <code class="highlighter-rouge">함수</code>라고 부른다.</li>
+  <li>람다 표현식을 메서드 인수로 전달하거나(동작 파라미터화) 변수에 할당할 수 있음.</li>
+</ul>
+
+<h4 id="다양한-형태의-람다-표현식">다양한 형태의 람다 표현식</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Apple형 파라미터를 받아서 boolean형을 반환
+(Apple a) -&gt; a.getWeight() &gt; 150
+
+// 람다 바디 부분을 중괄호로 묶을 경우 명시적으로 return 키워드가 필요함
+(Apple a) -&gt; { return a.getWeight() &gt; 150; }
+
+// 파라미터의 타입은 생략이 가능함 (파라미터 형식 추론)
+(a) -&gt; a.getWeight() &gt; 150
+
+// 파라미터가 한 개일 경우 괄호도 생략이 가능함
+a -&gt; a.getWeight() &gt; 150
+
+// int형 파라미터 2개를 받고, 리턴값 없음(void)
+(num1, num2) -&gt; { System.out.println(num1 + num2); }
+
+// 파라미터 없고 Apple형 반환
+() -&gt; new Apple();
+</code></pre></div></div>
+
+<h3 id="함수형-인터페이스">함수형 인터페이스</h3>
+<ul>
+  <li>함수형 인터페이스란 -&gt; 추상메서드가 정확히 한 개인 인터페이스.
+    <ul>
+      <li>디폴트 메서드는 있어도 상관 없음</li>
+    </ul>
+  </li>
+  <li>@FunctionalInterface 어노테이션을 사용</li>
+  <li>람다 표현식은 함수형 인터페이스를 구현한 콘크리트 클래스의 인스턴스임.</li>
+  <li>함수형 인터페이스 타입을 인수로 받는 메서드에게 람다 표현식을 파라미터로 넘길 수 있음.</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 람다 표현식.
+// System.out.println() 메서드는 void형을 반환하므로, 이 람다 표현식 또한 void를 반환한다.
+Runnable r1 = () -&gt; System.out.println("Hello World 1");
+
+// 익명 클래스
+Runnable r2 = new Runnable() {
+    public void run() {
+        System.out.println("Hello World 2");
+    }
+}
+
+public static void process(Runnable r) {
+    r.run();
+}
+
+process(r1);	// Hello World 1 출력
+process(r2);	// Hello World 2 출력
+process(() -&gt; System.out.println("Hello World 3"));
+</code></pre></div></div>
+
+<h4 id="함수-디스크립터">함수 디스크립터</h4>
+<ul>
+  <li>함수형 인터페이스의 추상메서드 시그니처는 곧 람다 표현식의 시그니처이다. 이 시그니처를  <code class="highlighter-rouge">함수 디스크립터</code>라고 한다.
+    <ul>
+      <li>() -&gt; void</li>
+      <li>(item, item) -&gt; int</li>
+      <li>기타 등등</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="함수형-인터페이스-종류">함수형 인터페이스 종류</h3>
+
+<blockquote>
+  <p>Java 8의 java.util.function는 다양한 메서드 시그니처에 대응한 함수를 일일이 별도 인터페이스로 정의하고 있다. 람다식을 이용하여 필요한 형태에 맞는 인터페이스의 구현체를 즉석에서 정의하여 사용하는 것이다. 물론 원하는 형태의 인터페이스가 없다면 함수형 인터페이스를 직접 만들어서 사용해도 된다. 다시 말해 파라미터로 함수 자체를 넘기는 것이 아니라 객체(함수를 랩핑한 클래스)를 넘기는 것이고, 자바에서 함수는 여전히 일급 시민(first class citizen)이 아니다.</p>
+</blockquote>
+
+<h4 id="predicate--t---boolean">Predicate : T -&gt; boolean</h4>
+<ul>
+  <li>한 개의 인수를 받아서 boolean 값을 반환. 인수에 대해 참/거짓을 확인할 때 사용한다.</li>
+  <li>두 개의 인수를 받는 BiPredicate <code class="highlighter-rouge">(T, U) -&gt; boolean</code> 도 있음.</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@FunctionalInterface
+public interface Predicate&lt;T&gt; {
+	boolean test(T t);
+}
+
+Predicate&lt;String&gt; p = (String s) -&gt; !s.isEmpty();
+</code></pre></div></div>
+
+<h4 id="consumer--t---void">Consumer : T -&gt; void</h4>
+<ul>
+  <li>한 개의 인수를 받아 ‘소비’하고 반환값은 없음(void).</li>
+  <li>두 개의 인수를 받는 BiConsumer <code class="highlighter-rouge">(T, U) -&gt; void</code> 도 있음.</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@FunctionalInterface
+public interface Consumer&lt;T&gt; {
+	void accept(T t);
+}
+
+Consumer&lt;Integer&gt; c = (Integer i) -&gt; System.out.println(i);
+</code></pre></div></div>
+
+<h4 id="supplier-----t">Supplier : () -&gt; T</h4>
+<ul>
+  <li>인수를 받지 않고(void), 한 개의 객체를 반환함.</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@FunctionalInterface
+public interface Supplier&lt;T&gt; {
+	T get();
+}
+
+Supplier&lt;String&gt; f = () -&gt; "hello";
+</code></pre></div></div>
+
+<h4 id="function--t---r">Function : T -&gt; R</h4>
+<ul>
+  <li>한 개의 인수를 받아서 한 개의 객체를 반환함. 인수에 따른 출력값을 매핑할 때 사용.</li>
+  <li>두 개의 인수를 받는 BiFunction <code class="highlighter-rouge">(T, U) -&gt; R</code> 도 있음.</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@FunctionalInterface
+public interface Function&lt;T, R&gt; {
+	R apply(T t);
+}
+
+Function&lt;String, Integer&gt; f = (String s) -&gt; s.length();
+</code></pre></div></div>
+
+<h4 id="operator">Operator</h4>
+<ul>
+  <li>UnaryOperator : Function의 서브 인터페이스. 인수 한 개를 받아서, 동일한 타입의 객체를 반환하는 단항 연산자.  <code class="highlighter-rouge">T -&gt; T</code></li>
+  <li>BinaryOperator : BiFunction의 서브 인터페이스. 같은 타입의 인수 두 개를 받아서, 동일한 타입의 객체를 반환하는 이항 연산자.  <code class="highlighter-rouge">(T, T) -&gt; T</code></li>
+</ul>
+
+<h4 id="기본형primitive-type-특화-인터페이스">기본형(Primitive Type) 특화 인터페이스</h4>
+<ul>
+  <li>자바의 모든 타입은 참조형(Reference Type - Integer, Object, List 등) 아니면 기본형(Primitive Type - int, double, long 등) 인데, Generic 파라미터에는 참조형만 사용할 수 있다.</li>
+  <li>기본형을 참조형으로 자동으로 변환하는 것을  <code class="highlighter-rouge">박싱</code>, 그 반대를 언박싱이라고 하며 자바에서는 오토박싱을 지원한다.</li>
+  <li>단, 박싱한 값은 기본형을 랩핑한 것이며 힙 메모리에 저장되므로 메모리를 더 소비하며, 기본형을 가져올 때에도 메모리를 탐색하는 과정이 필요하다.</li>
+  <li>Java 8에서는 기본형 <code class="highlighter-rouge">int</code>, <code class="highlighter-rouge">double</code>, <code class="highlighter-rouge">long</code>을 입출력으로 사용하는 상황에서 오토박싱을 피할 수 있도록 특별한 형태의 함수형 인터페이스를 제공하여 대신 사용할 수 있게 한다.</li>
+</ul>
+
+<h3 id="타입-검사-및-추론">타입 검사 및 추론</h3>
+<ul>
+  <li>자바 컴파일러는 람다식이 사용된 컨텍스트를 이용하여 람다의 타입을 추론할 수 있다. 람다가 전달될 메서드의 파라미터나, 람다가 할당되는 변수의 타입에서 기대되는 람다식의 타입을 <code class="highlighter-rouge">Target Type</code>이라고 한다.
+    <ul>
+      <li>람다의 바디에 일반 표현식이 올 경우 리턴값이 있는 표현식일지라도 void를 반환하는 함수 디스크립터와 호환된다. 예를들어 List의 add 메서드는 boolean을 반환하지만,  <code class="highlighter-rouge">Consumer&lt;String&gt; c = s -&gt; list.add(s);</code>  또한 유효하다.</li>
+    </ul>
+  </li>
+  <li>이를 통해 람다식에 해당되는 함수형 인터페이스의 함수 디스크립터를 알 수 있으므로 람다 문법의 파라미터 리스트에서 타입을 생략할 수 있다.</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 명시적으로 형식 포함
+Comparator&lt;Apple&gt; c1 = (Apple a1, Apple a2) -&gt; a1.getWeight().compareTo(a2.getWeight());
+
+// 형식 생략 - 형식 추론
+Comparator&lt;Apple&gt; c2 = (a1, a2) -&gt; a1.getWeight().compareTo(a2.getWeight());
+</code></pre></div></div>
+
+<h3 id="람다-캡처링-capturing-lambda">람다 캡처링 (Capturing Lambda)</h3>
+<ul>
+  <li>
+    <p>람다 표현식 내에서 람다 표현식 외부에 정의된 변수를 사용하는 것을 람다가 객체를 <code class="highlighter-rouge">캡처</code>한다고 함.</p>
+  </li>
+  <li>일종의 Closure 이지만 람다식 = Closure는 아님.)
+    <blockquote>
+      <p>클로저는 어휘적(lexical) 클로저 또는 함수(function) 클로저를 간단하게 부르는 말이다. 단순하게 말하면 자신을 감싼 영역에 있는 외부 변수에 접근하는 함수다. 클로저에서 접근하는 함수 밖의 변수를 자유 변수(free variable)라 한다. 이 정의에 따르면 람다 표현식으로 정의한 익명 함수 가운데 일부는 클로저고 일부는 클로저가 아니다. 변수의 범위와 연관해 클로저를 정의하기도 하지만 단순히 함수를 감싼 객체를 모두 클로저라고 표현하기도 한다. Groovy에서는 자유 변수를 참조하는지 여부와 상관없이 익명 함수를 클로저라 한다. 그 외에도 함수를 객체로 감싸는 패턴은 Function Object, Functor, Functionoid 등 다양하게 불린다.  - <a href="https://d2.naver.com/helloworld/4911107#fn:8">NAVER D2</a></p>
+    </blockquote>
+  </li>
+  <li>명시적으로 final로 선언된 변수이거나, final 키워드를 붙이지 않았지만 사실상 final로 사용되고 있는 변수여야 함(effectively final).</li>
+  <li>
+    <p>즉 람다에서는 한 번만 할당되는 지역변수만 캡처할 수 있으며, final 이므로 값을 바꿀 수는 없고 참조만 가능.</p>
+  </li>
+  <li>아래의 코드에서 지역변수 num1은 final로 선언되어있지는 않지만 범위 내에서 한 번만 할당되므로 실질적으로 final임. 따라서 람다식 내에서 사용 가능한 free variable임.</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int num1 = 10;
+Runnable r = () -&gt; System.out.println(num1);
+</code></pre></div></div>
+
+<ul>
+  <li>num2 변수에는 값이 두 번 할당되므로, 실질적인 final이 아니라 람다식 내에서 사용이 불가능하다.</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int num2 = 20;
+Runnable r = () -&gt; System.out.println(num2);	// 에러 발생
+num2 = 30;
+</code></pre></div></div>
+
+<ul>
+  <li>자바에서 지역변수는 힙이 아닌 스택에 위치하므로 지역변수를 정의한 쓰레드가 사라질 경우 람다를 실행하는 쓰레드에서는 지역변수에 접근할 수 없다. 따라서 람다에서 지역 변수를 사용하는 경우 변수 자체에 접근을 허용하는 것이 아니라 변수의 복사본을 제공하고, 복사본의 값이 바뀌지 않아야 하므로 final 이어야 한다는 제약이 생긴 것이다.</li>
+</ul>
+
+<h3 id="메서드-레퍼런스--생성자-레퍼런스">메서드 레퍼런스 &amp; 생성자 레퍼런스</h3>
+<h4 id="메서드-레퍼런스">메서드 레퍼런스</h4>
+<ul>
+  <li>특정 메서드만을 호출하는 람다 표현식의 축약형 문법.</li>
+  <li>메서드 레서런스의 세 가지 유형
+    <ol>
+      <li>static 메서드 레퍼런스
+        <ul>
+          <li><code class="highlighter-rouge">(num) -&gt; Integer.parseInt(num)</code>를  <code class="highlighter-rouge">Integer::parseInt</code> 으로</li>
+        </ul>
+      </li>
+      <li>인스턴스 메서드 레퍼런스
+        <ul>
+          <li><code class="highlighter-rouge">(String s) -&gt; s.length()</code> 를  <code class="highlighter-rouge">String::length</code> 으로</li>
+          <li><code class="highlighter-rouge">(s1, s2) -&gt; s1.concat(s2)</code>를 <code class="highlighter-rouge">String::concat</code> 으로</li>
+        </ul>
+      </li>
+      <li>기존 객체의 인스턴스 메서드 레퍼런스
+        <ul>
+          <li><code class="highlighter-rouge">() -&gt; obj.getValue()</code>를 <code class="highlighter-rouge">obj::getValue</code> 으로
+            <ul>
+              <li>이 경우 obj 인스턴스에 대한 평가는 컴파일시에 일어남.</li>
+            </ul>
+          </li>
+          <li><code class="highlighter-rouge">(String s) -&gt; this.transfer(s)</code>을 <code class="highlighter-rouge">this::transfer</code>으로</li>
+        </ul>
+      </li>
+    </ol>
+  </li>
+  <li>메서드 레퍼런스의 왼쪽 부분(:: 의 앞) <code class="highlighter-rouge">타겟 레퍼런스</code> 라고 함.</li>
+</ul>
+
+<h4 id="생성자-레퍼런스">생성자 레퍼런스</h4>
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">클래스명::new</code></p>
+  </li>
+  <li>
+    <p>인수가 없는 생성자의 경우</p>
+  </li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Supplier&lt;T&gt; 인터페이스는 파라미터를 받지 않고 T 타입 인스턴스를 반환한다
+Supplier&lt;Apple&gt; s1 = () -&gt; new Apple();
+
+// 생성자 레퍼런스 이용. Apple 클래스의 인수가 없는 생성자가 호출됨.
+Supplier&lt;Apple&gt; s1 = Apple::new;
+</code></pre></div></div>
+
+<ul>
+  <li>인수가 한 개인 생성자의 경우</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Function&lt;T, R&gt; 인터페이스는 T 타입을 파라미터로 받고 R 타입을 반환한다
+Function&lt;Integer, Apple&gt; f1 = (int weight) -&gt; new Apple(weight);
+
+// 생성자 레퍼런스 이용. Apple 클래스에서 int형 인수를 받는 생성자가 호출됨.
+Function&lt;Integer, Apple&gt; f2 = Apple::new;
+</code></pre></div></div>
+
+<ul>
+  <li>인수가 두 개인 생성자의 경우</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// BiFunction&lt;T, U, R&gt; 인터페이스는 2개의 파라미터(T 타입, U 타입)를 받고 R 타입을 반환한다
+BiFunction&lt;String, Integer, Apple&gt; b1 = new Apple("green", 10);
+
+// 생성자 레퍼런스 이용. Apple 클래스에서 String, int 인수를 받는 생성자가 호출됨.
+BiFunction&lt;String, Integer, Apple&gt; b1 = Apple::new;
+</code></pre></div></div>
+
+<ul>
+  <li>인수가 세 개 이상인 생성자 레퍼런스를 사용하려면 이에 맞게 인터페이스를 직접 구현하여 사용하면 됨.</li>
+</ul>
+
+<h3 id="함수형-인터페이스의-유용한-메소드">함수형 인터페이스의 유용한 메소드</h3>
+<ul>
+  <li>몇몇 함수형 인터페이스들은 다양한 유틸리티 메서드를 디폴트 메서드로 포함하고 있다.</li>
+  <li>이들을 이용하여 여러 개의 람다 표현식을 조합해서 복잡한 람다 표현식을 만들 수 있음.</li>
+</ul>
+
+<h4 id="comparator">Comparator</h4>
+<ul>
+  <li>Comparator 인터페이스는 Comparable 키를 추출하는 함수를 인수로 받는 <code class="highlighter-rouge">Comparator.comparing</code> static 메서드를 포함한다.
+    <ul>
+      <li><code class="highlighter-rouge">static Comparator&lt;T&gt; comparing(Function keyExtractor)</code></li>
+    </ul>
+  </li>
+  <li>추출한 키를 비교할 때 사용할 Comparator를 두 번째 인수로 넘겨줄 수도 있다.
+    <ul>
+      <li><code class="highlighter-rouge">static Comparator&lt;T&gt; comparing(Function keyExtractor, Comparator keyComparator))</code></li>
+    </ul>
+  </li>
+  <li>이를 이용하여 Apple 객체의 weight를 비교하는 Comparator를 다음과 같이 정의하여 정렬에 사용할 수 있다.</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Comparator&lt;Apple&gt; byWeight = Comparator.comparing(Apple::getWeight);
+inventory.sort(byWeight);
+
+// 내림차순으로 정렬하려면 reversed 메소드를 이용한다.
+inventory.sort(Comparator.comparing(Apple::getW- eight)
+				.reversed());
+</code></pre></div></div>
+
+<ul>
+  <li><code class="highlighter-rouge">thenComparing</code>  메서드를 이용해서 첫 번째 키 값이 동일할 경우 사용할 두 번째 비교 조건을 지정할 수 있다.</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>inventory.sort(Comparator.comparing(Apple::getWeight)
+				.reversed()
+				.thenComparing(Apple::getCountry));
+</code></pre></div></div>
+
+<h4 id="predicate">Predicate</h4>
+<ul>
+  <li>Predicate 인터페이스는 더욱 복잡한 Predicate를 만들 수 있도록 <code class="highlighter-rouge">negate</code>, <code class="highlighter-rouge">and</code>, <code class="highlighter-rouge">or</code> 메서드를 제공한다.</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 색이 Red인지 테스트하는 Predicate
+Predicate&lt;Apple&gt; p = (a) -&gt; a.getColor().equals("Red");
+
+// 색이 Red가 아닌지 테스트하는 Predicate
+Predicate&lt;Apple&gt; p = (a) -&gt; a.getColor().equals("Red").negate();
+
+// 색이 Red이면서 무게가 100 이상인지 테스트하는 Predicate
+Predicate&lt;Apple&gt; p = (a) -&gt; 
+	a.getColor().equals("Red").and((a) -&gt; a.getWeight() &gt; 100);
+
+// 색이 Red 이거나 무게가 100 이상인지 테스트하는 Predicate
+Predicate&lt;Apple&gt; p = (a) -&gt;
+	a.getColor().equals("Red").or((a) -&gt; a.getWeight() &gt; 100);
+</code></pre></div></div>
+
+<h4 id="function">Function</h4>
+<ul>
+  <li>Function 인터페이스는 함수형 메서드간의 결과를 순차적으로 수행할수 있도록 도와주는 <code class="highlighter-rouge">andThen</code>,  <code class="highlighter-rouge">compose</code> 메소드를 제공한다.</li>
+  <li>andThen 메서드는 주어진 함수를 적용한 결과를 다른 함수의 입력으로 전달하는 함수를 반환한다.</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Function&lt;Integer, Integer&gt; f = x -&gt; x + 1;
+Function&lt;Integer, Integer&gt; g = x -&gt; x * 2;
+Function&lt;Integer, Integer&gt; h = f.andThen(g);
+int result = h.apply(1);	// g(f(1)) = 4 반환
+</code></pre></div></div>
+<ul>
+  <li>compose 메서드는 인수로 넘긴 함수를 실행한 다음에 그 결과를 외부 함수의 인수로 제공한다.</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Function&lt;Integer, Integer&gt; f = x -&gt; x + 1;
+Function&lt;Integer, Integer&gt; g = x -&gt; x * 2;
+Function&lt;Integer, Integer&gt; h = f.compose(g);
+int result = h.apply(1);	// f(g(1)) = 3 반환
+</code></pre></div></div>
+<ul>
+  <li><code class="highlighter-rouge">Function.identity()</code>  static 메서드는 입력받은 인수를 그대로 반환해준다.</li>
+</ul>
+
+<hr />
+<p>References</p>
+<ul>
+  <li>Java 8 in Action - 한빛미디어</li>
+  <li><a href="https://d2.naver.com/helloworld/4911107">NAVER D2</a></li>
+</ul>
+
+</div>
+        		  	  
+<div style="float: left"></div>
+<div class="comments">
+	<div class="comments_wrapper" aria-hidden="true">
+		<div class="heading">
+			<a href="#content_div" onClick="comment_toggle('comment_hidden_2017-06-13-java8');">Comments</a>
+		</div>
+		<div id="comment_hidden_2017-06-13-java8" style="display: none;">
+			<div class="line"></div>
+			<div class="content_div">
+				<script src="https://utteranc.es/client.js" repo="soyme/my-blog-comments" branch="master" issue-term="2017-06-13-java8" theme="github-light" crossorigin="anonymous" async></script>
+			</div>
+		</div>
+	</div>
+</div>
+<div style="clear: both"></div>
+
+        		  </section>
+				  <section class="prev_next">
+					
+                        <a style="float: left;" href="/2017/02/23/shuf/"><i class="icon-arrow-left"></i> 파일 내용 랜덤으로 섞기 - Shuffle the contents of a file</a>
+                    
+					
+						<a style="float:right; margin-bottom: 10px;"; href="/2017/06/14/java8-stream/">Java 8 - Stream (스트림) <i class="icon-arrow-right"></i></a>
+					
+		  		  </section>
+			</article>
+		</div>
+	</section>
+</main>
+
+
+	<footer>
+  <div class="wrapper">
+    <a href="#" class="menu-icon" data-toggle="tooltip" title="ABOUT"><i class="fa fa-arrow-up"></i></a>
+  </div>
+</footer>
+
+	<copyright>
+	</copyright>
+
+	<!-- Javascripts 
+	    ================================================= -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/custom.js"></script>
+	<script type="text/template" id="template-comment">
+	<div id="comment{index}" class="comment">
+	<div class="comment_wrapper">
+		<div class="comment_line"></div>
+		<div>
+		<span class="comment_name">
+			
+				<a rel="nofollow" href="{url}">{name}</a>
+			
+		</span>
+
+		
+			<span class="comment_date">, now</span> </div>
+			<div class="comment_content">
+			<p><em>This is a preview of your comment. It may take a couple of minutes for it to be displayed to others.</em></p>
+		
+		{message}</div>
+	</div>
+</div>
+</script>
+
+    <!-- Analytics
+    ================================================== -->
+    <script>
+		// analytics code
+    </script>	
+	</body>
+</html>

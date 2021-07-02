@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta charset="utf-8"/>
+		<title>
+		 Shell - awk 명령어 기본 -
+		
+		 soy blog</title>
+		<!-- For responsive site
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<link rel="author" href="/humans.txt">
+		<meta name="description" content="Description Goes Here">
+		<link rel="stylesheet" href="/css/style.css">
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+		<!--[if IE 7]>
+			<html class="ie7"> 
+			<link rel="stylesheet" type="text/css" href="/css/font-awesome-ie7.min.css">
+		<![endif]-->
+		<!--[if IE 8]><html class="ie8"> <![endif]-->		
+	    <!--[if lt IE 9]>
+	      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	    <![endif]-->
+
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-92395927-1', 'auto');
+		  ga('send', 'pageview');
+		</script>
+
+		<link rel="apple-touch-icon" sizes="57x57" href="/ico/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/ico/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/ico/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/ico/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/ico/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/ico/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/ico/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/ico/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/ico/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="/ico/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/ico/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="/ico/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/ico/favicon-16x16.png">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/ico/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff"> 
+	</head>
+	<body>
+	<!-- Header
+	    ================================================== -->
+	<header>
+	</header>
+
+	
+
+
+
+
+
+
+
+<main class="content">
+    <section class="container">
+    	<div class="row-fluid">
+			<article class="top-menu">
+				<a href="/" class="menu-icon" data-toggle="tooltip" title="HOME"><i class="fa fa-home"></i></a>
+<a href="/about/" class="menu-icon" data-toggle="tooltip" title="ABOUT"><i class="fa fa-user"></i></a>
+<a href="/category/diary/" class="menu-icon" data-toggle="tooltip" title="DIARY"><i class="fa fa-edit"></i></a>
+      <a href="/category/blog/" class="menu-icon" data-toggle="tooltip" title="BLOG"><i class="fa fa-bars"></i></a>
+      <a href="/tag/" class="menu-icon" data-toggle="tooltip" title="TAG"><i class="fa fa-tags"></i></a>
+  <div class="top-line"></div>
+ 
+			</article>
+
+			
+
+     	   <article class="diary">
+       	 	   <div align=center><h2>Shell - awk 명령어 기본</h2></div>
+       		   <div class="time"><a style="color:#777" href="http://3.34.122.196:7500/edit/2016-05-03-awk.md"><i class="fa fa-calendar"></i></a> 03 May 2016</div>
+				 <div class="tags"><a href="/tag/linux/">#Linux</a>, <a href="/tag/shell/">#Shell</a></div>
+        		  <section class="diary_section">
+     			  	 
+           		  	  <div class="inner_content"><h3 id="awk">awk</h3>
+<ul>
+  <li>데이터 처리를 위한 유닉스 프로그래밍 언어.</li>
+  <li><code class="highlighter-rouge">awk</code> 이름의 의미는, 언어 개발자 세 명의 이름의 이니셜을 따서 만든 것..</li>
+  <li>awk가 제작된 이후 다양한 버전이 나왔는데 구버전은 <code class="highlighter-rouge">awk</code>, 새로운 버전은 <code class="highlighter-rouge">nawk</code>, GNU 버전은 <code class="highlighter-rouge">gawk</code> 라는 명령어로 사용한다.</li>
+</ul>
+
+<!-- more -->
+
+<h3 id="awk-기본-사용법">awk 기본 사용법</h3>
+<ul>
+  <li><code class="highlighter-rouge">패턴</code>과 <code class="highlighter-rouge">command</code>로 이루어진다.</li>
+  <li>패턴 부분에는 정규식이나 조건 표현식(true/false)이 올 수 있다.</li>
+  <li>정규식 예: <code class="highlighter-rouge">/^hello$/</code></li>
+  <li>조건 표현식 예: <code class="highlighter-rouge">$1 &gt;= 0</code></li>
+  <li>command 부분은 c언어와 마찬가지로 조건연산자, 반복연산자, 산술연산자, 논리연산자, 삼항연산자, 증감연산자, 대입연산자 등을 사용 가능하다. 문법 또한 c언어와 거의 유사하다.</li>
+  <li>아무 command를 지정하지 않을 경우, <code class="highlighter-rouge">패턴에 매칭된 줄을 그대로 출력</code>하는 기본 동작을 수행한다.</li>
+  <li>command 부분은 <code class="highlighter-rouge">{ }</code>로 감싼다.
+    <ul>
+      <li>command 예: <code class="highlighter-rouge">{ if($1 &gt;= 0){ print "hello"; } }</code></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="정규표현식">정규표현식</h3>
+<ul>
+  <li>정규표현식을 사용할 때는 슬래시 <code class="highlighter-rouge">/</code>로 감싼다.</li>
+  <li>grep, sed와 마찬가지로 정규표현식 메타문자를 사용할 수 있다. 단 단어 지시자 <code class="highlighter-rouge">\&lt;\&gt;</code>, 캡처 <code class="highlighter-rouge">\(\)</code>, 반복 지시자 <code class="highlighter-rouge">\{\}</code>는 사용할 수 없다.</li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">awk</span> <span class="s1">'/^Hello/'</span> file	<span class="c"># 정규식 /^Hello/에 매칭되는 줄을 그대로 출력한다.</span>
+</code></pre></div></div>
+
+<h3 id="field-separator">Field Separator</h3>
+<p>awk는 <code class="highlighter-rouge">필드 구분자</code>를 기준으로 각 줄의 필드를 나누어 처리한다. 필드 구분자는 <code class="highlighter-rouge">FS</code>라는 이름의 내장변수로 관리되며 기본값은 탭/스페이스이다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat </span>file
+Hello 1
+Hi 2
+Haha 3
+
+<span class="nv">$ </span><span class="nb">awk</span> <span class="s1">'{print $1}'</span> file
+hello
+hi
+haha
+</code></pre></div></div>
+<p>디폴트 FS인 스페이스에 의해 필드가 나뉘었다. print 함수를 이용하여 첫 번째 필드 <code class="highlighter-rouge">$1</code>를 출력한다. command 부분은 <code class="highlighter-rouge">{ }</code>로 묶는다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat </span>file
+hello 1
+hi 2
+haha 3
+
+<span class="nv">$ </span><span class="nb">awk</span> <span class="s1">'/hello/{print $1,$2}'</span> file
+hello 1
+</code></pre></div></div>
+
+<p>정규식 패턴 <code class="highlighter-rouge">/hello/</code>에 매칭된 모든 줄의 첫 번째 필드($1)와 두 번째 필드($2)를 출력한다.
+이 때 <code class="highlighter-rouge">$1,$2</code> 사이에 콤마<code class="highlighter-rouge">,</code>를 사용했는데, 출력된 결과에는 <code class="highlighter-rouge">콤마 대신 공백</code>이 들어갔다. print 명령에서의 콤마는 <code class="highlighter-rouge">출력 필드 구분자</code>를 의미하는 <code class="highlighter-rouge">OFS</code>라는 이름의 내장변수의 값으로 치환되기 때문이다. OFS의 기본값은 스페이스라서 콤마 대신 스페이스가 출력되었다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat </span>file
+hello 1
+hi 2
+haha 3
+
+<span class="nv">$ </span><span class="nb">awk</span> <span class="s1">'$2 &gt; 1'</span> file
+hi 2
+haha 3
+</code></pre></div></div>
+<p>조건 표현식 <code class="highlighter-rouge">$2 &gt; 1</code>이 참인 줄만 출력한다. 즉 두 번째 필드($2)의 값이 1 보다 큰 줄만 출력한다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat </span>file
+hello 1
+hi 2
+haha 3
+
+<span class="nv">$ </span><span class="nb">awk</span> <span class="s1">'{ print $0 }'</span> file
+hello 1
+hi 2
+haha 3
+</code></pre></div></div>
+<p><code class="highlighter-rouge">$0</code>은 필드를 나누지 않은 상태의 전체 레코드를 의미하는 내장변수이다. 즉 줄 내용 전체가 그대로 출력된다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">awk</span> <span class="nt">-F</span>: <span class="o">{</span>print <span class="nv">$1</span><span class="o">}</span> file    <span class="c"># 콜론(:) 을 필드 구분자로 사용</span>
+
+<span class="nv">$ </span><span class="nb">awk</span> <span class="nt">-F</span><span class="s1">'[:,]'</span> <span class="o">{</span>print <span class="nv">$1</span><span class="o">}</span> file    <span class="c"># 콜론(:)과 콤마(,)를 필드 구분자로 사용</span>
+</code></pre></div></div>
+<p><code class="highlighter-rouge">-F</code> 옵션을 사용하여 필드 구분자를 직접 지정할 수도 있다.</p>
+
+<h3 id="printf">printf</h3>
+<ul>
+  <li>출력 포맷을 지정하고 싶을 때는 print 대신 <code class="highlighter-rouge">printf</code> 함수를 사용한다. 사용법은 C언어의 printf와 유사하다.</li>
+  <li>printf는 print와 달리 개행(new line)처리가 되지 않으므로, 필요시 <code class="highlighter-rouge">\n</code>을 직접 명시한다.</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>문자</th>
+      <th>설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>%c</td>
+      <td>character</td>
+    </tr>
+    <tr>
+      <td>%s</td>
+      <td>string</td>
+    </tr>
+    <tr>
+      <td>%d, %ld</td>
+      <td>10진수, long 10진수</td>
+    </tr>
+    <tr>
+      <td>%u, %lu</td>
+      <td>unsigned 10진수</td>
+    </tr>
+    <tr>
+      <td>%x, %lx</td>
+      <td>16진수</td>
+    </tr>
+    <tr>
+      <td>%o, %lo</td>
+      <td>8진수</td>
+    </tr>
+    <tr>
+      <td>%e</td>
+      <td>부동소수점, e-표기법</td>
+    </tr>
+    <tr>
+      <td>%f</td>
+      <td>부동소수점</td>
+    </tr>
+    <tr>
+      <td>%g</td>
+      <td>부동소수점. %e와 %f 중 적은 자릿수를 차지하는 표기법을 사용.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat </span>file
+hello 1
+hi 2
+haha 3
+
+<span class="nv">$ </span><span class="nb">awk</span> <span class="s1">'{ printf "word is %-10s and number is %8d and %03d\n", $1, $2, $2}'</span> file
+word is hello      and number is        1 and 001
+word is hi         and number is        2 and 002
+word is haha       and number is        3 and 003
+</code></pre></div></div>
+
+<ul>
+  <li><code class="highlighter-rouge">%-10s</code> : 10자리의 공간에 string 출력. 대시<code class="highlighter-rouge">-</code>는 <code class="highlighter-rouge">왼쪽 정렬</code>을 의미.</li>
+  <li><code class="highlighter-rouge">%8d</code> : 8자리의 공간에 10진수 출력. 기본으로 오른쪽 정렬.</li>
+  <li><code class="highlighter-rouge">%03d</code> : 3자리의 공간에 10진수 출력. 남는 공간은 0으로 채움.</li>
+</ul>
+
+<h3 id="내장변수">내장변수</h3>
+<p>위에서 언급한 FS, OFS 외에도 여러 내장변수가 존재한다.</p>
+
+<ul>
+  <li>내장변수의 이름은 대문자로 이루어져 있다.</li>
+  <li>내장변수는 패턴 및 command 내에서 사용할 수 있으며 값을 재설정 할 수도 있다.</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>이름</th>
+      <th>설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ARGC</td>
+      <td>커맨드라인 매개변수의 갯수</td>
+    </tr>
+    <tr>
+      <td>ARGV</td>
+      <td>커맨드라인 매개변수의 배열</td>
+    </tr>
+    <tr>
+      <td>FILENAME</td>
+      <td>입력 파일의 이름</td>
+    </tr>
+    <tr>
+      <td>FNR</td>
+      <td>현재 파일의 레코드 갯수</td>
+    </tr>
+    <tr>
+      <td>NF</td>
+      <td>현재 레코드의 필드 갯수</td>
+    </tr>
+    <tr>
+      <td>NR</td>
+      <td>레코드 번호</td>
+    </tr>
+    <tr>
+      <td>OFMT</td>
+      <td>숫자를 위한 출력 포맷</td>
+    </tr>
+    <tr>
+      <td>OFS</td>
+      <td>출력 필드 구분자</td>
+    </tr>
+    <tr>
+      <td>ORS</td>
+      <td>출력 레코드 구분자</td>
+    </tr>
+    <tr>
+      <td>RS</td>
+      <td>입력 레코드 구분자</td>
+    </tr>
+    <tr>
+      <td>RLENGTH</td>
+      <td>match 연산자로 매칭된 부분의 길이</td>
+    </tr>
+    <tr>
+      <td>RSTART</td>
+      <td>match 연산자로 매칭된 부분의 시작 위치</td>
+    </tr>
+    <tr>
+      <td>SUBSEP</td>
+      <td>배열 구분자</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="nr-nf">NR, NF</h4>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat </span>file
+hello 1
+hi 2
+haha 3
+
+<span class="nv">$ </span><span class="nb">awk</span> <span class="s1">'/haha/{ print NR, $1, NF }'</span> file
+3 haha 2
+</code></pre></div></div>
+<p><code class="highlighter-rouge">NR</code>은 파일 내에서 해당 레코드의 번호를 나타내는 내장변수이다.
+<code class="highlighter-rouge">NF</code>은 해당 줄의 필드 갯수를 나타내는 내장변수이다.</p>
+
+<h4 id="ofmt">OFMT</h4>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">awk</span> <span class="sb">`</span><span class="o">{</span> <span class="nv">OFMT</span><span class="o">=</span><span class="s2">"%.2f"</span><span class="p">;</span> print 1.234567, 12E-2<span class="p">;</span> <span class="o">}</span><span class="sb">`</span> file
+</code></pre></div></div>
+<p><code class="highlighter-rouge">OFMT</code>는 print 함수의 출력 포맷을 지정하는 내장변수이다.</p>
+
+<h4 id="argv-argc">ARGV, ARGC</h4>
+<ul>
+  <li><code class="highlighter-rouge">ARGV</code>는 shell 커맨드라인에서 입력받은 매개변수가 순서대로 저장되는 내장 배열이다. <code class="highlighter-rouge">nawk</code> 에서만 지원한다.</li>
+  <li><code class="highlighter-rouge">nawk</code>라는 명령어 자체도 매개변수에 포함되며(ARGV[0]), 명령어의 옵션들은 포함되지 않는다.</li>
+  <li><code class="highlighter-rouge">ARGC</code>는 커맨드라인 매개변수의 갯수가 저장되는 내장 변수이다.</li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>nawk <span class="nt">-F</span><span class="s1">','</span> <span class="s1">'{ for(i=0; i&lt;ARGC; i++){ print ARGV[i]; } }'</span> filename1 filename2
+nawk        <span class="c"># ARGV[0]</span>
+filename1   <span class="c"># ARGV[1]</span>
+filename2   <span class="c"># ARGV[2]</span>
+</code></pre></div></div>
+
+<h3 id="match-연산자--tilde">match 연산자 (~, tilde)</h3>
+<p>특정 필드의 값이 정규표현식에 매칭되는지 검사할 때는 <code class="highlighter-rouge">~</code>를 사용한다. 매칭되지 않는지 검사할 때는 <code class="highlighter-rouge">!~</code>를 사용한다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">awk</span> <span class="s1">'$1 ~ /[Hh]ello/'</span> file    <span class="c"># 첫 번째 필드가 Hello, hello인 레코드를 출력</span>
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">awk</span> <span class="s1">'$1 !~ /^hello/{ print $1 }'</span> file
+</code></pre></div></div>
+
+<h3 id="variable">variable</h3>
+<ul>
+  <li>정수, 부동소수점 실수, 문자열 등을 위한 변수를 사용할 수 있다.</li>
+  <li>awk의 변수는 선언 없이 바로 사용할 수 있으며, 사용되는 형태에 따라 0이나 ““으로 초기화된다.</li>
+  <li>awk 내에서의 변수는 shell에서의 변수와 기본적으로 호환되지 않는다. shell의 변수를 awk로 전달하기 위해서는 -v 옵션을 사용할 수 있다.</li>
+</ul>
+
+<h4 id="-v-옵션">-v 옵션</h4>
+<ul>
+  <li>-v 옵션을 통해 전달된 변수는 awk의 BEGIN 문에서 사용할 수 있다,</li>
+</ul>
+
+<h3 id="begin">BEGIN</h3>
+<ul>
+  <li>awk가 입력 파일을 처리하기 전에, 수행해야 될 전처리 동작들을 지정할 수 있다.</li>
+  <li>OFS, RS, FS 등 내장변수의 값을 변경하거나, 사용자 정의 변수의 초기화 등을 하기 위해 쓰인다.</li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat </span>file
+hello:1
+hi:2
+haha:3
+
+<span class="nv">$ </span><span class="nb">awk</span> <span class="s1">'BEGIN{ FS=":"; OFS="\t"; } {print $1,$2 }'</span> file
+hello	1
+hi	2
+haha	3
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">awk</span> <span class="s1">'BEGIN{ print "Hello, world!" }
+</span></code></pre></div></div>
+<ul>
+  <li>BEGIN 블럭은 awk가 입력 파일을 열기 전에 수행되므로, 입력 파일 없이 BEGIN 블럭만 실행할 수도 있다.</li>
+</ul>
+
+<h3 id="end">END</h3>
+<ul>
+  <li>입력 파일의 모든 줄의 처리가 끝난 후에, 맨 마지막으로 실행할 동작들을 지정할 수 있다.</li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">awk</span> <span class="s1">'{print $1} END{ print "process done."; }'</span> file
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">awk</span> <span class="s1">'BEGIN{ sum = 0; } /hello/{ sum += $1; } END{ print "sum is "sum; }'</span> file
+</code></pre></div></div>
+<p>이렇게 BEGIN, 패턴, command, END 를 모두 함께 사용할 수 있다.</p>
+
+<h3 id="array-in-awk">Array in awk</h3>
+<ul>
+  <li>awk의 배열은 연관 배열(associative array)로, key와 value를 갖는 Hash Set 이다.</li>
+  <li>변수와 마찬가지로, 미리 선언하지 않아도 바로 사용할 수 있다. (사용과 동시에 생성된다.)</li>
+  <li>배열이 사용되는 타입에 따라 0이나 빈 문자열로 적당히 초기화된다.</li>
+</ul>
+
+<h4 id="배열의-순회">배열의 순회</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for (item in array) {
+	print array[item];
+}
+</code></pre></div></div>
+
+<h4 id="delete">delete</h4>
+<p>내장 함수 delete는 배열 요소를 삭제하는데 사용한다. - <code class="highlighter-rouge">delete(array[item]);</code></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">awk</span> <span class="s1">'{ arr[x++] = $2; } END{ for(i in arr){ delete(arr[i]); } }'</span> filename
+</code></pre></div></div>
+
+<h3 id="기타-내장함수">기타 내장함수</h3>
+
+<h4 id="sub">sub</h4>
+<p>정규표현식에 매칭되는 부분을 지정한 문자열로 치환한다. longest 매칭이며, 레코드 내에서 여러번 매칭되어도 맨 왼쪽의 일치하는 부분에 대해서 한번만 치환한다. 치환할 대상을 지정하지 않으면 현재 레코드 전체(<code class="highlighter-rouge">$0</code>)에 대해서 치환한다.</p>
+
+<ul>
+  <li>sub(/정규표현식/, “치환할 문자열”, “치환할 대상”);</li>
+  <li>sub(/정규표현식/, “치환할 문자열”); - $0 에 대해서 치환</li>
+</ul>
+
+<h4 id="gsub">gsub</h4>
+<p><code class="highlighter-rouge">sub</code>와 유사하나 레코드 내에서 정규표현식이 매칭될 때마다 치환한다.</p>
+
+<h4 id="index">index</h4>
+<p>문자열 내에서 찾는 문자열이 나타나는 위치를 리턴한다. 위치는 1부터 시작하여 계산된다.</p>
+<ul>
+  <li>index(“문자열”, “찾는 문자열”);</li>
+</ul>
+
+<h4 id="length">length</h4>
+<p>문자열의 길이(문자 수)를 구한다.</p>
+
+<ul>
+  <li>length(“문자열”)</li>
+  <li>length 문자열을 지정하지 않으면 현재 레코드 전체($0)에 대한 길이를 구한다.</li>
+</ul>
+
+<h4 id="substr">substr</h4>
+<p>문자열 내에서 지정한 위치부터의 부분 문자열을 반환한다.</p>
+
+<ul>
+  <li>substr(문자열, 시작 위치);</li>
+  <li>substr(문자열, 시작 위치, 문자열 길이)</li>
+</ul>
+
+<h4 id="match">match</h4>
+<p>문자열 내에서 주어진 정규표현식에 매칭되는 패턴이 있으면 시작 위치를 반환하고, 없으면 0을 리턴한다. 추가적으로 문자열이 매칭될 경우, 패턴의 시작 위치를 내장변수 RSTART에 저장하고 부분 문자열의 길이는 RLENGTH에 저장한다. 이는 match 함수로 매칭 여부를 확인 후 substr을 사용하는데 유용하다. 단 nawk에서만 동작한다.</p>
+
+<ul>
+  <li>match(“문자열”, /정규표현식/);</li>
+</ul>
+
+<h4 id="split">split</h4>
+<p>문자열을 단어 단위로 나누어 배열에 저장한다. 필드 구분자를 지정하지 않으면, 내장변수 FS의 값이 디폴트로 사용된다.</p>
+
+<ul>
+  <li>split(문자열, 저장할 배열, 필드 구분자);</li>
+  <li>split(문자열, 저장할 배열); - 내장변수 FS의 값을 필드 구분자로 사용</li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">awk</span> <span class="s1">'BEGIN{ split("05/01/2016", date, "/"); print date[3]; }'</span>
+2016
+</code></pre></div></div>
+
+<h4 id="int">int</h4>
+<p>소숫점 이하를 버리고 정수부만 반환한다.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">int(x)</code></li>
+</ul>
+
+<h4 id="rand">rand</h4>
+<p>0~1 사이의 난수를 반환한다.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">rand()</code></li>
+</ul>
+</div>
+        		  	  
+<div style="float: left"></div>
+<div class="comments">
+	<div class="comments_wrapper" aria-hidden="true">
+		<div class="heading">
+			<a href="#content_div" onClick="comment_toggle('comment_hidden_2016-05-03-awk');">Comments</a>
+		</div>
+		<div id="comment_hidden_2016-05-03-awk" style="display: none;">
+			<div class="line"></div>
+			<div class="content_div">
+				<script src="https://utteranc.es/client.js" repo="soyme/my-blog-comments" branch="master" issue-term="2016-05-03-awk" theme="github-light" crossorigin="anonymous" async></script>
+			</div>
+		</div>
+	</div>
+</div>
+<div style="clear: both"></div>
+
+        		  </section>
+				  <section class="prev_next">
+					
+                        <a style="float: left;" href="/2016/04/23/gmt/"><i class="icon-arrow-left"></i> GMT와 UTC 차이, summer time</a>
+                    
+					
+						<a style="float:right; margin-bottom: 10px;"; href="/2016/05/09/mock_stub/">Mocks Aren't Stubs <i class="icon-arrow-right"></i></a>
+					
+		  		  </section>
+			</article>
+		</div>
+	</section>
+</main>
+
+
+	<footer>
+  <div class="wrapper">
+    <a href="#" class="menu-icon" data-toggle="tooltip" title="ABOUT"><i class="fa fa-arrow-up"></i></a>
+  </div>
+</footer>
+
+	<copyright>
+	</copyright>
+
+	<!-- Javascripts 
+	    ================================================= -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/custom.js"></script>
+	<script type="text/template" id="template-comment">
+	<div id="comment{index}" class="comment">
+	<div class="comment_wrapper">
+		<div class="comment_line"></div>
+		<div>
+		<span class="comment_name">
+			
+				<a rel="nofollow" href="{url}">{name}</a>
+			
+		</span>
+
+		
+			<span class="comment_date">, now</span> </div>
+			<div class="comment_content">
+			<p><em>This is a preview of your comment. It may take a couple of minutes for it to be displayed to others.</em></p>
+		
+		{message}</div>
+	</div>
+</div>
+</script>
+
+    <!-- Analytics
+    ================================================== -->
+    <script>
+		// analytics code
+    </script>	
+	</body>
+</html>

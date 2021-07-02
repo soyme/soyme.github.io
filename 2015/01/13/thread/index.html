@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta charset="utf-8"/>
+		<title>
+		 기본적인 쓰레드 제어 -  sleep / wait / notify / notifyAll -
+		
+		 soy blog</title>
+		<!-- For responsive site
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<link rel="author" href="/humans.txt">
+		<meta name="description" content="Description Goes Here">
+		<link rel="stylesheet" href="/css/style.css">
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+		<!--[if IE 7]>
+			<html class="ie7"> 
+			<link rel="stylesheet" type="text/css" href="/css/font-awesome-ie7.min.css">
+		<![endif]-->
+		<!--[if IE 8]><html class="ie8"> <![endif]-->		
+	    <!--[if lt IE 9]>
+	      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	    <![endif]-->
+
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-92395927-1', 'auto');
+		  ga('send', 'pageview');
+		</script>
+
+		<link rel="apple-touch-icon" sizes="57x57" href="/ico/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/ico/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/ico/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/ico/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/ico/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/ico/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/ico/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/ico/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/ico/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="/ico/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/ico/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="/ico/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/ico/favicon-16x16.png">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/ico/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff"> 
+	</head>
+	<body>
+	<!-- Header
+	    ================================================== -->
+	<header>
+	</header>
+
+	
+
+
+
+
+
+
+
+<main class="content">
+    <section class="container">
+    	<div class="row-fluid">
+			<article class="top-menu">
+				<a href="/" class="menu-icon" data-toggle="tooltip" title="HOME"><i class="fa fa-home"></i></a>
+<a href="/about/" class="menu-icon" data-toggle="tooltip" title="ABOUT"><i class="fa fa-user"></i></a>
+<a href="/category/diary/" class="menu-icon" data-toggle="tooltip" title="DIARY"><i class="fa fa-edit"></i></a>
+      <a href="/category/blog/" class="menu-icon" data-toggle="tooltip" title="BLOG"><i class="fa fa-bars"></i></a>
+      <a href="/tag/" class="menu-icon" data-toggle="tooltip" title="TAG"><i class="fa fa-tags"></i></a>
+  <div class="top-line"></div>
+ 
+			</article>
+
+			
+
+     	   <article class="diary">
+       	 	   <div align=center><h2>기본적인 쓰레드 제어 -  sleep / wait / notify / notifyAll</h2></div>
+       		   <div class="time"><a style="color:#777" href="http://3.34.122.196:7500/edit/2015-01-13-thread.md"><i class="fa fa-calendar"></i></a> 13 January 2015</div>
+				 <div class="tags"><a href="/tag/java/">#Java</a>, <a href="/tag/thread/">#Thread</a></div>
+        		  <section class="diary_section">
+     			  	 
+           		  	  <div class="inner_content"><p>기본적인 쓰레드 제어 메소드인 sleep, wait, notify, notifyAll에 대해서 간략하게 살펴보자.</p>
+
+<!-- more -->
+
+<h3 id="쓰레드의-일시-정지---sleep">쓰레드의 일시 정지 - sleep</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+ 
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">"Good!"</span><span class="o">);</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">);</span>		<span class="c1">// 1000밀리초=1초동안 현재의 쓰레드를 일시정지함</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+ 
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p><code class="highlighter-rouge">Good!</code>을 출력한 뒤, sleep() 메소드 호출로 인하여 해당 쓰레드가 1초(1000밀리초) 동안 일시정지 된다. 1초가 지난 뒤에는 스스로 깨어나서, 수행하던 코드를 마저 수행한다. 따라서 1초 간격으로 “Good!”이 출력되게 된다.</p>
+
+<blockquote>
+  <p>참고) Thread.sleep으로 잠들어 있는 쓰레드를 도중에 깨우려면 interrupt를 발생시켜야 한다.</p>
+</blockquote>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">sleep</span><span class="o">(</span><span class="kt">long</span> <span class="n">millis</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">InterruptedException</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">sleep</span><span class="o">(</span><span class="kt">long</span> <span class="n">millis</span><span class="o">,</span> <span class="kt">int</span> <span class="n">nanos</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">InterruptedException</span>
+</code></pre></div></div>
+<p>sleep() 메소드는 InterruptedException을 발생시킬 수 있으므로 try-catch로 묶었다. 밀리초 뿐 아니라 나노초를 파라미터로 받는 오버로딩 메소드도 있다. 하지만 실질적으로 그렇게까지 세세한 제어는 되지 않는다.</p>
+
+<h3 id="쓰레드의-대기---wait">쓰레드의 대기 - wait</h3>
+<p>모든 인스턴스들은 각각 wait 집합을 가지고 있다. wait() 메소드를 실행한 후 대기중인 쓰레드들의 (가상의, 개념적인) 집합이다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wait();          // 이 둘은 동일함
+this.wait();
+</code></pre></div></div>
+<p>락을 획득하여 실행되고 있던 쓰레드가 wait() 메소드를 만나면 동작을 정지하고, wait 집합에 들어가고, 가지고 있던 락을 해제한다. 바꿔 말하자면, 락을 가지고 있는 쓰레드만 wait() 메소드를 실행할 수 있다.</p>
+
+<p>그리고 다음 중 어느 한 상황이 발생하기 전까지는 영원히 wait 집합 안에서 잠들어 있는다.</p>
+
+<ul>
+  <li>다른 쓰레드의 notify() 메소드 호출에 의해 깨어난다.</li>
+  <li>다른 쓰레드의 notifyAll() 메소드 호출에 의해 깨어난다.</li>
+  <li>다른 쓰레드의 interrupt() 메소드 호출에 의해 깨어난다.</li>
+  <li>wait() 메소드가 타임아웃 된다.</li>
+</ul>
+
+<h3 id="대기-중인-쓰레드-한-개-깨우기---notify">대기 중인 쓰레드 한 개 깨우기 - notify</h3>
+<p>락을 획득하여 실행되고 있던 쓰레드가 notify() 메소드를 호출하면, 해당 인스턴스의 wait 집합에 있는 쓰레드 한 개가 wait 집합에서 꺼내진다. 이 때 wait 집합 안에 있는 쓰레드 중 어떤 쓰레드가 선택될지는 정해져 있지 않다. wait와 마찬가지로, 락을 가지고 있는 쓰레드만 notify() 메소드를 호출할 수 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">instanceName</span><span class="o">.</span><span class="na">notify</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>notify() 호출에 의하여 wait 집합에서 나온 쓰레드가 곧바로 실행을 재개하는 것은 아니다. 실행을 재개하려면 wait 집합에 들어갈 때 해제했던 락을 다시 획득해야 하는데.. notify()가 호출된 순간에는 notify()를 실행한 쓰레드가 해당 락을 가지고 있는 상태이기 때문이다.</p>
+
+<h3 id="대기-중인-모든-쓰레드-깨우기---notifyall">대기 중인 모든 쓰레드 깨우기 - notifyAll</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>notifyAll();		// this.notifyAll()과 동일함
+this.notifyAll();	// notifyAll()과 동일함
+instanceName.notifyAll();
+</code></pre></div></div>
+
+<p>락을 획득하여 실행되고 있던 쓰레드가 notifyAll() 메소드를 호출하면, 해당 인스턴스의 wait 집합에 있는 모든 쓰레드를 wait 집합에서 꺼낸다. wait, notify와 마찬가지로, 락을 가지고 있는 쓰레드만 nodifyAll() 메소드를 호출할 수 있다.</p>
+
+<h3 id="wait--notify--notifyall">wait() &amp; notify() &amp; notifyAll()</h3>
+<ol>
+  <li>위에서도 언급했듯이 wait, notify, notifyAll 메소드는 전부 ‘락을 가지고 있던 쓰레드’만이 호출할 수 있다.
+락을 가지고 있지 않은 쓰레드가 wait(), notify(), notifyAll() 메소드를 호출할 경우는 java.lang.IlegalMonitorStateException이 발생한다.</li>
+  <li>wait, notify, notifyAll 메소드는 java.lang.Object 클래스의 메소드이지 Thread 클래스의 메소드가 아니다.
+이 세개의 메소드는 쓰레드에 대한 조작이라고 하기 보다는, 인스턴스의 wait 집합에 대한 조작이다. wait 집합은 모든 인스턴스가 가지고 있으므로 wait, notify, notifyAll은 Object 클래스의 메소드인 것이다.
+(Object 클래스는 모든 클래스의 슈퍼클래스이므로, 엄밀히 말하자면 Thread 클래스의 (슈퍼클래스의) 메소드이다.)</li>
+</ol>
+</div>
+        		  	  
+<div style="float: left"></div>
+<div class="comments">
+	<div class="comments_wrapper" aria-hidden="true">
+		<div class="heading">
+			<a href="#content_div" onClick="comment_toggle('comment_hidden_2015-01-13-thread');">Comments</a>
+		</div>
+		<div id="comment_hidden_2015-01-13-thread" style="display: none;">
+			<div class="line"></div>
+			<div class="content_div">
+				<script src="https://utteranc.es/client.js" repo="soyme/my-blog-comments" branch="master" issue-term="2015-01-13-thread" theme="github-light" crossorigin="anonymous" async></script>
+			</div>
+		</div>
+	</div>
+</div>
+<div style="clear: both"></div>
+
+        		  </section>
+				  <section class="prev_next">
+					
+                        <a style="float: left;" href="/2015/01/09/mysql_oracle_migration/"><i class="icon-arrow-left"></i> MySQL 쿼리를 오라클 쿼리로 변경하기</a>
+                    
+					
+						<a style="float:right; margin-bottom: 10px;"; href="/2015/01/17/interrupted_exception/">InterruptedException과 멀티쓰레드 <i class="icon-arrow-right"></i></a>
+					
+		  		  </section>
+			</article>
+		</div>
+	</section>
+</main>
+
+
+	<footer>
+  <div class="wrapper">
+    <a href="#" class="menu-icon" data-toggle="tooltip" title="ABOUT"><i class="fa fa-arrow-up"></i></a>
+  </div>
+</footer>
+
+	<copyright>
+	</copyright>
+
+	<!-- Javascripts 
+	    ================================================= -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/custom.js"></script>
+	<script type="text/template" id="template-comment">
+	<div id="comment{index}" class="comment">
+	<div class="comment_wrapper">
+		<div class="comment_line"></div>
+		<div>
+		<span class="comment_name">
+			
+				<a rel="nofollow" href="{url}">{name}</a>
+			
+		</span>
+
+		
+			<span class="comment_date">, now</span> </div>
+			<div class="comment_content">
+			<p><em>This is a preview of your comment. It may take a couple of minutes for it to be displayed to others.</em></p>
+		
+		{message}</div>
+	</div>
+</div>
+</script>
+
+    <!-- Analytics
+    ================================================== -->
+    <script>
+		// analytics code
+    </script>	
+	</body>
+</html>

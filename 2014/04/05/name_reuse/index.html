@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta charset="utf-8"/>
+		<title>
+		 Java 이름 재사용 - 오버라이딩 / 하이딩 / 섀도윙 / 모호화 -
+		
+		 soy blog</title>
+		<!-- For responsive site
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<link rel="author" href="/humans.txt">
+		<meta name="description" content="Description Goes Here">
+		<link rel="stylesheet" href="/css/style.css">
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+		<!--[if IE 7]>
+			<html class="ie7"> 
+			<link rel="stylesheet" type="text/css" href="/css/font-awesome-ie7.min.css">
+		<![endif]-->
+		<!--[if IE 8]><html class="ie8"> <![endif]-->		
+	    <!--[if lt IE 9]>
+	      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	    <![endif]-->
+
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-92395927-1', 'auto');
+		  ga('send', 'pageview');
+		</script>
+
+		<link rel="apple-touch-icon" sizes="57x57" href="/ico/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/ico/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/ico/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/ico/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/ico/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/ico/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/ico/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/ico/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/ico/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="/ico/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/ico/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="/ico/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/ico/favicon-16x16.png">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/ico/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff"> 
+	</head>
+	<body>
+	<!-- Header
+	    ================================================== -->
+	<header>
+	</header>
+
+	
+
+
+
+
+
+
+
+<main class="content">
+    <section class="container">
+    	<div class="row-fluid">
+			<article class="top-menu">
+				<a href="/" class="menu-icon" data-toggle="tooltip" title="HOME"><i class="fa fa-home"></i></a>
+<a href="/about/" class="menu-icon" data-toggle="tooltip" title="ABOUT"><i class="fa fa-user"></i></a>
+<a href="/category/diary/" class="menu-icon" data-toggle="tooltip" title="DIARY"><i class="fa fa-edit"></i></a>
+      <a href="/category/blog/" class="menu-icon" data-toggle="tooltip" title="BLOG"><i class="fa fa-bars"></i></a>
+      <a href="/tag/" class="menu-icon" data-toggle="tooltip" title="TAG"><i class="fa fa-tags"></i></a>
+  <div class="top-line"></div>
+ 
+			</article>
+
+			
+
+     	   <article class="diary">
+       	 	   <div align=center><h2>Java 이름 재사용 - 오버라이딩 / 하이딩 / 섀도윙 / 모호화</h2></div>
+       		   <div class="time"><a style="color:#777" href="http://3.34.122.196:7500/edit/2014-04-05-name_reuse.md"><i class="fa fa-calendar"></i></a> 05 April 2014</div>
+				 <div class="tags"><a href="/tag/java/">#Java</a>, <a href="/tag/oop/">#OOP</a></div>
+        		  <section class="diary_section">
+     			  	 
+           		  	  <div class="inner_content"><h3 id="오버라이딩-overriding">오버라이딩 (overriding)</h3>
+<p>자식 클래스에 있는 인스턴스 메서드가 부모 클래스의 접근 가능한 메서드와 동일한 이름과 매개변수를 가지는 것. 오버라이딩 되면 동적 바인딩이 가능해짐. 따라서 JVM은 실행중에 인스턴스의 자료형에 기반하여 호출할 메서드를 결정함.</p>
+
+<h3 id="하이딩-hiding">하이딩 (hiding)</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Parent</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">f</span><span class="o">()</span> <span class="o">{</span> <span class="o">}</span>
+<span class="o">}</span>
+  
+<span class="kd">class</span> <span class="nc">Child</span> <span class="kd">extends</span> <span class="n">Parent</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">f</span><span class="o">()</span> <span class="o">{</span> <span class="o">}</span>  <span class="c1">// Parent.f()를 하이딩함</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>부모클래스의 필드, static 메서드, 클래스, 인터페이스와 동일한 이름으로 자식 클래스에도 요소를 생성하면, 자식에서 만든 요소가 부모에 있는 요소를 하이딩한다. 이처럼 하이딩을 사용하면 부모 클래스의 멤버를 자식 클래스가 상속(사용)하지 못하게 만들 수 있다.</p>
+
+<h3 id="오버로딩-overloading">오버로딩 (overloading)</h3>
+<p>클래스 내부의 메소드끼리 이름은 같은데 매개변수가 다른 것. 메소드를 호출할 때 어떤 메소드를 사용할지는 컴파일할 때 결정된다.</p>
+
+<h3 id="섀도윙-shadowing">섀도윙 (shadowing)</h3>
+<p>변수, 메소드, 클래스, 인터페이스의 이름을 같은 영역에서 동일하게 사용하면 이름이 겹쳐 섀도윙이 발생한다. 예를 들어, 인스턴스 변수의 이름과 인스턴스 메소드 내부의 지역변수 이름이 같은 경우이다. 어떤 대상이 섀도윙되면 해당 대상을 이름으로 접근할 수 없다. 다양한 방법을 사용하면 접근할 수 있겠지만, 전히 접근 불가능한 경우도 있다.
+일반적으로 섀도윙은 사용하지 않는 것이 좋다. 하지만 많은 개발자들이 생성자에서 인스턴스 변수의 초기화를 할 때 일반적으로 섀도윙을 사용한다.</p>
+
+<h3 id="모호화">모호화</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Obscure</span> <span class="o">{</span>
+    <span class="kd">static</span> <span class="n">String</span> <span class="n">System</span><span class="o">;</span>  <span class="c1">// java.lang.System을 모호화한다</span>
+     
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hello World!"</span><span class="o">);</span>  <span class="c1">// System 식별자가 모호화되어 컴파일되지 않는다</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>변수와 클래스 또는 변수와 인터페이스의 이름이 같으면, 해당 이름을 사용했을 때 변수를 선택하게 되는데, 이런 경우를 ‘변수가, 다른 타입(클래스/인스턴스)의 이름을 모호화한다’고 표현한다. 모호화는 다른 이름 재사용과 다르게 이름이 다른 네임스페이스에 있어도 적용되는 이름 재사용이다. 따라서 패키지, 클래스, 인터페이스 등이 모호화되면 특정한 네임스페이스에서만 허용하는 문법을 제외하면 해당 대상을 선택할 수 없다. 물론 자바 네이밍 컨벤션을 잘 지켜서 개발한다면 모호화가 발생하지 않는다.</p>
+</div>
+        		  	  
+<div style="float: left"></div>
+<div class="comments">
+	<div class="comments_wrapper" aria-hidden="true">
+		<div class="heading">
+			<a href="#content_div" onClick="comment_toggle('comment_hidden_2014-04-05-name_reuse');">Comments</a>
+		</div>
+		<div id="comment_hidden_2014-04-05-name_reuse" style="display: none;">
+			<div class="line"></div>
+			<div class="content_div">
+				<script src="https://utteranc.es/client.js" repo="soyme/my-blog-comments" branch="master" issue-term="2014-04-05-name_reuse" theme="github-light" crossorigin="anonymous" async></script>
+			</div>
+		</div>
+	</div>
+</div>
+<div style="clear: both"></div>
+
+        		  </section>
+				  <section class="prev_next">
+					
+                        <a style="float: left;" href="/2013/08/17/process_vs_thread/"><i class="icon-arrow-left"></i> 프로세스와 쓰레드의 차이</a>
+                    
+					
+						<a style="float:right; margin-bottom: 10px;"; href="/2014/04/16/synchronized/">쓰레드의 배타제어 (mutual exclusion) / 동기화 (synchronized) <i class="icon-arrow-right"></i></a>
+					
+		  		  </section>
+			</article>
+		</div>
+	</section>
+</main>
+
+
+	<footer>
+  <div class="wrapper">
+    <a href="#" class="menu-icon" data-toggle="tooltip" title="ABOUT"><i class="fa fa-arrow-up"></i></a>
+  </div>
+</footer>
+
+	<copyright>
+	</copyright>
+
+	<!-- Javascripts 
+	    ================================================= -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/custom.js"></script>
+	<script type="text/template" id="template-comment">
+	<div id="comment{index}" class="comment">
+	<div class="comment_wrapper">
+		<div class="comment_line"></div>
+		<div>
+		<span class="comment_name">
+			
+				<a rel="nofollow" href="{url}">{name}</a>
+			
+		</span>
+
+		
+			<span class="comment_date">, now</span> </div>
+			<div class="comment_content">
+			<p><em>This is a preview of your comment. It may take a couple of minutes for it to be displayed to others.</em></p>
+		
+		{message}</div>
+	</div>
+</div>
+</script>
+
+    <!-- Analytics
+    ================================================== -->
+    <script>
+		// analytics code
+    </script>	
+	</body>
+</html>

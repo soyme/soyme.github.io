@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta charset="utf-8"/>
+		<title>
+		 블로그 단장하기 -
+		
+		 soy blog</title>
+		<!-- For responsive site
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<link rel="author" href="/humans.txt">
+		<meta name="description" content="Description Goes Here">
+		<link rel="stylesheet" href="/css/style.css">
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+		<!--[if IE 7]>
+			<html class="ie7"> 
+			<link rel="stylesheet" type="text/css" href="/css/font-awesome-ie7.min.css">
+		<![endif]-->
+		<!--[if IE 8]><html class="ie8"> <![endif]-->		
+	    <!--[if lt IE 9]>
+	      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	    <![endif]-->
+
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-92395927-1', 'auto');
+		  ga('send', 'pageview');
+		</script>
+
+		<link rel="apple-touch-icon" sizes="57x57" href="/ico/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/ico/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/ico/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/ico/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/ico/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/ico/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/ico/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/ico/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/ico/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="/ico/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/ico/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="/ico/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/ico/favicon-16x16.png">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/ico/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff"> 
+	</head>
+	<body>
+	<!-- Header
+	    ================================================== -->
+	<header>
+	</header>
+
+	
+
+
+
+
+
+
+
+<main class="content">
+    <section class="container">
+    	<div class="row-fluid">
+			<article class="top-menu">
+				<a href="/" class="menu-icon" data-toggle="tooltip" title="HOME"><i class="fa fa-home"></i></a>
+<a href="/about/" class="menu-icon" data-toggle="tooltip" title="ABOUT"><i class="fa fa-user"></i></a>
+<a href="/category/diary/" class="menu-icon" data-toggle="tooltip" title="DIARY"><i class="fa fa-edit"></i></a>
+      <a href="/category/blog/" class="menu-icon" data-toggle="tooltip" title="BLOG"><i class="fa fa-bars"></i></a>
+      <a href="/tag/" class="menu-icon" data-toggle="tooltip" title="TAG"><i class="fa fa-tags"></i></a>
+  <div class="top-line"></div>
+ 
+			</article>
+
+			
+
+     	   <article class="diary">
+       	 	   <div align=center><h2>블로그 단장하기</h2></div>
+       		   <div class="time"><a style="color:#777" href="http://3.34.122.196:7500/edit/2016-03-22-diary.md"><i class="fa fa-calendar"></i></a> 22 March 2016</div>
+				 <div class="tags"></div>
+        		  <section class="diary_section">
+     			  	 
+           		  	  <div class="inner_content"><p>하.. <code class="highlighter-rouge">Jekyll</code> + <code class="highlighter-rouge">Github Page</code> 블로그 셋업 하느라 주말을 불태웠다. 처음에는 Github에 올리기만 하면 알아서 다 되니까 오오 신세계! 했는데.. 심플한 만큼 많은 제약이 따르기에 내 입맛대로 뜯어고치기가 너무 힘들다는 것..</p>
+
+<h4 id="github-page는-custom-plugin을-지원하지-않음">Github Page는 custom plugin을 지원하지 않음</h4>
+<p>Jekyll build를 할 때 여러 플러그인을 사용할 수 있는데, Github Pages에서는 custom plugin을 지원하지 않는다 ㅠ_ㅠ. <a href="http://jekyllrb-ko.github.io/docs/plugins/">Jekyll Docs</a>에 따르면,</p>
+<blockquote>
+  <p>GitHub Pages 는 Jekyll 을 사용합니다. 하지만 보안상의 이유로 인해, 모든 Pages 사이트는 –safe 옵션으로 사용자 플러그인이 비활성화된 상태에서 생성됩니다. 이 말은 안타깝게도, GitHub Pages 에서는 당신의 플러그인을 사용할 수 없다는 뜻입니다.</p>
+</blockquote>
+
+<p>그렇다 보니 이미 있는 플러그인들만 사용해야 하고, 내가 원하는 대로 build 결과가 나오도록 자동화할 수 없다. 이 문제의 가장 심플한 해결책은 build는 local PC에서 하고, Github에는 결과물만 업로드 하는 것이다. 그래도 source 파일들을 관리를 해야하니, source 파일들은 별도의 브랜치에 넣고 <code class="highlighter-rouge">master</code> 브랜치에는 <code class="highlighter-rouge">_site</code> 디렉토리 하위의 static 파일들만 유지한다. 변경이 있을 때마다 두 개의 브랜치를 관리해야 하는 번거로움이 있으나 할만한 수준인 것 같다.</p>
+
+<h4 id="카테고리-태그-기능의-부실함">카테고리, 태그 기능의 부실함</h4>
+<p>카테고리와 태그는 블로그의 핵심 아닌가…? ㅠ_ㅠ 포스팅들을 카테고리로 분류했을 때, 카테고리별 페이징 기능을 지원하지 않음. 이는 <code class="highlighter-rouge">tag</code>도 마찬가지임. 카테고리별로 페이징을 해주는 플러그인이 몇몇 있었지만, 뭐가 문제인지 내 환경에서 제대로 동작하는 것이 없었음. ㅠ_ㅠ 또한 나는 카테고리별로 렌더링 파일을 다르게 하고 싶었고, 한 페이지에 들어가는 포스팅의 개수를 카테고리마다 다르게 지정하고 싶었음. 결국 <code class="highlighter-rouge">custom plugin</code>을 사용해야 한다는 결론에 도달했고, 위에서 언급한 방식으로 브랜치를 source와 master로 분리하여 custom plugin을 사용하였음.</p>
+
+<h4 id="댓글-기능의-부재">댓글 기능의 부재</h4>
+<p>비록 댓글이 달릴 일이 거의 없긴 해도 댓글 기능을 달아야 하는데, 마침 정말 심플하게 댓글 플러그인을 구현한 node 프로젝트를 발견함. 근데 이걸 띄우려면 서버가 있어야 함… 결국 <code class="highlighter-rouge">Github Page</code>를 사용하면서 빌드도 직접하고 개인 서버도 사용하는 상황에 이르렀다. 댓글 플러그인은 잘 작동하긴 하지만 여러 이슈가 있어서 계속 쓸지 말지는 고민 중이다. =&gt; 결국 Disqus를 달되 최대한 깔끔함을 유지하게 위해 접어놓는 것으로 결정했다.</p>
+</div>
+        		  	  
+<div style="float: left"></div>
+<div class="comments">
+	<div class="comments_wrapper" aria-hidden="true">
+		<div class="heading">
+			<a href="#content_div" onClick="comment_toggle('comment_hidden_2016-03-22-diary');">Comments</a>
+		</div>
+		<div id="comment_hidden_2016-03-22-diary" style="display: none;">
+			<div class="line"></div>
+			<div class="content_div">
+				<script src="https://utteranc.es/client.js" repo="soyme/my-blog-comments" branch="master" issue-term="2016-03-22-diary" theme="github-light" crossorigin="anonymous" async></script>
+			</div>
+		</div>
+	</div>
+</div>
+<div style="clear: both"></div>
+
+        		  </section>
+				  <section class="prev_next">
+					
+                        <a style="float: left;" href="/2016/03/15/code_readability/"><i class="icon-arrow-left"></i> Code Readability</a>
+                    
+					
+						<a style="float:right; margin-bottom: 10px;"; href="/2016/03/23/git_alias/">Git 유용한 환경 설정 및 alias 셋팅 <i class="icon-arrow-right"></i></a>
+					
+		  		  </section>
+			</article>
+		</div>
+	</section>
+</main>
+
+
+	<footer>
+  <div class="wrapper">
+    <a href="#" class="menu-icon" data-toggle="tooltip" title="ABOUT"><i class="fa fa-arrow-up"></i></a>
+  </div>
+</footer>
+
+	<copyright>
+	</copyright>
+
+	<!-- Javascripts 
+	    ================================================= -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/custom.js"></script>
+	<script type="text/template" id="template-comment">
+	<div id="comment{index}" class="comment">
+	<div class="comment_wrapper">
+		<div class="comment_line"></div>
+		<div>
+		<span class="comment_name">
+			
+				<a rel="nofollow" href="{url}">{name}</a>
+			
+		</span>
+
+		
+			<span class="comment_date">, now</span> </div>
+			<div class="comment_content">
+			<p><em>This is a preview of your comment. It may take a couple of minutes for it to be displayed to others.</em></p>
+		
+		{message}</div>
+	</div>
+</div>
+</script>
+
+    <!-- Analytics
+    ================================================== -->
+    <script>
+		// analytics code
+    </script>	
+	</body>
+</html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta charset="utf-8"/>
+		<title>
+		 멀티쓰레드 프로그램 구현 방법 (Thread, Runnable) / ThreadFactory -
+		
+		 soy blog</title>
+		<!-- For responsive site
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<link rel="author" href="/humans.txt">
+		<meta name="description" content="Description Goes Here">
+		<link rel="stylesheet" href="/css/style.css">
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+		<!--[if IE 7]>
+			<html class="ie7"> 
+			<link rel="stylesheet" type="text/css" href="/css/font-awesome-ie7.min.css">
+		<![endif]-->
+		<!--[if IE 8]><html class="ie8"> <![endif]-->		
+	    <!--[if lt IE 9]>
+	      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	    <![endif]-->
+
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-92395927-1', 'auto');
+		  ga('send', 'pageview');
+		</script>
+
+		<link rel="apple-touch-icon" sizes="57x57" href="/ico/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/ico/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/ico/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/ico/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/ico/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/ico/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/ico/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/ico/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/ico/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="/ico/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/ico/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="/ico/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/ico/favicon-16x16.png">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/ico/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff"> 
+	</head>
+	<body>
+	<!-- Header
+	    ================================================== -->
+	<header>
+	</header>
+
+	
+
+
+
+
+
+
+
+<main class="content">
+    <section class="container">
+    	<div class="row-fluid">
+			<article class="top-menu">
+				<a href="/" class="menu-icon" data-toggle="tooltip" title="HOME"><i class="fa fa-home"></i></a>
+<a href="/about/" class="menu-icon" data-toggle="tooltip" title="ABOUT"><i class="fa fa-user"></i></a>
+<a href="/category/diary/" class="menu-icon" data-toggle="tooltip" title="DIARY"><i class="fa fa-edit"></i></a>
+      <a href="/category/blog/" class="menu-icon" data-toggle="tooltip" title="BLOG"><i class="fa fa-bars"></i></a>
+      <a href="/tag/" class="menu-icon" data-toggle="tooltip" title="TAG"><i class="fa fa-tags"></i></a>
+  <div class="top-line"></div>
+ 
+			</article>
+
+			
+
+     	   <article class="diary">
+       	 	   <div align=center><h2>멀티쓰레드 프로그램 구현 방법 (Thread, Runnable) / ThreadFactory</h2></div>
+       		   <div class="time"><a style="color:#777" href="http://3.34.122.196:7500/edit/2015-01-02-thread_factory.md"><i class="fa fa-calendar"></i></a> 02 January 2015</div>
+				 <div class="tags"><a href="/tag/java/">#Java</a>, <a href="/tag/thread/">#Thread</a></div>
+        		  <section class="diary_section">
+     			  	 
+           		  	  <div class="inner_content"><p>싱글쓰레드 프로그램과 멀티쓰레드 프로그램의 차이를 살펴보고 기본적인 멀티쓰레드 프로그램을 구현해보자.
+<!-- more --></p>
+
+<h3 id="싱글쓰레드-프로그램과-멀티쓰레드-프로그램의-차이">싱글쓰레드 프로그램과 멀티쓰레드 프로그램의 차이</h3>
+
+<h4 id="싱글쓰레드-프로그램">싱글쓰레드 프로그램</h4>
+<p>싱글쓰레드 프로그램은, 지금 프로그램의 어느 부분이 실행되고 있냐는 물음에 “여기” 라고 한 군데를 가르킬 수 있다.</p>
+
+<p>자바 프로그램을 실행하면 최소 한 개 이상의 쓰레드가 반드시 동작을 하게 된다. 코딩할 때 쓰레드를 따로 구현하지 않았더라도, 메인 쓰레드가 기본적으로 작동하여 main 메소드를 실행한다. 그리고 main 메소드 실행이 끝나면 메인 쓰레드는 종료된다. (물론 메인 쓰레드 뿐 아니라, 가비지 콜렉션용 쓰레드나 GUI 관련 쓰레드 등 또한 뒤에서 작동한다.)</p>
+
+<h4 id="멀티쓰레드-프로그램">멀티쓰레드 프로그램</h4>
+<p>멀티쓰레드 프로그램은 지금 프로그램의 어느 부분이 실행되고 있냐는 물음에, “첫 번째 쓰레드는 여기, 두 번째 쓰레드는 저기…” 라며 쓰레드의 갯수 만큼을 가르키게 된다.</p>
+
+<p>멀티 쓰레드가 사용되는 프로그램의 대표적인 예는 다음과 같다.</p>
+
+<ol>
+  <li>GUI 응용 프로그램</li>
+  <li>시간이 걸리는 I/O 처리
+    <ul>
+      <li>일반적으로 파일이나 네트워크 I/O 처리는 오래 걸리므로, I/O처리를 실행하는 쓰레드와 다른 처리를 실행하는 쓰레드를 분리하면 I/O에 걸리는 시간을 이용하여 다른 처리를 진행할 수 있다.</li>
+    </ul>
+  </li>
+  <li>복수 클라이언트 동시 처리
+    <ul>
+      <li>일반적으로 네트워크 상에서 동작하는 서버는 여러 클라이언트를 동시에 상대한다. 클라이언트가 서버에 접속했을 때 그 클라이언트를 상대할 쓰레드를 준비한다. 그러면 서버가 마치 딱 하나의 클라이언트를 상대하고 있는 것처럼 프로그래밍을 할 수 있다.</li>
+    </ul>
+  </li>
+</ol>
+
+<blockquote>
+  <p>참고) java.nio 패키지를 사용하면 쓰레드를 이용하지 않고도 수행능력과 확장성이 높은 I/O 처리가 가능하다.</p>
+</blockquote>
+
+<h3 id="멀티쓰레드-프로그램-구현-방법">멀티쓰레드 프로그램 구현 방법</h3>
+<p>Thread 클래스를 확장(extends) 하는 방법과 Runnable 인터페이스를 구현(implements) 하는 방법 두 가지로 나뉜다. Thread 클래스와 Runnable 인터페이스 모두 java.lang 패키지에 속해있다.</p>
+
+<h3 id="thread-클래스를-확장extends-하는-방법">Thread 클래스를 확장(extends) 하는 방법</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyThread</span> <span class="kd">extends</span> <span class="n">Thread</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">message</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">MyThread</span><span class="o">(</span><span class="n">String</span> <span class="n">message</span><span class="o">)</span> <span class="o">{</span>
+    	<span class="k">this</span><span class="o">.</span><span class="na">message</span> <span class="o">=</span> <span class="n">message</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+    	<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10000</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+    		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
+    	<span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ol>
+  <li>Thread 클래스를 확장(extends)한 클래스를 만든다.</li>
+  <li>개별 쓰레드가 수행할 코드를 run() 메소드에 작성한다.
+    <ul>
+      <li>새로운 쓰레드를 기동시키면 그 쓰레드가 run() 메소드를 호출한다. 그리고 run() 메소드가 종료되면 쓰레드도 종료된다.</li>
+    </ul>
+  </li>
+</ol>
+
+<p>이 MyThread 클래스 만으로는 아무 것도 할 수 없으며, 메인 메소드 등에서 MyThread를 생성 및 기동시켜줘야 한다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+
+	<span class="n">MyThread</span> <span class="n">thread1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyThread</span><span class="o">(</span><span class="s">"thread 1"</span><span class="o">);</span>	<span class="c1">// 쓰레드 인스턴스 생성</span>
+	<span class="n">thread1</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>								<span class="c1">// 쓰레드 기동 및 run() 실행</span>
+
+	<span class="k">new</span> <span class="nf">MyThread</span><span class="o">(</span><span class="s">"thread 2"</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>		<span class="c1">// 위의 두 줄의 코드를 한줄로 쓰면 이렇게.</span>
+
+	<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">50</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+	    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">"main"</span><span class="o">);</span>
+	<span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>메인메소드에 Thread 클래스를 확장한 클래스 (여기서는 MyThread) 의 인스턴스를 생성(new)한다.</li>
+  <li>생성한 쓰레드 인스턴스의 start() 메소드를 호출한다.
+    <ul>
+      <li>start() 메소드는 Thread 클래스의 메소드이며, 우리가 따로 오버라이딩 하지 않는다.</li>
+      <li>start() 메소드를 호출하면, 쓰레드가 기동되고 해당 쓰레드의 run() 메소드가 호출된다.</li>
+      <li>run() 메소드를 직접 호출하는 것도 가능하나, 그렇게 하면 새로운 쓰레드를 기동할 수 없다.</li>
+    </ul>
+  </li>
+</ol>
+
+<blockquote>
+  <p>참고) 쓰레드 인스턴스가 생성/소멸되는 것과, 쓰레드 그 자체가 시작/종료되는 것은 별개이다.</p>
+</blockquote>
+
+<blockquote>
+  <p>thread1, thread2 인스턴스가 만들어졌다고 해서 쓰레드가 시작되는 것이 아니며, 쓰레드가 종료되었다고 thread1, thread2 인스턴스가 사라져 버리는 것도 아니다.</p>
+</blockquote>
+
+<p>위의 코드를 실행시키면 <code class="highlighter-rouge">main</code>, <code class="highlighter-rouge">thread 1</code>, <code class="highlighter-rouge">thread 2</code>가 무작위로 번갈아가며 출력된다.
+처음에는 메인 쓰레드만이 존재하여 main 메소드가 실행되었지만, <code class="highlighter-rouge">thread1.start()</code>가 실행된 시점부터 쓰레드가 한 개 더 기동됨으로써 프로그램의 흐름이 두 개로 나뉘었고, <code class="highlighter-rouge">thread2.start()</code>가 실행된 시점부터 쓰레드가 한 개 더 기동됨으로서 프로그램의 흐름이 세 개가 되었기 때문이다. 세 개의 쓰레드는 각각 독립적으로 자신의 일을 수행한다. 메인쓰레드는 “main”을 출력하고, 새로 생성된 쓰레드 thread1은 <code class="highlighter-rouge">thread 1</code> 을 출력하고, 곧이어 생성된 thread2는 <code class="highlighter-rouge">thread 2</code>를 출력하고 ….</p>
+
+<p>여기서 <code class="highlighter-rouge">run()</code> 메소드의 for문은 10000회 반복하도록 되어있고, 메인메소드의 for문은 50회 반복하도록 되어있기 때문에 <code class="highlighter-rouge">main</code> 출력이 50회 완료된 후에는 메인 메소드가 종료되어 <code class="highlighter-rouge">thread1</code>, <code class="highlighter-rouge">thread2</code>만 무작위로 번갈아가며 출력된다.</p>
+
+<p>메인메소드가 종료되면 메인쓰레드도 바로 종료된다. 하지만 start된 두 개의 쓰레드가 아직 끝나지 않았기에 프로그램은 종료되지 않는다. 모든 쓰레드가 종료되어야 프로그램이 종료된다.</p>
+
+<blockquote>
+  <p>참고) 자바 프로그램은 데몬쓰레드를 제외한 모든 쓰레드가 종료되어야 종료된다. 데몬쓰레드란 background에서 수행되는 작업을 시키기 위한 쓰레드이며, setDaemon() 메소드를 사용하여 데몬쓰레드를 만들 수 있다.</p>
+</blockquote>
+
+<h3 id="runnable-인터페이스를-구현implements-하는-방법">Runnable 인터페이스를 구현(implements) 하는 방법</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Runnable</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>java.lang.Runnable 인터페이스는 위와 같이 run() 이라는 한 개의 추상메소드를 갖는다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Printer</span> <span class="kd">implements</span> <span class="n">Runnable</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">message</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Printer</span><span class="o">(</span><span class="n">String</span> <span class="n">message</span><span class="o">)</span> <span class="o">{</span>
+	<span class="k">this</span><span class="o">.</span><span class="na">message</span> <span class="o">=</span> <span class="n">message</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+	<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10000</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+	    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
+	<span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ol>
+  <li>Runnable 인터페이스를 implements한 클래스를 만든다.</li>
+  <li>개별 쓰레드가 수행할 코드를 run() 메소드에 작성한다.
+여기서 Thread 클래스를 extends하는 방식과 달라진 점은, extends Thread =&gt; implements Runnable 외에는 없다.</li>
+</ol>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+
+	<span class="n">Runnable</span> <span class="n">r</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Printer</span><span class="o">(</span><span class="s">"runnable 1"</span><span class="o">);</span>	<span class="c1">// Runnable을 implements한 클래스의 인스턴스 생성</span>
+	<span class="n">Thread</span> <span class="n">thread1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="n">r</span><span class="o">);</span>	<span class="c1">// 생성한 인스턴스를 인자로 하여 Thread 인스턴스 생성</span>
+	<span class="n">thread1</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>			<span class="c1">// 쓰레드 기동 및 run() 실행</span>
+
+	<span class="k">new</span> <span class="nf">Thread</span><span class="o">(</span> <span class="k">new</span> <span class="n">Printer</span><span class="o">(</span><span class="s">"runnable 2"</span><span class="o">)</span> <span class="o">).</span><span class="na">start</span><span class="o">();</span>	<span class="c1">// 위의 세 줄의 코드를 한줄로 쓰면 이렇게.</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ol>
+  <li>메인메소드에 Runnable 인터페이스를 구현한 클래스 (여기서는 Printer)의 인스턴스를 생성(new)한다.</li>
+  <li>생성한 인스턴스를 인자로 하여 Thread 인스턴스를 생성한다.</li>
+  <li>생성한 쓰레드 인스턴스의 start() 메소드를 호출한다.
+    <ul>
+      <li>이후 작동 방식은 Thread 클래스를 extends하는 방식과 동일하다.</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="javautilconcurrentthreadfactory로-구현하는-방법">java.util.concurrent.ThreadFactory로 구현하는 방법</h3>
+<p>java.util.concurrent 패키지에는 쓰레드 생성을 추상화시킨 ThreadFactory 인터페이스가 포함되어 있다.
+이를 이용하면 Runnable을 인수로 하여 Thread 인스턴스를 생성하는 부분을 ThreadFactory 내부에 숨길 수 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.concurrent.Executors</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.concurrent.ThreadFactory</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+
+<span class="c1">//      Runnable r = new Printer("runnable 1");	// Runnable을 구현한 클래스의 인스턴스 생성</span>
+<span class="c1">//      Thread thread1 = new Thread(r);	// 생성한 인스턴스를 인자로 하여 Thread 인스턴스 생성</span>
+<span class="c1">//      thread1.start();					// 쓰레드 기동 및 run() 실행</span>
+
+	<span class="n">ThreadFactory</span> <span class="n">factory</span> <span class="o">=</span> <span class="n">Executors</span><span class="o">.</span><span class="na">defaultThreadFactory</span><span class="o">();</span>
+	<span class="n">factory</span><span class="o">.</span><span class="na">newThread</span><span class="o">(</span><span class="k">new</span> <span class="n">Printer</span><span class="o">(</span><span class="s">"runnable 1"</span><span class="o">)).</span><span class="na">start</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ol>
+  <li>디폴트 ThreadFactory 객체를 얻기 위해 Executors.defaultThreadFactory() 메소드를 이용한다.</li>
+  <li>Runnable 인스턴스를 인자로 하여 ThreadFactory 객체의 newThread 메소드를 호출하면 쓰레드 인스턴스가 생성된다.</li>
+  <li>생성된 쓰레드 인스턴스의 start() 메소드를 호출한다.</li>
+</ol>
+
+<hr />
+
+<p>References: “Java 언어로 배우는 디자인 패턴 입문 - 멀티쓰레드편” Introduction 01</p>
+</div>
+        		  	  
+<div style="float: left"></div>
+<div class="comments">
+	<div class="comments_wrapper" aria-hidden="true">
+		<div class="heading">
+			<a href="#content_div" onClick="comment_toggle('comment_hidden_2015-01-02-thread_factory');">Comments</a>
+		</div>
+		<div id="comment_hidden_2015-01-02-thread_factory" style="display: none;">
+			<div class="line"></div>
+			<div class="content_div">
+				<script src="https://utteranc.es/client.js" repo="soyme/my-blog-comments" branch="master" issue-term="2015-01-02-thread_factory" theme="github-light" crossorigin="anonymous" async></script>
+			</div>
+		</div>
+	</div>
+</div>
+<div style="clear: both"></div>
+
+        		  </section>
+				  <section class="prev_next">
+					
+                        <a style="float: left;" href="/2015/01/02/multi_thread_performance/"><i class="icon-arrow-left"></i> 멀티쓰레드 프로그램의 성능 평가 기준</a>
+                    
+					
+						<a style="float:right; margin-bottom: 10px;"; href="/2015/01/03/concurrent/">순차(sequential) vs 병렬(parallel) vs 병행(concurrent) 차이 <i class="icon-arrow-right"></i></a>
+					
+		  		  </section>
+			</article>
+		</div>
+	</section>
+</main>
+
+
+	<footer>
+  <div class="wrapper">
+    <a href="#" class="menu-icon" data-toggle="tooltip" title="ABOUT"><i class="fa fa-arrow-up"></i></a>
+  </div>
+</footer>
+
+	<copyright>
+	</copyright>
+
+	<!-- Javascripts 
+	    ================================================= -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/custom.js"></script>
+	<script type="text/template" id="template-comment">
+	<div id="comment{index}" class="comment">
+	<div class="comment_wrapper">
+		<div class="comment_line"></div>
+		<div>
+		<span class="comment_name">
+			
+				<a rel="nofollow" href="{url}">{name}</a>
+			
+		</span>
+
+		
+			<span class="comment_date">, now</span> </div>
+			<div class="comment_content">
+			<p><em>This is a preview of your comment. It may take a couple of minutes for it to be displayed to others.</em></p>
+		
+		{message}</div>
+	</div>
+</div>
+</script>
+
+    <!-- Analytics
+    ================================================== -->
+    <script>
+		// analytics code
+    </script>	
+	</body>
+</html>

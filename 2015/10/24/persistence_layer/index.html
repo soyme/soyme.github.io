@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta charset="utf-8"/>
+		<title>
+		 대용량 서비스 아키텍처의 Persistent Layer -
+		
+		 soy blog</title>
+		<!-- For responsive site
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<link rel="author" href="/humans.txt">
+		<meta name="description" content="Description Goes Here">
+		<link rel="stylesheet" href="/css/style.css">
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+		<!--[if IE 7]>
+			<html class="ie7"> 
+			<link rel="stylesheet" type="text/css" href="/css/font-awesome-ie7.min.css">
+		<![endif]-->
+		<!--[if IE 8]><html class="ie8"> <![endif]-->		
+	    <!--[if lt IE 9]>
+	      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	    <![endif]-->
+
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-92395927-1', 'auto');
+		  ga('send', 'pageview');
+		</script>
+
+		<link rel="apple-touch-icon" sizes="57x57" href="/ico/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/ico/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/ico/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/ico/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/ico/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/ico/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/ico/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/ico/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/ico/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="/ico/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/ico/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="/ico/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/ico/favicon-16x16.png">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/ico/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff"> 
+	</head>
+	<body>
+	<!-- Header
+	    ================================================== -->
+	<header>
+	</header>
+
+	
+
+
+
+
+
+
+
+<main class="content">
+    <section class="container">
+    	<div class="row-fluid">
+			<article class="top-menu">
+				<a href="/" class="menu-icon" data-toggle="tooltip" title="HOME"><i class="fa fa-home"></i></a>
+<a href="/about/" class="menu-icon" data-toggle="tooltip" title="ABOUT"><i class="fa fa-user"></i></a>
+<a href="/category/diary/" class="menu-icon" data-toggle="tooltip" title="DIARY"><i class="fa fa-edit"></i></a>
+      <a href="/category/blog/" class="menu-icon" data-toggle="tooltip" title="BLOG"><i class="fa fa-bars"></i></a>
+      <a href="/tag/" class="menu-icon" data-toggle="tooltip" title="TAG"><i class="fa fa-tags"></i></a>
+  <div class="top-line"></div>
+ 
+			</article>
+
+			
+
+     	   <article class="diary">
+       	 	   <div align=center><h2>대용량 서비스 아키텍처의 Persistent Layer</h2></div>
+       		   <div class="time"><a style="color:#777" href="http://3.34.122.196:7500/edit/2015-10-24-persistence_layer.md"><i class="fa fa-calendar"></i></a> 24 October 2015</div>
+				 <div class="tags"><a href="/tag/database/">#Database</a></div>
+        		  <section class="diary_section">
+     			  	 
+           		  	  <div class="inner_content"><h3 id="클러스터링">클러스터링</h3>
+<ul>
+  <li>Fail Over 가능 : 특정 인스턴스 장애 시 다른 인스턴스들이 장애가 난 인스턴스의 메시지를 받아서 이어서 처리</li>
+  <li>한 대의 서버로 처리할 수 없는 양의 메시지를 여러 대의 서버에서 분산 처리 가능</li>
+</ul>
+
+<h3 id="rdbms에서의-성능-향상을-위한-아키텍처">RDBMS에서의 성능 향상을 위한 아키텍처</h3>
+
+<h4 id="query-off-loading">Query off Loading</h4>
+<p>DB 트랜잭션의 CRUD 중 80% 이상은 SELECT임. INSERT/UPDATE/DELETE는 많지 않음. 따라서 조회 트랜잭션과 쓰기 트랜잭션을 분리하는 기법. 마스터 DB에는 쓰기 트랜잭션만을 허용하고, Slave DB에는 읽기만을 허용. 마스터 DB의 내용을 중간의 스테이징 DB로 복사. 그리고 스테이징 DB는 복제된 내용을 N개의 Slave DB로 복제. 이렇게 하려면 커넥션풀을 2개로 나눠야함. 또한 Slave가 여러대이므로 로드밸런싱 필요. 만약 마스터 DB가 복제를 직접 한다면 성능 저하를 유발할 수 있으므로 중간에 스테이징 DB를 넣는다.</p>
+
+<h4 id="샤딩sharding">샤딩(Sharding)</h4>
+<p>DB 용량 한계를 극복하기 위한 기술. 데이터를 여러대의 DB에 분산 저장함. 분산된 각 DB들을 샤드(Shard)라고 함. 데이터의 범위별로 나누는 수직적 샤딩, 데이터의 분류에 따라서 나누는 수평적 샤딩. 단 데이터가 어느 샤딩으로 쏠리는 현상이 생길 수 있음. 쏠리는 정도에 따라 각 샤드의 성능을 다르게 설계할 수 있음(CPU,메모리). 데이터 편중 현상에 대해 예측이 어려운 경우는 의미없는 키(Key값을 기준으로 해싱 등)를 이용하여 샤딩할 수 있음. DBMS 단에서 샤딩을 지원할 수도 있고, 맵핑 프레임워크를 이용할 수도 있다. 애플리케이션 코드 자체에서 지원할 수도 있으나 애플리케이션의 복잡도가 올라갈 수 있으며 데이터 편중 등 여러가지 요소를 고려하여 설계해야 한다.</p>
+
+<h3 id="nosql-not-only-sql--non-rdbms">NoSQL (Not Only SQL : Non-RDBMS)</h3>
+<p>빠른 성능과 대용량 데이터에 초점을 맞춘 데이터베이스. 데이터 모델은 단순하게 Key-Value 형태의 저장 구조를 가지며 데이터간의 관계 등은 지원하지 않는다. 오로지 단순한 구조의 데이터를 빠르게 읽고 쓰는데에 최적화가 되어있다. 일종의 유행처럼 NoSQL이 퍼지고 있지만 일반적인 어플리케이션에서는 NoSQL이 필요 없을 수 있다. RDBMS만으로 충분하고, 쿼리오프로딩과 샤딩의 조합으로도 충분하다. 아주 대용량의 서비스를 빠른 성능으로 제공할 때에만 NoSQL을 신중하게 고려해 볼 필요가 있다. 각 NoSQL DBMS마다 특성이 매우 다양하므로, 특성을 잘 파악하고 필요에 맞는 제품을 선정해야 한다.</p>
+
+<h4 id="nosql-공통-특징">NoSQL 공통 특징</h4>
+<ul>
+  <li>데이터 간의 관계를 정의하지 않음 (외래키, 조인, 등이 없음)</li>
+  <li>데이터를 저장하고 키에 대한 Put/Get 만을 지원.</li>
+  <li>따라서 Sorting, Join, Grouping, Range Select, Index 등에 대해 고민을 해야 한다.</li>
+  <li>대용량 데이터 저장 가능</li>
+  <li>서버 수십대를 연결하여 데이터를 저장 및 처리하는 분산형 구조를 가짐. 분산하여 저장하고, 데이터를 상호 복제하여 장애시에도 데이터 유실이나 서비스 중지가 없는 구조.</li>
+  <li>고정되지 않은 테이블 스키마 . Key의 타입만 동일하고, 데이터를 저장하는 컬럼은 각 row마다 일관되지 않는다.</li>
+  <li>CAP 이론: 일관성(분산된 노드 중 어느 노드에 접근하더라도 데이터 값은 일관), 가용성(특정 노드 오류시 Fail over 처리). Partition Tolerance(노드 간 통신하는 네트워크 장애시 저항력). 이 3가지 중 2가지를 함께 사용.</li>
+</ul>
+
+<h4 id="nosql-분류">NoSQL 분류</h4>
+<ul>
+  <li>Key/Value: Value는 단순 값 한 개가 아니라 여러개의 컬럼들을 가질 수 있음. Map과 비슷하다고 생각하면 됨.. Redis.</li>
+  <li>Ordered Key/Value : Key/Value 구조와 유사하나 정렬하여 저장. 데이터를 항상 날짜순으로 order by하여 조회한다면? 아주 유리함. 카산드라.</li>
+  <li>Document Key/Value : Key/Value의 확장된 형태. Value의 데이터 타입으로 XML, JSON 등 구조화된 데이터 타입을 사용함으로써 계층 구조 표현 가능. 몽고DB..</li>
+</ul>
+
+<hr />
+
+<p>References: 조대협님의 서버사이드 책</p>
+</div>
+        		  	  
+<div style="float: left"></div>
+<div class="comments">
+	<div class="comments_wrapper" aria-hidden="true">
+		<div class="heading">
+			<a href="#content_div" onClick="comment_toggle('comment_hidden_2015-10-24-persistence_layer');">Comments</a>
+		</div>
+		<div id="comment_hidden_2015-10-24-persistence_layer" style="display: none;">
+			<div class="line"></div>
+			<div class="content_div">
+				<script src="https://utteranc.es/client.js" repo="soyme/my-blog-comments" branch="master" issue-term="2015-10-24-persistence_layer" theme="github-light" crossorigin="anonymous" async></script>
+			</div>
+		</div>
+	</div>
+</div>
+<div style="clear: both"></div>
+
+        		  </section>
+				  <section class="prev_next">
+					
+                        <a style="float: left;" href="/2015/10/24/java_gc/"><i class="icon-arrow-left"></i> Java Garbage Collection</a>
+                    
+					
+						<a style="float:right; margin-bottom: 10px;"; href="/2016/02/13/map_reduce/">MapReduce 기본 개념 <i class="icon-arrow-right"></i></a>
+					
+		  		  </section>
+			</article>
+		</div>
+	</section>
+</main>
+
+
+	<footer>
+  <div class="wrapper">
+    <a href="#" class="menu-icon" data-toggle="tooltip" title="ABOUT"><i class="fa fa-arrow-up"></i></a>
+  </div>
+</footer>
+
+	<copyright>
+	</copyright>
+
+	<!-- Javascripts 
+	    ================================================= -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/custom.js"></script>
+	<script type="text/template" id="template-comment">
+	<div id="comment{index}" class="comment">
+	<div class="comment_wrapper">
+		<div class="comment_line"></div>
+		<div>
+		<span class="comment_name">
+			
+				<a rel="nofollow" href="{url}">{name}</a>
+			
+		</span>
+
+		
+			<span class="comment_date">, now</span> </div>
+			<div class="comment_content">
+			<p><em>This is a preview of your comment. It may take a couple of minutes for it to be displayed to others.</em></p>
+		
+		{message}</div>
+	</div>
+</div>
+</script>
+
+    <!-- Analytics
+    ================================================== -->
+    <script>
+		// analytics code
+    </script>	
+	</body>
+</html>

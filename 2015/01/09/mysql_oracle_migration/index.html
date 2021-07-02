@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta charset="utf-8"/>
+		<title>
+		 MySQL 쿼리를 오라클 쿼리로 변경하기 -
+		
+		 soy blog</title>
+		<!-- For responsive site
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<link rel="author" href="/humans.txt">
+		<meta name="description" content="Description Goes Here">
+		<link rel="stylesheet" href="/css/style.css">
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+		<!--[if IE 7]>
+			<html class="ie7"> 
+			<link rel="stylesheet" type="text/css" href="/css/font-awesome-ie7.min.css">
+		<![endif]-->
+		<!--[if IE 8]><html class="ie8"> <![endif]-->		
+	    <!--[if lt IE 9]>
+	      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	    <![endif]-->
+
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-92395927-1', 'auto');
+		  ga('send', 'pageview');
+		</script>
+
+		<link rel="apple-touch-icon" sizes="57x57" href="/ico/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/ico/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/ico/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/ico/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/ico/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/ico/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/ico/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/ico/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/ico/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="/ico/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/ico/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="/ico/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/ico/favicon-16x16.png">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/ico/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff"> 
+	</head>
+	<body>
+	<!-- Header
+	    ================================================== -->
+	<header>
+	</header>
+
+	
+
+
+
+
+
+
+
+<main class="content">
+    <section class="container">
+    	<div class="row-fluid">
+			<article class="top-menu">
+				<a href="/" class="menu-icon" data-toggle="tooltip" title="HOME"><i class="fa fa-home"></i></a>
+<a href="/about/" class="menu-icon" data-toggle="tooltip" title="ABOUT"><i class="fa fa-user"></i></a>
+<a href="/category/diary/" class="menu-icon" data-toggle="tooltip" title="DIARY"><i class="fa fa-edit"></i></a>
+      <a href="/category/blog/" class="menu-icon" data-toggle="tooltip" title="BLOG"><i class="fa fa-bars"></i></a>
+      <a href="/tag/" class="menu-icon" data-toggle="tooltip" title="TAG"><i class="fa fa-tags"></i></a>
+  <div class="top-line"></div>
+ 
+			</article>
+
+			
+
+     	   <article class="diary">
+       	 	   <div align=center><h2>MySQL 쿼리를 오라클 쿼리로 변경하기</h2></div>
+       		   <div class="time"><a style="color:#777" href="http://3.34.122.196:7500/edit/2015-01-09-mysql_oracle_migration.md"><i class="fa fa-calendar"></i></a> 09 January 2015</div>
+				 <div class="tags"><a href="/tag/database/">#Database</a></div>
+        		  <section class="diary_section">
+     			  	 
+           		  	  <div class="inner_content"><p>데이터베이스를 MySQL에서 Oracle로 이전하면서 진행했던 쿼리 수정 작업을 정리해본다.</p>
+
+<!-- more -->
+
+<h3 id="select-1">SELECT 1</h3>
+<p>MySQL에서는 <code class="highlighter-rouge">SELECT 1</code>과 같은 쿼리가 가능하다. (validationQuery가 보통 이런 식이다.) 그러나 오라클에서는 SELECT 문에 FROM 절이 필수이므로, FROM 절이 필요 없는 쿼리에는 <code class="highlighter-rouge">FROM dual</code>을 붙여준다.</p>
+
+<h3 id="날짜-표기-함수-변경">날짜 표기 함수 변경</h3>
+<p>윗줄이 MySQL 표현이고 아랫줄이 오라클 표현이다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 현재 시간 (년월일시분초)
+DATE_FORMAT(NOW(),'%Y%m%d%H%i%s')
+TO_CHAR(SYSDATE,'YYYYMMDDhh24miss')
+
+// 현재 시간 (년월일)
+DATE_FORMAT(NOW(),'%Y%m%d')
+TO_CHAR(SYSDATE,'YYYYMMDD')
+
+// 1초 후
+DATE_FORMAT(DATE_ADD(NOW() , INTERVAL + 1 SECOND),'%Y%m%d%H%i%s')
+TO_CHAR(SYSDATE+1/24/60/60,'YYYYMMDDhh24miss')
+
+// 5초 후
+DATE_FORMAT(DATE_ADD(NOW() , INTERVAL + 5 SECOND),'%Y%m%d%H%i%s')
+TO_CHAR(SYSDATE+5/24/60/60,'YYYYMMDDhh24miss')
+
+// 20분 후
+DATE_FORMAT(DATE_ADD(NOW() , INTERVAL + 20 MINUTE),'%Y%m%d%H%i%s')
+TO_CHAR(SYSDATE+20/24/60,'YYYYMMDDhh24miss')
+
+// 20분 전
+DATE_FORMAT(DATE_ADD(NOW() , INTERVAL - 20 MINUTE),'%Y%m%d%H%i%s')
+TO_CHAR(SYSDATE-20/24/60,'YYYYMMDDhh24miss')
+
+// 하루전
+TO_CHAR(SYSDATE-1,'YYYYMMDDhh24miss')
+
+// 내일(하루 후)
+DATE_FORMAT(DATE_ADD(NOW() , INTERVAL + 1 DAY),'%Y%m%d')
+TO_CHAR(SYSDATE+1,'YYYYMMDD')
+
+// 31일전
+DATE_FORMAT(DATE_ADD(NOW() , INTERVAL - 31 DAY),'%Y%m%d%H%i%s')
+TO_CHAR(SYSDATE-31,'YYYYMMDDhh24miss')
+
+// 31일전 말고 한달 전으로 표현할 수 도 있음
+TO_CHAR(ADD_MONTHS(SYSDATE, -1), 'YYYYMMDDhh24miss')
+
+// 7일전
+DATE_FORMAT(DATE_ADD(NOW() , INTERVAL - 7 DAY),'%Y%m%d%H%i%s')
+TO_CHAR(SYSDATE-7,'YYYYMMDDhh24miss')
+
+// 현재 월의 마지막날 (년월일)
+DATE_FORMAT(LAST_DAY(NOW()), '%Y%m%d')
+TO_CHAR(LAST_DAY(SYSDATE),'YYYYMMDD')
+</code></pre></div></div>
+
+<h3 id="limit-처리-변경">LIMIT 처리 변경</h3>
+<p>윗줄이 MySQL 표현이고 아랫줄이 오라클 표현이다. MySQL은 LIMIT을 적용할 때 인덱스가 0부터이고, 오라클은 1부터임에 유의한다.</p>
+
+<h5 id="최상단의-한-건만-뽑을-때">최상단의 한 건만 뽑을 때</h5>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT * FROM TEST LIMIT 1;
+SELECT * FROM TEST WHERE rownum = 1;
+</code></pre></div></div>
+
+<h5 id="최상단의-n건-뽑을-때">최상단의 N건 뽑을 때.</h5>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT * FROM TEST LIMIT 0, 2;
+
+SELECT * FROM
+  (
+  SELECT
+    TEST.*,
+    row_number() over (ORDER BY 1) as LIMIT_NUM
+  FROM TEST
+  )
+WHERE LIMIT_NUM BETWEEN 1 AND 2
+</code></pre></div></div>
+
+<h5 id="내림차순으로-최상단의-n건-뽑을-때">내림차순으로 최상단의 N건 뽑을 때</h5>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT * FROM TEST LIMIT 0, 2 ORDER BY A DESC;
+
+SELECT * FROM
+  (
+  SELECT
+    TEST.*,
+    row_number() over (ORDER BY A DESC) as LIMIT_NUM
+  FROM TEST
+  )
+WHERE LIMIT_NUM BETWEEN 1 AND 2
+</code></pre></div></div>
+
+<h3 id="if-null-처리-변경">IF NULL 처리 변경</h3>
+<p>IF(ISNULL(조건컬럼), ‘NULL일 때 표시할 값’)</p>
+
+<p>-&gt; <code class="highlighter-rouge">NVL('조건컬럼', 'NULL일 때 표시할 값')</code></p>
+
+<p>IFNULL(조건컬럼, ‘NULL일 때 표시할 값’)</p>
+
+<p>-&gt; <code class="highlighter-rouge">NVL('조건컬럼', 'NULL일 때 표시할 값')</code></p>
+
+<p>결과 레코드가 한 건도 없을 때도 ‘NULL일 때 표시할 값’을 나타내고 싶다면</p>
+
+<p>-&gt; <code class="highlighter-rouge">NVL(MAX('조건컬럼'), 'NULL일 때 표시할 값')</code></p>
+
+<h3 id="sequence">SEQUENCE</h3>
+<p>MySQL에서는 AUTO_INCREMENT 옵션이면 다 되었지만, Oracle에서는 시퀀스 또한 별개의 객체로 직접 관리해줘야 한다.</p>
+
+<ol>
+  <li>AUTO_INCREMENT 컬럼이 존재하는 테이블마다 사용할 SEQUENCE 생성.</li>
+  <li>AUTO_INCREMENT 컬럼이 존재하는 테이블의 INSERT문 수정. INSERT 되는 값으로 [ 시퀀스명.nextval ] 사용
+    <ul>
+      <li>마이바티스에서 <code class="highlighter-rouge">SelectKey</code>를 사용하는 경우의 쿼리문은 SELECT 시퀀스명.nextval FROM dual</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="length-0인-empty-string----null-처리">length 0인 empty String (‘’) -&gt; NULL 처리</h3>
+<p>MySQL에서는 length 0인 empty string을 하나의 값으로서 사용할 수 있으나, 오라클에서는 empty string을 NULL과 같이 처리한다. 즉 not null인 컬럼의 값을 ‘’ 으로 셋팅이 불가능하다. 이에 따른 쿼리 변경 및 application 소스 수정이 필요함. 꽤 많은 작업이 필요할수도 ㅠㅠ</p>
+
+<h3 id="concat">CONCAT()</h3>
+<p>MySQL에서는 CONCAT 함수의 인자 수가 제한이 없으나, Oracle에서는 두 개의 인자만 갖는다.
+CONCAT(1,2,3,4,5) 이랬던 것을 아래와 같이 수정</p>
+
+<ul>
+  <li>1 || 2 || 3 || 4 || 5  이렇게 해도 되고</li>
+  <li>CONCAT( CONCAT( CONCAT (CONCAT(1,2), 3), 4), 5) 그냥 이렇게 해도 된다.</li>
+</ul>
+
+<h3 id="group_concat">GROUP_CONCAT()</h3>
+<p>MySQL에서는 GROUP_CONCAT()이 있고, 오라클에서는 이와 유사한 기능을 해주는 WM_CONCAT()이 있다.</p>
+
+<p>그리고 MySQL에서는 GROUP_CONCAT을 쓰면 자동으로 해당 컬럼으로 GroupBy 처리가 된다. 또한 GROUPBY 조건에 포함되지 않는 컬럼을 SELECT 절에 포함할 때는, 최상위의 레코드의 값을 사용하는 것 같다. 하지만 오라클은 GROUPBY 조건에 포함되지 않는 컬럼을 SELECT 절에 포함시키지 못한다. 즉 SELECT절에 있는 컬럼들을 모두 GroupBy 조건으로 이용해야 한다.</p>
+
+<h3 id="조인할-때-조인-대상이-되는-테이블의-as-제거">조인할 때 조인 대상이 되는 테이블의 ‘AS’ 제거</h3>
+<p>오라클에서는 AS 키워드를 넣지 않더라.. 그냥 이렇게 <code class="highlighter-rouge">AS</code> 키워드만 빼면 됨.
+SELECT * FROM TABLE1 INNER JOIN TABLE2 AS T2 ON TABLE1.ID=T2.ID;</p>
+<blockquote>
+  <p>SELECT * FROM TABLE1 INNER JOIN TABLE2 T2 ON TABLE1.ID=T2.ID;</p>
+</blockquote>
+
+<h3 id="참고사항">참고사항</h3>
+<ul>
+  <li>INSERT INTO ON DUPLICATE KEY UPDATE : INSERT를 날린 후, 키가 중복될때는 UPDATE</li>
+  <li>INSERT IGNORE INTO : INSERT를 날린 후, 키가 중복되도 에러(?)를 발생하지 않고 그냥 넘어감</li>
+  <li>REPLACE INTO : (중복되든 아니든) DELETE를 일단 날린 후, 새로 INSERT</li>
+</ul>
+
+<h3 id="insert-into-on-duplicate-key-update">INSERT INTO ON DUPLICATE KEY UPDATE</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MERGE INTO 테이블명
+    USING DUAL ON (ID = #{id}) // KEY 중복 조건
+    WHEN MATCHED THEN
+        // KEY 중복 조건이 만족할 때에는 기존 레코드 UPDATE
+        UPDATE SET A='값', B='값'
+
+        WHEN NOT MATCHED THEN
+            // 중복 조건이 만족하지 않을 때에는 신규 레코드 INSERT
+            INSERT (ID, A, B) VALUES ('#{id}', '값', '값')
+</code></pre></div></div>
+
+<h3 id="insert-ignore-into">INSERT IGNORE INTO</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MERGE INTO 테이블명
+    USING DUAL ON (ID = #{id})  // KEY 중복 조건
+    WHEN NOT MATCHED THEN
+        // 중복 조건이 만족하지 않을 때에는 신규 레코드 INSERT
+        INSERT (ID, A, B) VALUES ('#{id}', '값', '값')
+</code></pre></div></div>
+
+<h3 id="replace-into">REPLACE INTO</h3>
+<p>굳이 중복되는 행을 꼭 DELETE하고 싶다면 소스상에서 처리한다. UPDATE로 처리해도 괜찮다면 INSERT INTO ON DUPLICATE KEY UPDATE와 비슷하게 처리한다.</p>
+
+<h3 id="하나의-쿼리로-2개의-테이블을-update-하는-경우">하나의 쿼리로 2개의 테이블을 UPDATE 하는 경우</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>UPDATE TABLE1, TABLE2
+SET TABLE1.A='값', TABLE2.B='값'
+WHERE 조인조건
+</code></pre></div></div>
+<p>MySQL에서는 이게 가능하지만 오라클에서는 불가능하다. 쿼리상에서 처리하는 방법은 아직까지는 찾지 못함. 마이바티스나 소스 내에서 처리로 변경.</p>
+
+<h3 id="right-left-함수">RIGHT, LEFT 함수</h3>
+<p>MySQL에는 있지만 오라클에는 없다. SUBSTR 함수를 이용하여 동일하게 표시 가능하다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SUBSTR("문자열", 3)		// 3번째자리부터 나옴. LEFT 함수 대신 사용 가능
+SUBSTR("문자열", 3, 4)	// 3번째자리부터  4문자 나옴
+SUBSTR("문자열", -3)		// 맨 뒤에서부터 3문자 나옴. RIGHT 함수 대신 사용 가능
+</code></pre></div></div>
+
+<h3 id="group-by-절에-테이블의-alias명-사용">GROUP BY 절에 테이블의 alias명 사용</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT 컬럼명 AS 별칭 FROM TEST
+GROUP BY 별칭
+</code></pre></div></div>
+<p>MySQL에서는 이게 가능하나, 오라클에서는 GROUP BY 절에서 alias명을 사용할 수 없다. 그냥 원래 컬럼명을 사용하던가, 아니면 SELECT 문으로 한번 더 감싸주면 된다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT * FROM
+(SELECT 컬럼명 AS 별칭 FROM TEST)
+GROUP BY 별칭;
+</code></pre></div></div>
+</div>
+        		  	  
+<div style="float: left"></div>
+<div class="comments">
+	<div class="comments_wrapper" aria-hidden="true">
+		<div class="heading">
+			<a href="#content_div" onClick="comment_toggle('comment_hidden_2015-01-09-mysql_oracle_migration');">Comments</a>
+		</div>
+		<div id="comment_hidden_2015-01-09-mysql_oracle_migration" style="display: none;">
+			<div class="line"></div>
+			<div class="content_div">
+				<script src="https://utteranc.es/client.js" repo="soyme/my-blog-comments" branch="master" issue-term="2015-01-09-mysql_oracle_migration" theme="github-light" crossorigin="anonymous" async></script>
+			</div>
+		</div>
+	</div>
+</div>
+<div style="clear: both"></div>
+
+        		  </section>
+				  <section class="prev_next">
+					
+                        <a style="float: left;" href="/2015/01/04/collection_with_multi_thread/"><i class="icon-arrow-left"></i> Java Collection과 멀티쓰레드</a>
+                    
+					
+						<a style="float:right; margin-bottom: 10px;"; href="/2015/01/13/thread/">기본적인 쓰레드 제어 -  sleep / wait / notify / notifyAll <i class="icon-arrow-right"></i></a>
+					
+		  		  </section>
+			</article>
+		</div>
+	</section>
+</main>
+
+
+	<footer>
+  <div class="wrapper">
+    <a href="#" class="menu-icon" data-toggle="tooltip" title="ABOUT"><i class="fa fa-arrow-up"></i></a>
+  </div>
+</footer>
+
+	<copyright>
+	</copyright>
+
+	<!-- Javascripts 
+	    ================================================= -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/custom.js"></script>
+	<script type="text/template" id="template-comment">
+	<div id="comment{index}" class="comment">
+	<div class="comment_wrapper">
+		<div class="comment_line"></div>
+		<div>
+		<span class="comment_name">
+			
+				<a rel="nofollow" href="{url}">{name}</a>
+			
+		</span>
+
+		
+			<span class="comment_date">, now</span> </div>
+			<div class="comment_content">
+			<p><em>This is a preview of your comment. It may take a couple of minutes for it to be displayed to others.</em></p>
+		
+		{message}</div>
+	</div>
+</div>
+</script>
+
+    <!-- Analytics
+    ================================================== -->
+    <script>
+		// analytics code
+    </script>	
+	</body>
+</html>

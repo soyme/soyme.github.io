@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta charset="utf-8"/>
+		<title>
+		 Shell - sed 명령어 -
+		
+		 soy blog</title>
+		<!-- For responsive site
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<link rel="author" href="/humans.txt">
+		<meta name="description" content="Description Goes Here">
+		<link rel="stylesheet" href="/css/style.css">
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+		<!--[if IE 7]>
+			<html class="ie7"> 
+			<link rel="stylesheet" type="text/css" href="/css/font-awesome-ie7.min.css">
+		<![endif]-->
+		<!--[if IE 8]><html class="ie8"> <![endif]-->		
+	    <!--[if lt IE 9]>
+	      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	    <![endif]-->
+
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-92395927-1', 'auto');
+		  ga('send', 'pageview');
+		</script>
+
+		<link rel="apple-touch-icon" sizes="57x57" href="/ico/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/ico/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/ico/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/ico/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/ico/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/ico/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/ico/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/ico/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/ico/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="/ico/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/ico/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="/ico/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/ico/favicon-16x16.png">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/ico/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff"> 
+	</head>
+	<body>
+	<!-- Header
+	    ================================================== -->
+	<header>
+	</header>
+
+	
+
+
+
+
+
+
+
+<main class="content">
+    <section class="container">
+    	<div class="row-fluid">
+			<article class="top-menu">
+				<a href="/" class="menu-icon" data-toggle="tooltip" title="HOME"><i class="fa fa-home"></i></a>
+<a href="/about/" class="menu-icon" data-toggle="tooltip" title="ABOUT"><i class="fa fa-user"></i></a>
+<a href="/category/diary/" class="menu-icon" data-toggle="tooltip" title="DIARY"><i class="fa fa-edit"></i></a>
+      <a href="/category/blog/" class="menu-icon" data-toggle="tooltip" title="BLOG"><i class="fa fa-bars"></i></a>
+      <a href="/tag/" class="menu-icon" data-toggle="tooltip" title="TAG"><i class="fa fa-tags"></i></a>
+  <div class="top-line"></div>
+ 
+			</article>
+
+			
+
+     	   <article class="diary">
+       	 	   <div align=center><h2>Shell - sed 명령어</h2></div>
+       		   <div class="time"><a style="color:#777" href="http://3.34.122.196:7500/edit/2016-04-22-sed.md"><i class="fa fa-calendar"></i></a> 22 April 2016</div>
+				 <div class="tags"><a href="/tag/linux/">#Linux</a>, <a href="/tag/shell/">#Shell</a></div>
+        		  <section class="diary_section">
+     			  	 
+           		  	  <div class="inner_content"><p>지난번에 <code class="highlighter-rouge">grep</code> 정리한 것(<a href="http://soy.me/2016/03/24/grep">http://soy.me/2016/03/24/grep</a>) 이 꽤 도움이 되었기에, 이어서 <code class="highlighter-rouge">sed</code>도 정리해본다.</p>
+
+<!-- more -->
+
+<h3 id="sed">sed</h3>
+<ul>
+  <li>비 대화식 편집기. stream editor.</li>
+  <li>원본 파일은 변경되지 않으며, 편집 결과는 표준 출력으로 출력된다.</li>
+  <li>파일 내에서 편집을 할 범위와, 그 범위에 대해 적용할 명령을 지정하는 방식으로 편집한다.</li>
+  <li>명령은 line by line으로 적용된다.</li>
+</ul>
+
+<h3 id="sed-명령어의-반환-값">sed 명령어의 반환 값</h3>
+<ul>
+  <li><code class="highlighter-rouge">grep</code>은 패턴을 찾았으면 0, 찾지 못하였으면 1을 종료 상태로 반환한다.</li>
+  <li><code class="highlighter-rouge">sed</code>는 검색 결과와는 무관하게 문법 오류가 발생하지 않았다면 0을 반환한다.</li>
+</ul>
+
+<h3 id="sed-정규표현식">sed 정규표현식</h3>
+<ul>
+  <li>sed 명령어에서 정규표현식을 나타낼 때는 <code class="highlighter-rouge">/표현식/</code>과 같이 슬래시로 감싼다.</li>
+  <li>슬래시 외에도 다른 문자를 구분자로 사용할 수 있는데, 사용할 문자 앞에 역슬래시를 붙여주기만 하면 된다. <code class="highlighter-rouge">\#정규식\#</code></li>
+</ul>
+
+<h3 id="정규표현식-메타문자">정규표현식 메타문자</h3>
+<p>grep과 유사하게, sed 또한 패턴 검색을 위한 메타문자를 지원한다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>메타문자</th>
+      <th>기능</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>^</td>
+      <td>line의 맨 앞</td>
+    </tr>
+    <tr>
+      <td>$</td>
+      <td>line의 맨 뒤</td>
+    </tr>
+    <tr>
+      <td>.</td>
+      <td>아무 문자 1개</td>
+    </tr>
+    <tr>
+      <td>*</td>
+      <td>아무 문자 0개 이상</td>
+    </tr>
+    <tr>
+      <td>[abc] or [a-z]</td>
+      <td>괄호 안의 <code class="highlighter-rouge">문자 집합</code> 중 한 개와 일치</td>
+    </tr>
+    <tr>
+      <td>[^abc] or [^a-z]</td>
+      <td>괄호 안의 <code class="highlighter-rouge">문자 집합</code>에 없는 글자와 일치</td>
+    </tr>
+    <tr>
+      <td>\&lt;</td>
+      <td>단어의 시작</td>
+    </tr>
+    <tr>
+      <td>\&gt;</td>
+      <td>단어의 끝</td>
+    </tr>
+    <tr>
+      <td>\(문자\)</td>
+      <td>괄호 안의 문자를 capture. capture된 부분은 레지스터에 저장되어 <code class="highlighter-rouge">\1</code>, <code class="highlighter-rouge">\2</code>, <code class="highlighter-rouge">\3</code>..으로 참조할 수 있다.</td>
+    </tr>
+    <tr>
+      <td>a\{m\}</td>
+      <td>문자 a를 m번 반복</td>
+    </tr>
+    <tr>
+      <td>a\{m,\}</td>
+      <td>문자 a를 m번 이상 반복</td>
+    </tr>
+    <tr>
+      <td>a\{m,n\}</td>
+      <td>문자 a를 m번 이상 n번 이하 반복</td>
+    </tr>
+    <tr>
+      <td>&amp;</td>
+      <td>패턴 매칭된 부분을 기억해서 치환문으로 사용한다. <code class="highlighter-rouge">s/love/**&amp;**/</code> 라고 하면 love &gt; <code class="highlighter-rouge">**love**</code>가 된다.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="sed-명령어의-사용법">sed 명령어의 사용법</h3>
+<p>숫자(줄 번호)와 정규표현식의 조합으로 편집하고자 하는 <code class="highlighter-rouge">범위</code>를 지정하고, 그 범위의 <code class="highlighter-rouge">각 line에 대해 처리할 명령</code>을 명시한다.</p>
+
+<h4 id="명령-d--delete">명령 d : delete</h4>
+<p>line number로 범위 지정하기</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sed</span> <span class="s1">'^d'</span> file		<span class="c"># 첫번째줄(^)을 삭제(d)</span>
+<span class="nv">$ </span><span class="nb">sed</span> <span class="s1">'$d'</span> file		<span class="c"># 마지막줄($)을 삭제(d)</span>
+<span class="nv">$ </span><span class="nb">sed</span> <span class="s1">'3d'</span> file		<span class="c"># 세번째줄을 삭제(d)</span>
+<span class="nv">$ </span><span class="nb">sed</span> <span class="s1">'1,3d'</span> file	<span class="c"># 1~3 line을 삭제(d)</span>
+<span class="nv">$ </span><span class="nb">sed</span> <span class="s1">'1,3!d'</span> file	<span class="c"># 1~3 line을 제외(!)한 모든 줄을 삭제(d)</span>
+</code></pre></div></div>
+
+<p>정규표현식으로 범위 지정하기.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sed</span> <span class="s1">'/hello/d'</span> file	<span class="c"># 정규식 /hello/에 매칭되는 모든 줄을 삭제</span>
+</code></pre></div></div>
+
+<p>정규식 /hello/가 처음으로 매칭되는 줄 이후부터 끝($)까지 삭제.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sed</span> <span class="s1">'/hello/,$'</span> file
+</code></pre></div></div>
+
+<p>정규식 /hello/가 처음으로 매칭되는 줄 이후부터, /bye/가 처음으로 매칭되는 줄 까지 삭제. 만약 bye가 한 번도 나오지 않는다면 파일의 끝($)을 범위로 한다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sed</span> <span class="s1">'/hello/,/bye/'</span> file
+</code></pre></div></div>
+
+<h4 id="명령-p--print">명령 p : print</h4>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sed</span> <span class="s1">'/[Hh]ello/p'</span> file	<span class="c"># Hello, hello가 포함된 줄을 출력(p)</span>
+</code></pre></div></div>
+
+<h4 id="명령-s--substitution-치환">명령 s : substitution (치환)</h4>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">"hi"</span> | <span class="nb">sed</span> <span class="s1">'s/hi/hello/'</span> 	<span class="c"># hello</span>
+<span class="nv">$ </span><span class="nb">echo</span> <span class="s2">"hi hi"</span> | <span class="nb">sed</span> <span class="s1">'s/hi/hello/'</span> 	<span class="c"># hello hi</span>
+<span class="nv">$ </span><span class="nb">echo</span> <span class="s2">"hi hi"</span> | <span class="nb">sed</span> <span class="s1">'s/hi/hello/g'</span> 	<span class="c"># hello hello</span>
+<span class="nv">$ </span><span class="nb">echo</span> <span class="s2">"hello"</span> | <span class="nb">sed</span> <span class="s1">'s/hello/&amp; world/g'</span>	<span class="c"># hello world (`&amp;`는 패턴 매칭된 부분을 의미)</span>
+</code></pre></div></div>
+
+<h4 id="명령-r--read-file">명령 r : read file</h4>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sed</span> <span class="s1">'/hello/r datafile'</span> file
+</code></pre></div></div>
+<p>hello가 나타나는 줄의 다음 줄에, datafile의 내용을 읽어서 삽입한다.</p>
+
+<h4 id="명령-w--write-to-file">명령 w : write to file</h4>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sed</span> <span class="s1">'/hello/w newfile'</span> file
+</code></pre></div></div>
+<p>hello가 나타나는 줄들을 newfile 이라는 파일명으로 저장한다.</p>
+
+<h4 id="명령-a--append">명령 a : append</h4>
+<p>r 명령과 결과는 비슷한데, 삽입할 내용을 파일에서 읽는게 아니라, sed 다음줄에 직접 입력한다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sed</span> <span class="s1">'/hello/a\
+contents to append'</span> file
+</code></pre></div></div>
+<p>이렇게 a 명령 뒤에 역슬래시 <code class="highlighter-rouge">\</code>를 붙여서 다음 줄로 넘어간 후, 삽입할 내용을 입력하고, closing ‘를 입력하고, 파일명을 입력한다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sed</span> <span class="s1">'/hello/a contents to append'</span> file	<span class="c"># error</span>
+</code></pre></div></div>
+<p>이렇게 한 줄로 입력할 수 없다. 에러 난다.</p>
+
+<p>삽입할 내용이 여러줄일때는, 맨 마지막 줄을 제외한 모든 줄의 끝에 역슬래시 ‘'를 붙여야한다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sed</span> <span class="s1">'/hello/a\	# 여기 역슬래시
+append1\		# 여기 역슬래시
+append2'</span> file		<span class="c"># 여기는 필요 없음</span>
+</code></pre></div></div>
+
+<h4 id="명령-i--insert">명령 i : insert</h4>
+<p>a 명령과 유사한데, 입력된 내용을 매칭된 줄의 다음 줄이 아니라 윗 줄에 삽입한다. a 명령과 마찬가지로 역슬래시를 붙여야한다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sed</span> <span class="s1">'/hello/i\'</span>
+contents to insert<span class="s1">' file
+</span></code></pre></div></div>
+
+<h4 id="명령-c--change">명령 c : change</h4>
+<p>a, i 명령과 유사한데, 입력된 내용을 매칭된 줄에 덮어쓴다. 즉 해당 줄 자체를 완전히 교체한다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sed</span> <span class="s1">'/hello/c\'</span>
+contents to change<span class="s1">' file
+</span></code></pre></div></div>
+
+<h4 id="명령-n--매칭된-줄의-다음-줄을-대상으로-명령을-적용">명령 n : 매칭된 줄의 다음 줄을 대상으로 명령을 적용</h4>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sed</span> <span class="s1">'/hello/{ n; s/world/World/g; }'</span> file
+</code></pre></div></div>
+<p>hello가 나타나는 줄의 바로 다음줄을 대상으로 s/world/World/g; 명령을 적용한다. <code class="highlighter-rouge">{ }</code>괄호는 여러개의 명령문을 묶기 위해 사용한다. 이 때 각 명령 뒤에는 반드시 세미콜론을 붙인다.</p>
+
+<h4 id="명령-y--문자-변환-명령-왼쪽-부분과-오른쪽-부분의-문자들이-11로-대응되어-변환된다">명령 y : 문자 변환 명령. 왼쪽 부분과 오른쪽 부분의 문자들이 1:1로 대응되어 변환된다.</h4>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sed</span> <span class="s1">'1,3y/abcd/ABCD'</span> file
+</code></pre></div></div>
+<p>1~3 line에 대하여, a-&gt;A, b-&gt;B, c-&gt;C, d-&gt;D 로 변환한다. y 명령에서는 정규표현식 메타문자가 동작하지 않는다.</p>
+
+<h4 id="명령-q--종료-패턴-매칭이-되는-줄이-나타나면-sed-명령이-종료된다">명령 q : 종료. 패턴 매칭이 되는 줄이 나타나면 sed 명령이 종료된다.</h4>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sed</span> <span class="s1">'5q'</span> file		<span class="c"># 5번째 줄까지 출력하고 종료.</span>
+</code></pre></div></div>
+
+<h4 id="명령-h-g--hold-get">명령 h, g : hold, get</h4>
+<p>h 명령은 해당 줄을 별도의 hold buffer에 저장한다. g 명령은 hold buffer에 있는 내용을 현재 줄의 다음 줄에 추가한다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sed</span> <span class="nt">-e</span> <span class="s1">'/hello/h'</span> <span class="nt">-e</span> <span class="s1">'$g'</span> file
+</code></pre></div></div>
+<p>hello 나타나는 줄을 홀드 버퍼에 저장하고, 맨 마지막줄($)의 다음 줄에 홀드 버퍼의 내용을 추가한다. 즉 hello가 나타나는 줄을 복사하여 맨 마지막줄에 붙여넣은 것과 같은 효과를 낸다.</p>
+
+<p><code class="highlighter-rouge">/hello/h</code> 대신 <code class="highlighter-rouge">/hello/{h; d;}</code> 라고 하면, hello가 나타내는 줄을 잘라내기 하여 맨 마지막줄에 붙인 효과를 낸다.</p>
+
+<h4 id="명령-h-x--hold-exchange">명령 h, x : hold, exchange</h4>
+<p>앞서 본 것 처럼 h 명령은 해당 줄을 별도의 hold buffer에 저장한다. x 명령은 현재 줄의 내용을 hold buffer에 있는 내용으로 교체한다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sed</span> <span class="nt">-e</span> <span class="s1">'/hello/h'</span> <span class="nt">-e</span> <span class="s1">'$x'</span> file
+</code></pre></div></div>
+<p>원래 있던 맨 마지막 줄의 내용이 hello가 나타나는 줄의 내용으로 교체된다.</p>
+
+<h3 id="sed-명령어의-옵션">sed 명령어의 옵션</h3>
+
+<h4 id="sed--n-옵션">sed -n 옵션</h4>
+<p>기본 출력을 막는다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sed</span> <span class="nt">-n</span> <span class="s1">'/[Hh]ello/p'</span> file	<span class="c"># Hello, hello가 포함된 줄만 출력(p)</span>
+</code></pre></div></div>
+<p>여기서 -n 옵션을 붙이지 않으면, 기본 출력으로 전체 파일의 내용이 출력되며 p 명령을 지정했기 때문에 패턴 매칭된 줄은 두 번씩 출력된다. 따라서 기본 출력을 막고 Hello, hello가 포함된 줄만 출력하기 위하여 -n 옵션과 p 명령어를 함께 사용한다.</p>
+
+<h4 id="sed--e-옵션">sed -e 옵션</h4>
+<p>명령을 여러개 사용할 때 사용한다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sed</span> <span class="nt">-e</span> <span class="s1">'s/hello/Hello/g'</span> <span class="nt">-e</span> <span class="s1">'s/world/World/g'</span> file
+</code></pre></div></div>
+</div>
+        		  	  
+<div style="float: left"></div>
+<div class="comments">
+	<div class="comments_wrapper" aria-hidden="true">
+		<div class="heading">
+			<a href="#content_div" onClick="comment_toggle('comment_hidden_2016-04-22-sed');">Comments</a>
+		</div>
+		<div id="comment_hidden_2016-04-22-sed" style="display: none;">
+			<div class="line"></div>
+			<div class="content_div">
+				<script src="https://utteranc.es/client.js" repo="soyme/my-blog-comments" branch="master" issue-term="2016-04-22-sed" theme="github-light" crossorigin="anonymous" async></script>
+			</div>
+		</div>
+	</div>
+</div>
+<div style="clear: both"></div>
+
+        		  </section>
+				  <section class="prev_next">
+					
+                        <a style="float: left;" href="/2016/04/07/node_heapdump/"><i class="icon-arrow-left"></i> node.js heapdump 생성하기</a>
+                    
+					
+						<a style="float:right; margin-bottom: 10px;"; href="/2016/04/23/gmt/">GMT와 UTC 차이, summer time <i class="icon-arrow-right"></i></a>
+					
+		  		  </section>
+			</article>
+		</div>
+	</section>
+</main>
+
+
+	<footer>
+  <div class="wrapper">
+    <a href="#" class="menu-icon" data-toggle="tooltip" title="ABOUT"><i class="fa fa-arrow-up"></i></a>
+  </div>
+</footer>
+
+	<copyright>
+	</copyright>
+
+	<!-- Javascripts 
+	    ================================================= -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/custom.js"></script>
+	<script type="text/template" id="template-comment">
+	<div id="comment{index}" class="comment">
+	<div class="comment_wrapper">
+		<div class="comment_line"></div>
+		<div>
+		<span class="comment_name">
+			
+				<a rel="nofollow" href="{url}">{name}</a>
+			
+		</span>
+
+		
+			<span class="comment_date">, now</span> </div>
+			<div class="comment_content">
+			<p><em>This is a preview of your comment. It may take a couple of minutes for it to be displayed to others.</em></p>
+		
+		{message}</div>
+	</div>
+</div>
+</script>
+
+    <!-- Analytics
+    ================================================== -->
+    <script>
+		// analytics code
+    </script>	
+	</body>
+</html>

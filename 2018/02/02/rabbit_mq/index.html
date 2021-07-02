@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta charset="utf-8"/>
+		<title>
+		 RabbitMQ -
+		
+		 soy blog</title>
+		<!-- For responsive site
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<link rel="author" href="/humans.txt">
+		<meta name="description" content="Description Goes Here">
+		<link rel="stylesheet" href="/css/style.css">
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+		<!--[if IE 7]>
+			<html class="ie7"> 
+			<link rel="stylesheet" type="text/css" href="/css/font-awesome-ie7.min.css">
+		<![endif]-->
+		<!--[if IE 8]><html class="ie8"> <![endif]-->		
+	    <!--[if lt IE 9]>
+	      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	    <![endif]-->
+
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-92395927-1', 'auto');
+		  ga('send', 'pageview');
+		</script>
+
+		<link rel="apple-touch-icon" sizes="57x57" href="/ico/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/ico/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/ico/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/ico/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/ico/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/ico/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/ico/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/ico/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/ico/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="/ico/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/ico/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="/ico/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/ico/favicon-16x16.png">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/ico/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff"> 
+	</head>
+	<body>
+	<!-- Header
+	    ================================================== -->
+	<header>
+	</header>
+
+	
+
+
+
+
+
+
+
+<main class="content">
+    <section class="container">
+    	<div class="row-fluid">
+			<article class="top-menu">
+				<a href="/" class="menu-icon" data-toggle="tooltip" title="HOME"><i class="fa fa-home"></i></a>
+<a href="/about/" class="menu-icon" data-toggle="tooltip" title="ABOUT"><i class="fa fa-user"></i></a>
+<a href="/category/diary/" class="menu-icon" data-toggle="tooltip" title="DIARY"><i class="fa fa-edit"></i></a>
+      <a href="/category/blog/" class="menu-icon" data-toggle="tooltip" title="BLOG"><i class="fa fa-bars"></i></a>
+      <a href="/tag/" class="menu-icon" data-toggle="tooltip" title="TAG"><i class="fa fa-tags"></i></a>
+  <div class="top-line"></div>
+ 
+			</article>
+
+			
+
+     	   <article class="diary">
+       	 	   <div align=center><h2>RabbitMQ</h2></div>
+       		   <div class="time"><a style="color:#777" href="http://3.34.122.196:7500/edit/2018-02-02-rabbit_mq.md"><i class="fa fa-calendar"></i></a> 02 February 2018</div>
+				 <div class="tags"></div>
+        		  <section class="diary_section">
+     			  	 
+           		  	  <div class="inner_content"><p>메시지 큐잉, AMQP, RabbitMQ에 대하여 간략하게 정리.</p>
+
+<!-- more -->
+
+<h3 id="메시지-큐">메시지 큐</h3>
+<ul>
+  <li>단방향 방식의 상호작용</li>
+  <li>메시지의 흐름: 메시지 생산자 -&gt; 브로커 -&gt; 메시지 소비자</li>
+  <li>비동기 방식</li>
+  <li>SMTP(이메일 전송 프로토콜)을 생각하면 이해가 쉬움</li>
+  <li>메시지 전달을 브로커에게 전적으로 위임하여 발행자 시스템, 소비자 시스템간 결합을 느슨하게 함</li>
+</ul>
+
+<h5 id="느슨하게-결합된-시스템-구성">느슨하게 결합된 시스템 구성</h5>
+<ul>
+  <li>발행자/소비자 간 문제 발생시 서로 영향을 주지 않음</li>
+  <li>발행자/소비자의 인스턴스 수를 독립적으로 증가/감소시킬 수 있음</li>
+  <li>발행자/소비자는 서로의 위치가 어디인지 어떤 기술을 사용하는지 알지 못함</li>
+</ul>
+
+<h3 id="amqp">AMQP</h3>
+<ul>
+  <li>Advanced Message Queuing Protocol</li>
+  <li>시스템간 메시지를 교환하기 위해 정의된 공개 표준 프로토콜. 발행자, 브로커, 소비자 사이에 발생하는 상호작용 방식 뿐 아니라 메시지와 명령어의 교환 형태 또한 정의하고 있음.</li>
+  <li>특정 업체나 호스팅 플랫폼에 정의되지 않음.</li>
+</ul>
+
+<h5 id="amqp-핵심-개념">AMQP 핵심 개념</h5>
+<ul>
+  <li>Broker: 미들웨어 애플리케이션으로, 발행자가 만든 메시지를 받아서 이를 소비자나 다른 브로커에게 전달.</li>
+  <li>Virtual host: 브로커 내의 가상영역으로 multitenancy(멀티테넌시; 시스템에서 다수의 이용자에게 동일한 서비스를 제공하는 기술)같이 대개 보안상의 이유로 발행자, 소비자 및 모든 AMQP 구성요소를 분리할 수 있다.</li>
+  <li>Connection: 발행자, 브로커, 소비자 간의 물리적인 네트워크(TCP) 연결.</li>
+  <li>Channel: 발행자, 브로커, 소비자 간의 논리적인 연결로 하나의 연결 내에 다수의 채널을 설정할 수 있다.</li>
+  <li>Exchange: 발행한 모든 메시지가 처음 도달하는 지점. 메시지가 목적지에 도달할 수 있도록 라우팅 규칙 적용을 담당. 라우팅 규칙에는 direct(point-to-point), topic(publish-subscribe), fanout(multicast)이 존재.</li>
+  <li>Queue: 메시지가 소비되기 전 대기하고 있는 최종 지점. 익스체인지 라우팅 규칙에 의해 단일 메시지가 복사되거나 다수의 큐에 도달할 수 있다.</li>
+  <li>Binding: 익스체인지와 큐 간의 가상 연결로 메시지가 익스체인지에서 큐로 이동할 수 있도록 함. 익스체인지 라우팅 규칙에 따라 큐를 바인딩하는데 라우팅키를 사용할 수 있다.</li>
+</ul>
+
+<h3 id="rabbitmq">RabbitMQ</h3>
+<ul>
+  <li>메시지 브로커. 메시지 큐잉 소프트웨어.</li>
+  <li>AMQP의 구현체이며 얼랭 기반이다.</li>
+</ul>
+
+<hr />
+<ul>
+  <li>RabbitMQ 따라잡기 - 데이비드 도소트 지음, 장준호 옮김, 에이콘출판사</li>
+  <li>https://www.cloudamqp.com/blog/2015-05-18-part1-rabbitmq-for-beginners-what-is-rabbitmq.html</li>
+</ul>
+</div>
+        		  	  
+<div style="float: left"></div>
+<div class="comments">
+	<div class="comments_wrapper" aria-hidden="true">
+		<div class="heading">
+			<a href="#content_div" onClick="comment_toggle('comment_hidden_2018-02-02-rabbit_mq');">Comments</a>
+		</div>
+		<div id="comment_hidden_2018-02-02-rabbit_mq" style="display: none;">
+			<div class="line"></div>
+			<div class="content_div">
+				<script src="https://utteranc.es/client.js" repo="soyme/my-blog-comments" branch="master" issue-term="2018-02-02-rabbit_mq" theme="github-light" crossorigin="anonymous" async></script>
+			</div>
+		</div>
+	</div>
+</div>
+<div style="clear: both"></div>
+
+        		  </section>
+				  <section class="prev_next">
+					
+                        <a style="float: left;" href="/2017/09/27/prepositions/"><i class="icon-arrow-left"></i> Git commit log 및 PR 작성시 참고할만한 주요 전치사 정리</a>
+                    
+					
+						<a style="float:right; margin-bottom: 10px;"; href="/2018/03/08/pale_blue_dot/">Pale Blue Dot <i class="icon-arrow-right"></i></a>
+					
+		  		  </section>
+			</article>
+		</div>
+	</section>
+</main>
+
+
+	<footer>
+  <div class="wrapper">
+    <a href="#" class="menu-icon" data-toggle="tooltip" title="ABOUT"><i class="fa fa-arrow-up"></i></a>
+  </div>
+</footer>
+
+	<copyright>
+	</copyright>
+
+	<!-- Javascripts 
+	    ================================================= -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/custom.js"></script>
+	<script type="text/template" id="template-comment">
+	<div id="comment{index}" class="comment">
+	<div class="comment_wrapper">
+		<div class="comment_line"></div>
+		<div>
+		<span class="comment_name">
+			
+				<a rel="nofollow" href="{url}">{name}</a>
+			
+		</span>
+
+		
+			<span class="comment_date">, now</span> </div>
+			<div class="comment_content">
+			<p><em>This is a preview of your comment. It may take a couple of minutes for it to be displayed to others.</em></p>
+		
+		{message}</div>
+	</div>
+</div>
+</script>
+
+    <!-- Analytics
+    ================================================== -->
+    <script>
+		// analytics code
+    </script>	
+	</body>
+</html>

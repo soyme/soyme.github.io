@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta charset="utf-8"/>
+		<title>
+		 Java - Enum -
+		
+		 soy blog</title>
+		<!-- For responsive site
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<link rel="author" href="/humans.txt">
+		<meta name="description" content="Description Goes Here">
+		<link rel="stylesheet" href="/css/style.css">
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+		<!--[if IE 7]>
+			<html class="ie7"> 
+			<link rel="stylesheet" type="text/css" href="/css/font-awesome-ie7.min.css">
+		<![endif]-->
+		<!--[if IE 8]><html class="ie8"> <![endif]-->		
+	    <!--[if lt IE 9]>
+	      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	    <![endif]-->
+
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-92395927-1', 'auto');
+		  ga('send', 'pageview');
+		</script>
+
+		<link rel="apple-touch-icon" sizes="57x57" href="/ico/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/ico/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/ico/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/ico/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/ico/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/ico/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/ico/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/ico/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/ico/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="/ico/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/ico/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="/ico/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/ico/favicon-16x16.png">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/ico/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff"> 
+	</head>
+	<body>
+	<!-- Header
+	    ================================================== -->
+	<header>
+	</header>
+
+	
+
+
+
+
+
+
+
+<main class="content">
+    <section class="container">
+    	<div class="row-fluid">
+			<article class="top-menu">
+				<a href="/" class="menu-icon" data-toggle="tooltip" title="HOME"><i class="fa fa-home"></i></a>
+<a href="/about/" class="menu-icon" data-toggle="tooltip" title="ABOUT"><i class="fa fa-user"></i></a>
+<a href="/category/diary/" class="menu-icon" data-toggle="tooltip" title="DIARY"><i class="fa fa-edit"></i></a>
+      <a href="/category/blog/" class="menu-icon" data-toggle="tooltip" title="BLOG"><i class="fa fa-bars"></i></a>
+      <a href="/tag/" class="menu-icon" data-toggle="tooltip" title="TAG"><i class="fa fa-tags"></i></a>
+  <div class="top-line"></div>
+ 
+			</article>
+
+			
+
+     	   <article class="diary">
+       	 	   <div align=center><h2>Java - Enum</h2></div>
+       		   <div class="time"><a style="color:#777" href="http://3.34.122.196:7500/edit/2015-08-13-enum.md"><i class="fa fa-calendar"></i></a> 13 August 2015</div>
+				 <div class="tags"><a href="/tag/java/">#Java</a></div>
+        		  <section class="diary_section">
+     			  	 
+           		  	  <div class="inner_content"><p>enum을 제대로 써보고자 정리해본다.</p>
+
+<!-- more -->
+
+<h3 id="enum">Enum</h3>
+<p>몇몇개의 상수들을 묶어서 관리하고 싶을 때. 연관된 상수들의 집합을 표현할때 사용한다.</p>
+
+<ul>
+  <li>월, 화, 수, 목, 금, 토, 일</li>
+  <li>남자, 여자</li>
+  <li>SKT, LGU+, KT</li>
+</ul>
+
+<p>enum은 C, C++ 등에 있던 개념인데, 자바에서는 JDK 1.5 버전에서 도입되었다. 자바에 enum이 도입되기 이전에는, 이러한 집합을 표현할 때 다음과 같이 <code class="highlighter-rouge">public static final</code> 변수를 이용하였다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TelecomCompany</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">SKT</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">LG</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">KT</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+   <span class="kd">private</span> <span class="n">String</span> <span class="n">phoneNumber</span><span class="o">;</span> <span class="c1">// 휴대폰 번호</span>
+   <span class="kd">private</span> <span class="kt">int</span> <span class="n">telecomCompany</span><span class="o">;</span> <span class="c1">// 휴대폰 통신사</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>이러한 방법의 문제점은..</p>
+
+<ol>
+  <li>type-safety 하지 않다. telecomCompany 변수에 TelecomCompany 클래스 안의 상수가 아닌 다른 int형 값이 할당될 수 있다.</li>
+  <li>print를 하면 의미없는 값이 출력된다. TelecomCompany.SKT를 프린트하면, 의미있는 이름인 “SKT” 대신 numeric value인 1이 출력된다.</li>
+  <li>네임스페이스가 없다.
+    <ul>
+      <li>이펙티브 자바의 30번째 항목에서도 int형 상수 대신 Enum을 사용하라고 하고 있다.</li>
+    </ul>
+  </li>
+</ol>
+
+<p>enum을 이용하면 다음과 같이 표현하는데, 위에서 언급된 문제점을 모두 해결할 수 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="n">TelecomCompany</span> <span class="o">{</span>
+   <span class="n">SKT</span><span class="o">,</span> <span class="n">LG</span><span class="o">,</span> <span class="n">KT</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+   <span class="kd">private</span> <span class="n">String</span> <span class="n">phoneNumber</span><span class="o">;</span> <span class="c1">// 휴대폰 번호</span>
+   <span class="kd">private</span> <span class="n">TelecomCompany</span> <span class="n">telecomCompany</span><span class="o">;</span> <span class="c1">// 휴대폰 통신사</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="enum-in-java">“enum” in java</h3>
+<ul>
+  <li>a keyword.</li>
+  <li>클래스, 인터페이스와 유사한 하나의 Data Type.</li>
+  <li>Enum 상수의 집합을 정의하는데 사용됨</li>
+  <li>type-safety</li>
+  <li>int형 변수처럼 switch문에서 사용 가능</li>
+  <li>Enum 안에 열거된 상수들은 암묵적으로 public static final 임.</li>
+</ul>
+
+<h3 id="enum의-내부-구조">Enum의 내부 구조</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="n">TelecomCompany</span> <span class="o">{</span>
+   <span class="n">SKT</span><span class="o">,</span> <span class="n">LG</span><span class="o">,</span> <span class="n">KT</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>위의 enum TelecomCompany은 내부적으로 아래와 유사한 형태로 컴파일된다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">final</span> <span class="kd">class</span> <span class="nc">TelecomCompany</span> <span class="kd">extends</span> <span class="n">Enum</span><span class="o">&lt;</span><span class="n">TelecomCompany</span><span class="o">&gt;</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="nf">TelecomCompany</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">int</span> <span class="n">ordinal</span><span class="o">)</span> <span class="o">{</span>
+     <span class="kd">super</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">ordinal</span><span class="o">);</span>
+  <span class="o">}</span>
+
+   <span class="kd">public</span> <span class="kd">static</span> <span class="n">TelecomCompany</span><span class="o">[]</span> <span class="nf">values</span><span class="o">(){</span>
+       <span class="n">TelecomCompany</span> <span class="n">atelecomcompany</span><span class="o">[];</span>
+       <span class="kt">int</span> <span class="n">i</span><span class="o">;</span>
+       <span class="n">TelecomCompany</span> <span class="n">atelecomcompany1</span><span class="o">[];</span>
+       <span class="n">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span><span class="n">atelecomcompany</span> <span class="o">=</span> <span class="n">ENUM$VALUES</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">atelecomcompany1</span>
+                              <span class="o">=</span> <span class="k">new</span> <span class="n">TelecomCompany</span><span class="o">[</span><span class="n">i</span> <span class="o">=</span> <span class="n">atelecomcompany</span><span class="o">.</span><span class="na">length</span><span class="o">],</span> <span class="mi">0</span><span class="o">,</span> <span class="n">i</span><span class="o">);</span>
+       <span class="k">return</span> <span class="n">atelecomcompany1</span><span class="o">;</span>
+   <span class="o">}</span>
+
+   <span class="kd">public</span> <span class="kd">static</span> <span class="n">TelecomCompany</span> <span class="nf">valueOf</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">){</span>
+       <span class="k">return</span> <span class="o">(</span><span class="n">TelecomCompany</span><span class="o">)</span><span class="n">Enum</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">enumexample</span><span class="o">/</span><span class="n">TelecomCompany</span><span class="o">,</span> <span class="n">name</span><span class="o">);</span>
+   <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">TelecomCompany</span> <span class="n">SKT</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TelecomCompany</span><span class="o">(</span><span class="s">"SKT"</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">TelecomCompany</span> <span class="n">LG</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TelecomCompany</span><span class="o">(</span><span class="s">"LG"</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">TelecomCompany</span> <span class="n">KT</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TelecomCompany</span><span class="o">(</span><span class="s">"KT"</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
+
+  <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">TelecomCompany</span> <span class="n">ENUM$VALUES</span><span class="o">[]</span> <span class="o">=</span> <span class="o">{</span><span class="n">SKT</span><span class="o">,</span> <span class="n">LG</span><span class="o">,</span> <span class="n">KT</span><span class="o">};</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>enum TelecomCompany는 하나의 클래스이며, java.lang.Enum 클래스를 상속받았다.</li>
+  <li>enum 상수들은 내부적으로 public static final 필드로 선언되었으며, “TelecomCompany”는 자료형이다.</li>
+  <li>enum 안에 열거한 순서대로 0, 1, 2 라는 int value가 생성자로 전달되고 있다.</li>
+  <li>ENUM$VALUE[] 라는 배열 안에 열거한 enum 상수들이 열거한 순서대로 들어가있다.</li>
+  <li>values() 메소드와 valuesOf(String) 메소드가 자동으로 생성되었다.</li>
+  <li>value() 메소드는 Enum 안에 열거된 enum 상수들을 , Enum 안에 열거된 순서대로 list up된 array로 반환해준다. 즉, enum에 열거된 전체 상수들에 대해 iterate 하고 싶을 때 value() 메소드를 사용할 수 있다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="o">(</span><span class="n">TelecomCompany</span> <span class="nl">telecom:</span> <span class="n">TelecomCompany</span><span class="o">.</span><span class="na">values</span><span class="o">())</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"TelecomCompany: "</span> <span class="o">+</span> <span class="n">telecom</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>static valueOf(String arg) 메소드는 String을 Enum으로 변환하는데 메소드인데, 상위클래스인 java.lang,Enum의 메소드를 내부적으로 사용한다. TelecomCompany.valueOf(“SKT”)를 호출하면 TelecomCompany.SK가 반환된다. String에 해당하는 Enum 상수가 없다면 java.lang.IllegalArgumentException 익셉션을 던진다.</li>
+</ul>
+
+<h3 id="javalangenum-클래스">java.lang.Enum 클래스</h3>
+<p>위에서 본 것과 같이, 사용자가 정의한 enum 클래스는 내부적으로 java.lang.Enum 클래스를 상속받는다.</p>
+<ul>
+  <li>java.lang.Enum 클래스는 Serializable, Comparable 인터페이스를 implements 했다.</li>
+  <li>java.lang.Object 클래스의 메소드들을 모두 오버라이드 했다.</li>
+  <li>java.lang.Enum 클래스의 소스를 보면 다음과 같다. 좀 길지만, 어렵지는 않다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Enum</span><span class="o">&lt;</span><span class="n">e</span> <span class="kd">extends</span> <span class="kd">enum</span><span class="o">&lt;</span><span class="n">e</span><span class="o">&gt;&gt;</span> <span class="kd">implements</span> <span class="n">Comparable</span><span class="o">&lt;</span><span class="n">e</span><span class="o">&gt;,</span> <span class="n">Serializable</span> <span class="o">{</span>
+    <span class="cm">/** enum 상수 이름 */</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kd">final</span> <span class="n">String</span> <span class="nf">name</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/** enum 상수가 enum 클래스 내에 열거된 순서  */</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">ordinal</span><span class="o">;</span>
+
+    <span class="cm">/** EnumSet, EnumMap과 같은 내부 자료구조에서 사용하기 위해 설계된 것으로, 일반적으로는 사용하지 않아야 한다. */</span>
+    <span class="kd">public</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nf">ordinal</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">ordinal</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/** 사용자가 직접 호출할 수 없으며, enum 상수 선언시 컴파일러가 만들어낸 코드에 의해 내부적으로 호출된다.  */</span>
+    <span class="kd">protected</span> <span class="nf">Enum</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">int</span> <span class="n">ordinal</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">ordinal</span> <span class="o">=</span> <span class="n">ordinal</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+     * java.lang.Object의 toString() 메소드를 오버라이드하였는데, enum 상수의 이름을 리턴한다.
+     * 사용자가 직접 오버라이드하여 원하는 형식으로 프린트되도록 사용할 수 있다.
+     */</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/** 동일한 enum 상수인지 여부를 리턴한다.
+    * enum 상수는 내부적으로 public static final 이므로, == 연산자로 비교해도 문제가 없다. */</span>
+    <span class="kd">public</span> <span class="kd">final</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">other</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">==</span><span class="n">other</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">hashCode</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+     * enum은 싱글톤이므로, clone 되서는 안된다.
+     * clone 되지 않음을 보장하기 위하여 clone() 메소드를 final로 오버라이드하고,
+     * 항상 CloneNotSupportedException를 던지도록 되어있다.
+     */</span>
+    <span class="kd">protected</span> <span class="kd">final</span> <span class="n">Object</span> <span class="nf">clone</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">CloneNotSupportedException</span> <span class="o">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">CloneNotSupportedException</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nf">compareTo</span><span class="o">(</span><span class="n">E</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Enum</span> <span class="n">other</span> <span class="o">=</span> <span class="o">(</span><span class="n">Enum</span><span class="o">)</span><span class="n">o</span><span class="o">;</span>
+        <span class="n">Enum</span> <span class="n">self</span> <span class="o">=</span> <span class="k">this</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">self</span><span class="o">.</span><span class="na">getClass</span><span class="o">()</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="na">getClass</span><span class="o">()</span> <span class="o">&amp;&amp;</span> <span class="c1">// optimization</span>
+            <span class="n">self</span><span class="o">.</span><span class="na">getDeclaringClass</span><span class="o">()</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="na">getDeclaringClass</span><span class="o">())</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">ClassCastException</span><span class="o">();</span>
+        <span class="k">return</span> <span class="n">self</span><span class="o">.</span><span class="na">ordinal</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="na">ordinal</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">final</span> <span class="n">Class</span><span class="o">&lt;</span><span class="n">e</span><span class="o">&gt;</span> <span class="nf">getDeclaringClass</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">Class</span> <span class="n">clazz</span> <span class="o">=</span> <span class="n">getClass</span><span class="o">();</span>
+        <span class="n">Class</span> <span class="n">zuper</span> <span class="o">=</span> <span class="n">clazz</span><span class="o">.</span><span class="na">getSuperclass</span><span class="o">();</span>
+        <span class="k">return</span> <span class="o">(</span><span class="n">zuper</span> <span class="o">==</span> <span class="n">Enum</span><span class="o">.</span><span class="na">class</span><span class="o">)</span> <span class="o">?</span> <span class="n">clazz</span> <span class="o">:</span> <span class="n">zuper</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">t</span> <span class="kd">extends</span> <span class="kd">enum</span><span class="o">&lt;</span><span class="n">t</span><span class="o">&gt;&gt;</span> <span class="nf">valueOf</span><span class="o">(</span><span class="n">Class</span><span class="o">&lt;</span><span class="n">t</span><span class="o">&gt;</span> <span class="n">enumType</span><span class="o">,</span> <span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">T</span> <span class="n">result</span> <span class="o">=</span> <span class="n">enumType</span><span class="o">.</span><span class="na">enumConstantDirectory</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">result</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+            <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">name</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">NullPointerException</span><span class="o">(</span><span class="s">"Name is null"</span><span class="o">);</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalArgumentException</span><span class="o">(</span>
+            <span class="s">"No enum constant "</span> <span class="o">+</span> <span class="n">enumType</span><span class="o">.</span><span class="na">getCanonicalName</span><span class="o">()</span> <span class="o">+</span> <span class="s">"."</span> <span class="o">+</span> <span class="n">name</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="cm">/** enum classes cannot have finalize methods. */</span>
+    <span class="kd">protected</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">finalize</span><span class="o">()</span> <span class="o">{</span> <span class="o">}</span>
+
+    <span class="cm">/** prevent default deserialization */</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">readObject</span><span class="o">(</span><span class="n">ObjectInputStream</span> <span class="n">in</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">,</span>
+        <span class="n">ClassNotFoundException</span> <span class="o">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">InvalidObjectException</span><span class="o">(</span><span class="s">"can't deserialize enum"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">readObjectNoData</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">ObjectStreamException</span> <span class="o">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">InvalidObjectException</span><span class="o">(</span><span class="s">"can't deserialize enum"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>java.lang,Object 클래스의 메소드들이 전부 오버라이드 되어있는데, toString() 외의 다른 메서드들은 전부 final로 오버라이드 되어 있다. 즉 toString() 이외의 메소드는 우리가 직접 오버라이드 할 수 없다.</li>
+  <li>toString() 메소드가 오버라이드 되어있으므로 enum 상수를 프린트했을 때 int value가 아닌 SKT, LG, KT가 출력된다. 또한, final이 아니므로 사용자가 직접 오버라이드 가능하며, enum 상수를 원하는 방식으로 프린트할 수 있으므로 유용하다.</li>
+  <li>name() 메소드는 특정 enum 상수를 String으로 변환하는 메소드이다. TelecomCompany.SK.name()를 호출하면 문자열 “SKT”가 반환된다. 오버라이드되어 있는 toString()과 동일하지 않냐고 생각할 수도 있지만, 사용자가 toString()클래스를 직접 오버라이드 하여 사용할 경우를 위한 메소드이다.</li>
+  <li>ordinal() 메소드는 해당 enum 상수가 enum 클래스 내에 나열된 순서를 리턴한다. 순서는 0부터 시작한다. 단 내부적으로 사용하기 위해 고안된 메소드이므로, 일반적으로 사용하지 않는 것이 좋다고 한다. (이펙티브 자바 31번에도 나와있다.) 나열된 순서를 사용해야 할 때에는 Enum 내에 final int 필드로 선언하여 순서를 저장해놓고 사용한다.</li>
+  <li>더 자세히: http://docs.oracle.com/javase/7/docs/api/java/lang/Enum.html</li>
+</ul>
+
+<h3 id="enum의-특징--장점">Enum의 특징 / 장점</h3>
+<ol>
+  <li>type-safety 하다. enum 클래스 안에 열거된 상수 외에 다른 값이 할당된다면 Type이 맞지 않기 때문에 컴파일 에러가 발생한다.</li>
+  <li>자신의 namespace를 가진다.</li>
+  <li>switch문에서 사용할 수 있음.</li>
+  <li>enum 클래스 안에 새로운 상수를 추가하는 것이 쉬우며, 기존 코드에 영향이 없음.</li>
+  <li>클래스, 인터페이스와 같은 하나의 Type이므로 변수, 메소드, 생성자를 선언할 수 있음. (C, C++ 등의 다른 언어에서의 Enum보다 더 파워풀한 이유이다. 다른 언어의 Enum은 단순 int형 상수와 마찬가지이나, 자바에서는 하나의 참조 자료형이다.)</li>
+  <li>enum 클래스 안의 생성자는 반드시 private 이여야 함. 안그러면 컴파일에러가 남. 즉 new 연산자로 인스턴스를 생성하는 것이 불가능하며, enum의 상수들은 오로지 enum 자신 안에서만 생성될 수 있다.</li>
+  <li>enum 상수가 코드 안에서 처음으로 call 되거나 참조될 때 Enum 인스턴스가 생성된다.</li>
+  <li>enum 클래스는 내부적으로 싱글톤을 보장한다. 이를 이용해, 어떤 클래스를 싱글톤으로 생성해야 할 경우 enum으로 선언하기도 한다. <code class="highlighter-rouge">public enum EasySingleton{ INSTANCE;</code>로 선언하고, <code class="highlighter-rouge">EasySingleton.INSTANCE</code> 이렇게 접근한다.</li>
+  <li>
+    <p>각 enum 상수마다 특정 타입의 value를 지정할 수 있다. 단 이것이 제대로 동작하려면 value를 저장할 변수와, 변수에 값을 셋팅해주는 생성자를 정의해줘야 한다. SKT, LG, KT는 TelecomCompany라는 타입의 인스턴스이다. 즉 SKT, LG, KT는 각각의 int value 값을 가진다. SKT(1)은 int value 1을 파라미터로 받는 TelecomCompany 클래스의 생성자를 호출하는 것이다.</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> public enum TelecomCompany {
+     SKT(1), LG(2), KT(3);
+
+     private int value;
+
+     private TelecomCompany(int value) {
+         this.value = value;
+     }
+  }
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>enum 클래스 안에 추상메소드를 정의할 수 있는데, 각 enum 상수마다 구현을 해줘야 한다.</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public enum TelecomCompany implements Runnable{
+      SK(1) {
+              @Override
+              public String homepage() {
+                      return "http://sk-telecom.co.kr";
+              }
+      }, LG(2) {
+              @Override
+              public String homepage() {
+                      return "http://lg-uplus.com";
+              }
+      }, KT(3) {
+              @Override
+              public String homepage() {
+                      return "http://olleh.co.kr";
+              }
+      };
+      private int value;
+
+      public abstract String homepage();
+
+      private TelecomCompany(int value) {
+              this.value = value;
+      }
+      // ....
+}
+</code></pre></div>    </div>
+  </li>
+  <li>enum 클래스 안의 enum 상수들은 암묵적으로 static final 이며, 한 번 생성된 이후에는 값을 바꿀 수 없음. 바꾸려 하면 컴파일 에러가 남.</li>
+  <li>enum 클래스 안의 enum 상수들은 static final 이므로, “==”를 이용하여 비교하여도 안전하다. (단, Object들을 비교할 때에는 항상 equals(), compareTo() 메소드를 이용하여 비교하자.)</li>
+  <li>Collection 패키지의 EnumMap, EnumSet 을 사용 가능하다.</li>
+  <li>enum은 일반 클래스와 마찬가지로 interface를 implements 할 수 있으며, 메소드를 override 할 수 있다. 단 클래스 상속(extends)은 불가능하다. (내부적으로 java.lang.Enum 클래스를 상속하고 있어서 아닐까?)</li>
+</ol>
+
+<hr />
+
+<p>Reference: <a href="http://javarevisited.blogspot.sg/2011/08/enum-in-java-example-tutorial.html">http://javarevisited.blogspot.sg/2011/08/enum-in-java-example-tutorial.html</a></p>
+</div>
+        		  	  
+<div style="float: left"></div>
+<div class="comments">
+	<div class="comments_wrapper" aria-hidden="true">
+		<div class="heading">
+			<a href="#content_div" onClick="comment_toggle('comment_hidden_2015-08-13-enum');">Comments</a>
+		</div>
+		<div id="comment_hidden_2015-08-13-enum" style="display: none;">
+			<div class="line"></div>
+			<div class="content_div">
+				<script src="https://utteranc.es/client.js" repo="soyme/my-blog-comments" branch="master" issue-term="2015-08-13-enum" theme="github-light" crossorigin="anonymous" async></script>
+			</div>
+		</div>
+	</div>
+</div>
+<div style="clear: both"></div>
+
+        		  </section>
+				  <section class="prev_next">
+					
+                        <a style="float: left;" href="/2015/04/14/double_ended_linkedlist/"><i class="icon-arrow-left"></i> Double Ended Linked List</a>
+                    
+					
+						<a style="float:right; margin-bottom: 10px;"; href="/2015/08/18/msa/">마이크로 서비스 아키텍처 <i class="icon-arrow-right"></i></a>
+					
+		  		  </section>
+			</article>
+		</div>
+	</section>
+</main>
+
+
+	<footer>
+  <div class="wrapper">
+    <a href="#" class="menu-icon" data-toggle="tooltip" title="ABOUT"><i class="fa fa-arrow-up"></i></a>
+  </div>
+</footer>
+
+	<copyright>
+	</copyright>
+
+	<!-- Javascripts 
+	    ================================================= -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/custom.js"></script>
+	<script type="text/template" id="template-comment">
+	<div id="comment{index}" class="comment">
+	<div class="comment_wrapper">
+		<div class="comment_line"></div>
+		<div>
+		<span class="comment_name">
+			
+				<a rel="nofollow" href="{url}">{name}</a>
+			
+		</span>
+
+		
+			<span class="comment_date">, now</span> </div>
+			<div class="comment_content">
+			<p><em>This is a preview of your comment. It may take a couple of minutes for it to be displayed to others.</em></p>
+		
+		{message}</div>
+	</div>
+</div>
+</script>
+
+    <!-- Analytics
+    ================================================== -->
+    <script>
+		// analytics code
+    </script>	
+	</body>
+</html>

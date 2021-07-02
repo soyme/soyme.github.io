@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta charset="utf-8"/>
+		<title>
+		 마이크로 서비스 아키텍처 -
+		
+		 soy blog</title>
+		<!-- For responsive site
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<link rel="author" href="/humans.txt">
+		<meta name="description" content="Description Goes Here">
+		<link rel="stylesheet" href="/css/style.css">
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+		<!--[if IE 7]>
+			<html class="ie7"> 
+			<link rel="stylesheet" type="text/css" href="/css/font-awesome-ie7.min.css">
+		<![endif]-->
+		<!--[if IE 8]><html class="ie8"> <![endif]-->		
+	    <!--[if lt IE 9]>
+	      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	    <![endif]-->
+
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-92395927-1', 'auto');
+		  ga('send', 'pageview');
+		</script>
+
+		<link rel="apple-touch-icon" sizes="57x57" href="/ico/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/ico/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/ico/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/ico/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/ico/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/ico/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/ico/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/ico/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/ico/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="/ico/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/ico/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="/ico/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/ico/favicon-16x16.png">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/ico/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff"> 
+	</head>
+	<body>
+	<!-- Header
+	    ================================================== -->
+	<header>
+	</header>
+
+	
+
+
+
+
+
+
+
+<main class="content">
+    <section class="container">
+    	<div class="row-fluid">
+			<article class="top-menu">
+				<a href="/" class="menu-icon" data-toggle="tooltip" title="HOME"><i class="fa fa-home"></i></a>
+<a href="/about/" class="menu-icon" data-toggle="tooltip" title="ABOUT"><i class="fa fa-user"></i></a>
+<a href="/category/diary/" class="menu-icon" data-toggle="tooltip" title="DIARY"><i class="fa fa-edit"></i></a>
+      <a href="/category/blog/" class="menu-icon" data-toggle="tooltip" title="BLOG"><i class="fa fa-bars"></i></a>
+      <a href="/tag/" class="menu-icon" data-toggle="tooltip" title="TAG"><i class="fa fa-tags"></i></a>
+  <div class="top-line"></div>
+ 
+			</article>
+
+			
+
+     	   <article class="diary">
+       	 	   <div align=center><h2>마이크로 서비스 아키텍처</h2></div>
+       		   <div class="time"><a style="color:#777" href="http://3.34.122.196:7500/edit/2015-08-18-msa.md"><i class="fa fa-calendar"></i></a> 18 August 2015</div>
+				 <div class="tags"><a href="/tag/general/">#General</a></div>
+        		  <section class="diary_section">
+     			  	 
+           		  	  <div class="inner_content"><p>SOA, 모노리틱 아키텍처, 마이크로 서비스 아키텍처에 대하여 그냥 간략하게..</p>
+
+<!-- more -->
+
+<h3 id="soa-service-oriented-architecture">SOA (Service-Oriented Architecture)</h3>
+<p>아키텍처 구성을 위한 하나의 개념이자 사상. 애플리케이션의 기능을 비즈니스적인 의미가 있는 기능 단위로 묶고, 표준화된 호출 인터페이스를 통해 서비스라는 소프트웨어 컴포넌트 단위로 재조합한 후, 이 서비스들을 서로 조합하여 업무 기능을 구현한다.</p>
+
+<ul>
+  <li>느슨하게 연결되고, 상호 조합 가능한 소프트웨어</li>
+  <li>수직적 분할: 각각의 서비스가 데이터 계층, 비즈니스 로직 계층, 뷰에 대한 모듈을 모두 가지고 있어서 각 서비스 간의 의존성이 최소화됨.</li>
+  <li>SOA 시스템 내에서 플랫폼이나 기술에 종속되지 않음</li>
+  <li>서비스 변경시 다른 서비스에 영향이 적음</li>
+  <li>각 서비스를 서로 연결하여 하나의 조합된 형태의 애플리케이션을 구상할 수 있음</li>
+</ul>
+
+<h3 id="모노리틱-아키텍처">모노리틱 아키텍처</h3>
+<p>하나의 어플리케이션에 모든 모든 로직이 다 들어가있는 통짜 구조.</p>
+
+<ul>
+  <li>배포 주기를 늘리기 어려워진다.</li>
+  <li>작은 변경이여도, 전체를 다시 빌드하고 배포해야 한다.</li>
+  <li>서버 확장이 필요할 경우 자원을 더 필요로 하는 부분만이 아니라 전체 Application 규모만큼 늘려야 한다.</li>
+</ul>
+
+<h3 id="msa-micro-service-architecture">MSA (Micro Service Architecture)</h3>
+<p>SOA가 엔터프라이즈 시스템을 중심으로 고안된 아키텍처라면, 마이크로서비스아키텍처는 SOA사상에 근간을 두고, 대용량 웹서비스 개발에 맞는 구조로 사상이 경량화되고, 대규모 개발팀의 조직 구조에 맞도록 변형된 아키텍처.</p>
+
+<ul>
+  <li>대용량 웹 시스템에 맞춰 개발된 API 기반의 아키텍처 스타일.</li>
+  <li>각 컴포넌트를 서비스라는 개념으로 정의.</li>
+  <li>데이터부터 비즈니스로직까지 독립적으로 상호 컴포넌트간의 의존성없이 개발된 컴포넌트. (수직적 분할)</li>
+  <li>각 컴포넌트 간에는 REST API 등 표준 인터페이스로 그 기능을 외부로 제공함.</li>
+  <li>타 컴포넌트와의 의존성 없이 독립적으로 배포 가능.</li>
+  <li>각 컴포넌트(스비스)가 독립적인 war파일로 개발되어 독립된 톰캣 인스턴스에 배치되고, 이렇게 배치된 톰캣 인스턴스는 횡적으로 스케일(인스턴스 수를 늘림)이 가능하고, 앞단에 로드밸런서를 배치하여 서비스간의 로드를 분산시킬 수 있다.</li>
+  <li>애플리케이션 로직을 분리하여 여러개의 애플리케이션으로 나눠서 서비스화하고, 서비스별로 톰캣을 분산 배치한 것이 가장 큰 특징이다.</li>
+  <li>독립적으로 배치, 확장 가능</li>
+  <li>서로 다른 언어/프레임워크, 서로 다른 데이터베이스. 독립적 운영. - Loose coupling, High 코히젼</li>
+  <li>새롭거나 혁신적인 것이 아니다. 컴포넌트 단위로 나누고 이들 간 관계 정의, 연결하는 것은 일반적인 구조임.</li>
+</ul>
+
+<h4 id="마이크로-서비스-아키텍처의-단점">마이크로 서비스 아키텍처의 단점</h4>
+<ul>
+  <li>다른 컴포넌트의 데이터를 API통신을 통해서만 가지고 와야 하므로 성능상 문제가 있을 수 있음. (서비스 간 호출 비용)</li>
+  <li>다른 데이터베이스간의 트랜잭션을 묶을 수 없으므로, 트랜잭션 처리 실패시 보상 트랜잭션 처리를 해줘야 한다. (트랜잭션 처리 비용)</li>
+  <li>각 서비스 간 API 호출을 통해 통신하므로, JSON/XML 등을 객체로 변환하는 등의 마샬링 오버헤드가 발생.</li>
+  <li>사용되는 프레임워크 등의 소스가 중복되므로 메모리 사용냥 늘어남. 톰캣 대수가 많아지므로 이에 따른 메모리도 늘어남. 하지만 현대의 인프라 환경에서는 크게 문제되지 않음.</li>
+  <li>테스팅의 복잡도가 올라감.</li>
+</ul>
+
+<h4 id="api-gateway-with-msa">API Gateway with MSA</h4>
+<p>마이크로서비스아키텍처에서, 서비스들의 앞단에 API 게이트웨이를 둘 수 있음.</p>
+
+<ul>
+  <li>프락시서버처럼 API들 앞에서 모든 API에 대한 엔드포인트를 통합하고, 몇 가지 추가적인 기능을 제공하는 미들웨어. SOA의 버스에 비해서 경량화됨.</li>
+  <li>컴포넌트간 각각 다른 엔드포인트(URL)들을 통합시킬 수 있음</li>
+  <li>매시업/오케스트레이션 가능. 하지만 오케스트레이션을 API 게이트웨이 계층에서 하는 것은 게이트웨이 입장에서는 부담임. 과도한 오케스트레이션 로직을 넣어서 전체적인 성능 문제가 생길 수 있음. 높은 수준의 기술적인 이해 필요.</li>
+  <li>인증, 로깅 등 공통 기능을 처리하도록 하여 다른 컴포넌트들은 비즈니스 로직에만 집중하도록 할 수 있음.</li>
+  <li>프로토콜이나 메시지 포맷 변환 기능 등의 중재 기능을 제공해 줄 수 있음. 하지만 이것 또한 API게이트웨이를 가능한 최대한 가볍게 가져간다는 설계 원칙 아래에서 높은 수준의 설게와 기술적인 노하우가 필요함.</li>
+</ul>
+
+<h3 id="거버넌스-모델">거버넌스 모델</h3>
+
+<h4 id="중앙-집중형">중앙 집중형</h4>
+<p>표준 프로세스와 가이드를 기반으로 전체 팀을 운용. 전체 시스템이 같은 프로세스와 기술을 가지고 개발되므로 유지보수가 비교적 쉬우며 인원 교체가 편리. 단 기술 적용에 대한 민첩성이 떨어짐.</p>
+
+<h4 id="분산형">분산형</h4>
+<p>각 팀에 독립적인 프로세스와 기술 선택 권한을 주고, 각 서비스가 표준 API로 통신함으로서 내부적인 구현 기술 구조는 추상화. 분산형 거버넌스 모델을 수행하려면 이에 맞는 팀 구조가 필요한데, 다음과 같은 특징이 있어야 함. 크로스펑셔널 팀. 개발+인프라운영을 하나의 조직으로 =&gt; <code class="highlighter-rouge">DevOps</code>. 프로젝트 단위가 아닌 프로덕트 단위의 개발팀 구성.</p>
+</div>
+        		  	  
+<div style="float: left"></div>
+<div class="comments">
+	<div class="comments_wrapper" aria-hidden="true">
+		<div class="heading">
+			<a href="#content_div" onClick="comment_toggle('comment_hidden_2015-08-18-msa');">Comments</a>
+		</div>
+		<div id="comment_hidden_2015-08-18-msa" style="display: none;">
+			<div class="line"></div>
+			<div class="content_div">
+				<script src="https://utteranc.es/client.js" repo="soyme/my-blog-comments" branch="master" issue-term="2015-08-18-msa" theme="github-light" crossorigin="anonymous" async></script>
+			</div>
+		</div>
+	</div>
+</div>
+<div style="clear: both"></div>
+
+        		  </section>
+				  <section class="prev_next">
+					
+                        <a style="float: left;" href="/2015/08/13/enum/"><i class="icon-arrow-left"></i> Java - Enum</a>
+                    
+					
+						<a style="float:right; margin-bottom: 10px;"; href="/2015/10/19/java8_interface/">Java 8 - Interface <i class="icon-arrow-right"></i></a>
+					
+		  		  </section>
+			</article>
+		</div>
+	</section>
+</main>
+
+
+	<footer>
+  <div class="wrapper">
+    <a href="#" class="menu-icon" data-toggle="tooltip" title="ABOUT"><i class="fa fa-arrow-up"></i></a>
+  </div>
+</footer>
+
+	<copyright>
+	</copyright>
+
+	<!-- Javascripts 
+	    ================================================= -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/custom.js"></script>
+	<script type="text/template" id="template-comment">
+	<div id="comment{index}" class="comment">
+	<div class="comment_wrapper">
+		<div class="comment_line"></div>
+		<div>
+		<span class="comment_name">
+			
+				<a rel="nofollow" href="{url}">{name}</a>
+			
+		</span>
+
+		
+			<span class="comment_date">, now</span> </div>
+			<div class="comment_content">
+			<p><em>This is a preview of your comment. It may take a couple of minutes for it to be displayed to others.</em></p>
+		
+		{message}</div>
+	</div>
+</div>
+</script>
+
+    <!-- Analytics
+    ================================================== -->
+    <script>
+		// analytics code
+    </script>	
+	</body>
+</html>

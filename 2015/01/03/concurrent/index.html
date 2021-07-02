@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta charset="utf-8"/>
+		<title>
+		 순차(sequential) vs 병렬(parallel) vs 병행(concurrent) 차이 -
+		
+		 soy blog</title>
+		<!-- For responsive site
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<link rel="author" href="/humans.txt">
+		<meta name="description" content="Description Goes Here">
+		<link rel="stylesheet" href="/css/style.css">
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+		<!--[if IE 7]>
+			<html class="ie7"> 
+			<link rel="stylesheet" type="text/css" href="/css/font-awesome-ie7.min.css">
+		<![endif]-->
+		<!--[if IE 8]><html class="ie8"> <![endif]-->		
+	    <!--[if lt IE 9]>
+	      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	    <![endif]-->
+
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-92395927-1', 'auto');
+		  ga('send', 'pageview');
+		</script>
+
+		<link rel="apple-touch-icon" sizes="57x57" href="/ico/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/ico/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/ico/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/ico/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/ico/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/ico/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/ico/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/ico/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/ico/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="/ico/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/ico/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="/ico/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/ico/favicon-16x16.png">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/ico/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff"> 
+	</head>
+	<body>
+	<!-- Header
+	    ================================================== -->
+	<header>
+	</header>
+
+	
+
+
+
+
+
+
+
+<main class="content">
+    <section class="container">
+    	<div class="row-fluid">
+			<article class="top-menu">
+				<a href="/" class="menu-icon" data-toggle="tooltip" title="HOME"><i class="fa fa-home"></i></a>
+<a href="/about/" class="menu-icon" data-toggle="tooltip" title="ABOUT"><i class="fa fa-user"></i></a>
+<a href="/category/diary/" class="menu-icon" data-toggle="tooltip" title="DIARY"><i class="fa fa-edit"></i></a>
+      <a href="/category/blog/" class="menu-icon" data-toggle="tooltip" title="BLOG"><i class="fa fa-bars"></i></a>
+      <a href="/tag/" class="menu-icon" data-toggle="tooltip" title="TAG"><i class="fa fa-tags"></i></a>
+  <div class="top-line"></div>
+ 
+			</article>
+
+			
+
+     	   <article class="diary">
+       	 	   <div align=center><h2>순차(sequential) vs 병렬(parallel) vs 병행(concurrent) 차이</h2></div>
+       		   <div class="time"><a style="color:#777" href="http://3.34.122.196:7500/edit/2015-01-03-concurrent.md"><i class="fa fa-calendar"></i></a> 03 January 2015</div>
+				 <div class="tags"><a href="/tag/thread/">#Thread</a></div>
+        		  <section class="diary_section">
+     			  	 
+           		  	  <div class="inner_content"><p>sequential, parallel, concurrent 처리의 차이에 대해 간략하게 살펴보자.</p>
+
+<!-- more -->
+
+<h4 id="순차sequential-처리">순차(sequential) 처리</h4>
+<ul>
+  <li>복수의 업무를 순서대로 하나씩 처리.</li>
+</ul>
+
+<h4 id="병렬parallel-처리">병렬(parallel) 처리</h4>
+<ul>
+  <li>복수의 업무를 “동시에” 처리.</li>
+</ul>
+
+<h4 id="병행concurrent-처리">병행(concurrent) 처리</h4>
+<ul>
+  <li>병렬에 비해 추상도가 높은 표현.</li>
+  <li>한 개의 업무를 어떠한 순서로 처리하든 상관 없는 여러 개의 작업으로 분할하여 처리.
+작업자가 한 명이라면 분할된 작업들을 순차적으로 처리하게 되지만, 작업자가 두 명이라면 같은 작업을 병렬적으로 처리할 수 있다.</li>
+</ul>
+
+<h3 id="멀티-쓰레드-프로그램에서의-병행-처리">멀티 쓰레드 프로그램에서의 병행 처리</h3>
+<p>멀티 쓰레드 프로그램의 경우 <code class="highlighter-rouge">병행 처리</code>를 의미한다. 만약 CPU가 한 개 뿐이라면 병행처리를 순차적으로 실행할 테고, CPU가 여러개라면 병행처리를 병렬적으로 실행할 수 있다.</p>
+
+<p>일반 컴퓨터는 대개 CPU가 한개이므로 복수의 쓰레드가 작동하고 있다 하더라도 병행처리를 순차적으로 실행하게 된다.</p>
+
+<ol>
+  <li>첫번째 쓰레드가 조금 작동하다가 멈춘다.</li>
+  <li>두번째 쓰레드가 조금 작동하가 멈춘다.</li>
+  <li>첫번째 쓰레드가 조금 작동하다 멈춘다.</li>
+  <li>두번째 쓰레드가 조금 작동하다 멈춘다.</li>
+  <li>….</li>
+</ol>
+
+<p>이처럼 실제 작동하는 쓰레드가 바뀌면서 병행처리가 순차적으로 이뤄진다. 즉 “동일한 시간”, “어떤 한 순간”에는 오직 하나의 쓰레드만 실행이 된다. 하지만 여러개의 쓰레드가 무작위로 번갈아가면서 실행됨으로서 “동시에” 처리되는 것처럼 보일 뿐이다.</p>
+
+<h3 id="쓰레드의-개수가-2배이면-처리량throughput도-2배일까">쓰레드의 개수가 2배이면 처리량(throughput)도 2배일까?</h3>
+<p>일반적으로 그렇지 않다. 그 이유는..</p>
+
+<ul>
+  <li>쓰레드 개수가 늘어났다고 해도, CPU 개수에 제약이 있다면 쓰레드들이 병렬로 동작한다고 보장할 수 없다. 그리고 쓰레드간 컨텍스트 스위칭 오버헤드가 발생한다.</li>
+  <li>처리하는 업무를 모든 쓰레드에게 균일하게 분담시키는 것이 가능하다고 장담할 수 없다.</li>
+  <li>하드웨어의 제약이 없어 2배의 쓰레드가 병렬로 동작했다고 하더라도, 쓰레드간 mutual exclusion을 수행하기 위한 오버헤드가 있다.</li>
+</ul>
+</div>
+        		  	  
+<div style="float: left"></div>
+<div class="comments">
+	<div class="comments_wrapper" aria-hidden="true">
+		<div class="heading">
+			<a href="#content_div" onClick="comment_toggle('comment_hidden_2015-01-03-concurrent');">Comments</a>
+		</div>
+		<div id="comment_hidden_2015-01-03-concurrent" style="display: none;">
+			<div class="line"></div>
+			<div class="content_div">
+				<script src="https://utteranc.es/client.js" repo="soyme/my-blog-comments" branch="master" issue-term="2015-01-03-concurrent" theme="github-light" crossorigin="anonymous" async></script>
+			</div>
+		</div>
+	</div>
+</div>
+<div style="clear: both"></div>
+
+        		  </section>
+				  <section class="prev_next">
+					
+                        <a style="float: left;" href="/2015/01/02/thread_factory/"><i class="icon-arrow-left"></i> 멀티쓰레드 프로그램 구현 방법 (Thread, Runnable) / ThreadFactory</a>
+                    
+					
+						<a style="float:right; margin-bottom: 10px;"; href="/2015/01/04/collection_with_multi_thread/">Java Collection과 멀티쓰레드 <i class="icon-arrow-right"></i></a>
+					
+		  		  </section>
+			</article>
+		</div>
+	</section>
+</main>
+
+
+	<footer>
+  <div class="wrapper">
+    <a href="#" class="menu-icon" data-toggle="tooltip" title="ABOUT"><i class="fa fa-arrow-up"></i></a>
+  </div>
+</footer>
+
+	<copyright>
+	</copyright>
+
+	<!-- Javascripts 
+	    ================================================= -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/custom.js"></script>
+	<script type="text/template" id="template-comment">
+	<div id="comment{index}" class="comment">
+	<div class="comment_wrapper">
+		<div class="comment_line"></div>
+		<div>
+		<span class="comment_name">
+			
+				<a rel="nofollow" href="{url}">{name}</a>
+			
+		</span>
+
+		
+			<span class="comment_date">, now</span> </div>
+			<div class="comment_content">
+			<p><em>This is a preview of your comment. It may take a couple of minutes for it to be displayed to others.</em></p>
+		
+		{message}</div>
+	</div>
+</div>
+</script>
+
+    <!-- Analytics
+    ================================================== -->
+    <script>
+		// analytics code
+    </script>	
+	</body>
+</html>
